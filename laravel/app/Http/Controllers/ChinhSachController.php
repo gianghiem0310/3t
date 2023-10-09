@@ -46,4 +46,18 @@ class ChinhSachController extends Controller
     {
         //
     }
+
+
+    //Start: Nguyen Gia Nghiem
+    public function layChinhSachTheoId(Request $request)
+    {
+        return ChinhSach::find($request->id);
+    }
+
+    public function capNhatChinhSach(Request $request)
+    {
+        $noidung = 'noiDungChinhSach';
+        return ChinhSach::where('id','=',$request->id)->update(['noiDungChinhSach'=>$request->$noidung]);
+    }
+    //End: Nguyen Gia Nghiem
 }

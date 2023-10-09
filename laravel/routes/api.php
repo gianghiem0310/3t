@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChinhSachController;
 use App\Http\Controllers\TaiKhoanController;
+use App\Models\ChinhSach;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +24,12 @@ use Illuminate\Support\Facades\Route;
 
 //Start Nghiem
 Route::get('/taikhoan',[TaiKhoanController::class,'layTaiKhoanTheoId']);
+Route::get('/thongtinadmin',[AdminController::class,'thongTinAdmin']);
+Route::patch('/doimatkhautaikhoan',[TaiKhoanController::class,'doiMatKhauTaiKhoan']);
 
+Route::put('/capnhatthongtinadmin',[AdminController::class,'capNhatThongTinAdmin']);
+
+
+Route::put('/chinhsach',[ChinhSachController::class,'layChinhSachTheoId']);
+Route::put('/capnhatchinhsach',[ChinhSachController::class,'capNhatChinhSach']);
 //End Nghiem

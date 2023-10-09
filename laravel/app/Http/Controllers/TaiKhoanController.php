@@ -46,8 +46,13 @@ class TaiKhoanController extends Controller
     {
         //
     }
+      //Start: Nguyen Gia Nghiem
     public function layTaiKhoanTheoId(Request $request) 
     {
         return TaiKhoan::find($request->id);
     }
+    public function doiMatKhauTaiKhoan(Request $request){
+        return TaiKhoan::where('id','=',$request->id)->update(['matKhau'=>$request->matkhaumoi]);
+    }
+      //End: Nguyen Gia Nghiem
 }

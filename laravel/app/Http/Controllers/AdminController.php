@@ -46,4 +46,21 @@ class AdminController extends Controller
     {
         //
     }
+
+    //Start: Nguyen Gia Nghiem
+
+    public function thongTinAdmin(Request $request) 
+    {
+        return Admin::find($request->id);
+    }
+    public function capNhatThongTinAdmin(Request $request)
+    {
+        $admin = Admin::find($request->id);
+        if(isset($admin)){
+            
+        }
+        return false;
+    }
+
+    //End: Nguyen Gia Nghiem
 }
