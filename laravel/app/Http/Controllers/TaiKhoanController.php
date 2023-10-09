@@ -46,4 +46,8 @@ class TaiKhoanController extends Controller
     {
         //
     }
+    public function layTaiKhoanTheoId(Request $request) 
+    {
+        return TaiKhoan::find($request->id);
+    }
 }
