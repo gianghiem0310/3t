@@ -46,4 +46,8 @@ class ChuTroController extends Controller
     {
         //
     }
+    public function layTatCaThongTinChuTroAPI(Request $request)
+    {
+        return ChuTro::all();
+    }
 }
