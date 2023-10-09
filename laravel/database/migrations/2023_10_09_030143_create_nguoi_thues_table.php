@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('ten');
             $table->string('soDienThoai');
             $table->integer('gioiTinh');
+   
             $table->timestamps();
         });
     }
