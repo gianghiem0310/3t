@@ -3,6 +3,8 @@
 use App\Http\Controllers\ChuTroController;
 use App\Http\Controllers\GoiController;
 use App\Http\Controllers\TaiKhoanController;
+use App\Http\Controllers\YeuCauDangKyGoiController;
+use App\Models\YeuCauDangKyGoi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,8 +30,14 @@ Route::get('/taikhoan',[TaiKhoanController::class,'layTaiKhoanTheoId']);
 
 //Start Minh
 Route::get('/goi/all',[GoiController::class,'layTatCaGoiAPI']);
+Route::get('/goi/all/condung',[GoiController::class,'layTatCaGoiTrangThaiConDungAPI']);
 Route::post('/goi/add',[GoiController::class, 'themGoiDichVuAPI']);
 Route::put('/goi/update',[GoiController::class, 'suaGoiDichVuAPI']);
 
 Route::get('/chutro/all',[ChuTroController::class,'layTatCaThongTinChuTroAPI']);
+Route::get('/chutro/chuaxacthuc',[ChuTroController::class,'layTatCaThongTinChuTroChuaXacThucAPI']);
+Route::get('/chutro/daxacthuc',[ChuTroController::class,'layTatCaThongTinChuTroDaXacThucAPI']);
+Route::get('/chutro/id',[ChuTroController::class,'layThongTinTheoIDTaiKhoanAPI']);  // Chuyền theo id tài khoản
+
+Route::get('/danhsachyeucaudangky/all',[YeuCauDangKyGoiController::class,'danhSachYeuCauDangKyGoiAPI']);
 //End Minh

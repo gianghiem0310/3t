@@ -17,4 +17,15 @@ class ChuTro extends Model
         "tenChuTaiKhoanNganHang",
         "xacThuc"
     ];
+
+    public function xacThucChuTro(){
+        $this->setAttribute("thongTinXacThucCuaChuTro", $this->hasOne(XacThucChuTro::class, 'idChuTro', 'id')->first());
+    }
+
+    public static function layThongTinXacThucTheoTaiKhoan($idTaiKhoan) {
+        $result = self::where('idTaiKhoan', "=", $idTaiKhoan)->first();
+
+        $result->xacThucChuTro();
+        return $result;
+    }
 }
