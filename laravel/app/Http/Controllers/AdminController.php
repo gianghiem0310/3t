@@ -64,7 +64,7 @@ class AdminController extends Controller
 
     public function uploadImage(Request $request) {
         $image = $request->hinh;
-        $image_name = 'images/' . time() . '-' . 'banner' . '.'. $image->extension();
+        $image_name = 'hinh/' . time() . '-' . 'admin' . '.'. $image->extension();
         $image->move(public_path('hinh'), $image_name);
         $admin = Admin::find(1);
         return $admin->update(['hinh' => $image_name]);
