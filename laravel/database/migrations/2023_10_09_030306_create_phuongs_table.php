@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('idQuan');
             $table->string('tenPhuong');
-            $table->string('trangThai');
+            $table->integer('trangThai');
             $table->timestamps();
         });
     }

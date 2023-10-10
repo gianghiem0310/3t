@@ -51,6 +51,11 @@ class GoiController extends Controller
         return Goi::all();
     }
 
+    public function layThongTinChiTietTheoIDGoiAPI(Request $request)
+    {
+        return Goi::where("id", $request->id)->first();
+    }
+
     public function layTatCaGoiTrangThaiConDungAPI(Request $request)
     {
         return Goi::where('trangThai', 0)->get();
