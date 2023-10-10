@@ -11,20 +11,26 @@ class YeuCauDangKyGoi extends Model
 
     public function cuaChuTro()
     {
-        $this->setAttribute("chuTro", $this->hasOne(ChuTro::class, 'id', 'idChuTro')->get());
+        $this->setAttribute("chuTro", $this->hasOne(ChuTro::class, 'id', 'idChuTro')->first());
     }
+
+
+
+
+
 
     public function goiDangKy()
     {
-        $this->setAttribute("chuTro", $this->hasOne(ChuTro::class, 'idChuTro', 'id')->first());
+        $this->setAttribute("goiDangKy", $this->hasOne(Goi::class, 'id', 'idGoi')->first());
     }
 
     public static function danhSachYeuCauDangKy()
     {
         $result = self::all();
         if ($result) {
-            foreach ($result as $key) {
-                $result->cuaChuTro();
+            foreach ($result as $item) {
+                $item->cuaChuTro();
+                $item->goiDangKy();
             }
         }
         return $result;
