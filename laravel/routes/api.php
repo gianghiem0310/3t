@@ -25,11 +25,21 @@ use Illuminate\Support\Facades\Route;
 //Start Nghiem
 Route::get('/taikhoan',[TaiKhoanController::class,'layTaiKhoanTheoId']);
 Route::get('/thongtinadmin',[AdminController::class,'thongTinAdmin']);
+
 Route::patch('/doimatkhautaikhoan',[TaiKhoanController::class,'doiMatKhauTaiKhoan']);
 
 Route::put('/capnhatthongtinadmin',[AdminController::class,'capNhatThongTinAdmin']);
+Route::patch('/capnhattrangthai',[TaiKhoanController::class,'capNhatTrangThai']);
+Route::patch('/capnhatxacthuc',[TaiKhoanController::class,'capNhatXacThuc']);
 
+Route::get('/kiemtradangnhap',[TaiKhoanController::class,'kiemTraDangNhap']);
 
 Route::put('/chinhsach',[ChinhSachController::class,'layChinhSachTheoId']);
 Route::put('/capnhatchinhsach',[ChinhSachController::class,'capNhatChinhSach']);
+
+//UpAnh
+Route::post('/uploadimage',[AdminController::class,'uploadImage']);
+
+//Nghiem NguoiThue
+
 //End Nghiem

@@ -62,5 +62,14 @@ class AdminController extends Controller
         return false;
     }
 
+    public function uploadImage(Request $request) {
+        $image = $request->hinh;
+        $name = $image->getClientOriginalName();
+        $image->move(public_path('hinh'), $name);
+        $admin = Admin::find(1);
+        $admin->hinh = $name;
+        return $admin->update();
+
+    }
     //End: Nguyen Gia Nghiem
 }

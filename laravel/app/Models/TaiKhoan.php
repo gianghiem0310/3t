@@ -13,7 +13,8 @@ class TaiKhoan extends Model
         'tenTaiKhoan',
         'matKhau',
         'trangThai',
-        'xacThuc'
+        'loaiTaiKhoan',
+        'email'
     ];
       //End: Nguyen Gia Nghiem
 }

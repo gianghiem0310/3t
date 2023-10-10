@@ -57,7 +57,7 @@ class ChinhSachController extends Controller
     public function capNhatChinhSach(Request $request)
     {
         $noidung = 'noiDungChinhSach';
-        return ChinhSach::where('id','=',$request->id)->update(['noiDungChinhSach'=>$request->$noidung]);
+        return ChinhSach::where('id',$request->id)->update(['noiDungChinhSach'=>$request->$noidung]);
     }
     //End: Nguyen Gia Nghiem
 }
