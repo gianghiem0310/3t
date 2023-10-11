@@ -82,4 +82,22 @@ class GoiController extends Controller
             "trangThai" =>  $request->trangThai
         ]);
     }
+
+    public function khoaGoiDichVuAPI(Request $request)
+    {
+        
+        return Goi::where('id', $request->id)->update([
+            
+            "trangThai" =>  1
+        ]);
+    }
+
+    public function moKhoaGoiDichVuAPI(Request $request)
+    {
+        
+        return Goi::where('id', $request->id)->update([
+            
+            "trangThai" =>  0
+        ]);
+    }
 }

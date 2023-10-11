@@ -36,6 +36,9 @@ Route::get('/goi/chitiet',[GoiController::class,'layThongTinChiTietTheoIDGoiAPI'
 Route::get('/goi/all/condung',[GoiController::class,'layTatCaGoiTrangThaiConDungAPI']);
 Route::post('/goi/add',[GoiController::class, 'themGoiDichVuAPI']);
 Route::put('/goi/update',[GoiController::class, 'suaGoiDichVuAPI']);
+Route::put('/goi/lock',[GoiController::class, 'khoaGoiDichVuAPI']);
+Route::put('/goi/unLock',[GoiController::class, 'moKhoaGoiDichVuAPI']);
+
 
 Route::get('/chutro/all',[ChuTroController::class,'layTatCaThongTinChuTroAPI']);
 Route::get('/chutro/chuaxacthuc',[ChuTroController::class,'layTatCaThongTinChuTroChuaXacThucAPI']);
