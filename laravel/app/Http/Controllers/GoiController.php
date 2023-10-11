@@ -46,4 +46,40 @@ class GoiController extends Controller
     {
         //
     }
+    public function layTatCaGoiAPI(Request $request)
+    {
+        return Goi::all();
+    }
+
+    public function layThongTinChiTietTheoIDGoiAPI(Request $request)
+    {
+        return Goi::where("id", $request->id)->first();
+    }
+
+    public function layTatCaGoiTrangThaiConDungAPI(Request $request)
+    {
+        return Goi::where('trangThai', 0)->get();
+    }
+
+    public function themGoiDichVuAPI(Request $request)
+    {
+
+        return Goi::create([
+            "thoiHan" => $request->thoiHan,
+            "soLuongPhongToiDa" => $request->soLuongPhongToiDa,
+            "gia" => $request->gia,
+            "trangThai" => 0
+        ]);
+    }
+
+    public function suaGoiDichVuAPI(Request $request)
+    {
+
+        return Goi::where('id', $request->id)->update([
+            "thoiHan" => $request->thoiHan,
+            "soLuongPhongToiDa" => $request->soLuongPhongToiDa,
+            "gia" => $request->gia,
+            "trangThai" =>  $request->trangThai
+        ]);
+    }
 }

@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Goi extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "thoiHan",
+        "soLuongPhongToiDa",
+        "gia",
+        "trangThai"
+    ];
 }
