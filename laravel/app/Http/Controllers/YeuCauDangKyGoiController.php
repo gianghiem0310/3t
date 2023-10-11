@@ -7,43 +7,21 @@ use Illuminate\Http\Request;
 
 class YeuCauDangKyGoiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public static function danhSachYeuCauDangKyGoiAPI(Request $request){
+        return YeuCauDangKyGoi::danhSachYeuCauDangKy();
+    } 
+
+    public static function thongTinChiTietYeuCauDangKyGoiAPI(Request $request){
+        return YeuCauDangKyGoi::thongTinChiTietYeuCauDangKy($request->id);
+    } 
+
+    public static function xacThucYeuCauDangKyGoiAPI(Request $request){
+        return YeuCauDangKyGoi::where('id', '=', $request->id)->update([
+            'trangThaiXacThuc' => 1
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(YeuCauDangKyGoi $yeuCauDangKyGoi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, YeuCauDangKyGoi $yeuCauDangKyGoi)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(YeuCauDangKyGoi $yeuCauDangKyGoi)
-    {
-        //
+    public static function huyYeuCauDangKyGoiAPI(Request $request){
+        return YeuCauDangKyGoi::where('id', '=', $request->id)->delete();
     }
 }
