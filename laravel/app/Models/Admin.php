@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Admin extends Model
 {
     use HasFactory;
+      //Start: Nguyen Gia Nghiem
     protected $fillable = [
         'idTaiKhoan',
         'hinh',
@@ -16,4 +17,5 @@ class Admin extends Model
         'soTaiKhoanNganHang',
         'tenChuTaiKhoan'
     ];
+      //End: Nguyen Gia Nghiem
 }
