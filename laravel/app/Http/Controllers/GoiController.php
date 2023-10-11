@@ -81,7 +81,6 @@ class GoiController extends Controller
             "thoiHan" => $request->thoiHan,
             "soLuongPhongToiDa" => $request->soLuongPhongToiDa,
             "gia" => $request->gia,
-            "trangThai" =>  $request->trangThai
         ]);
     }
 
