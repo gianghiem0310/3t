@@ -57,15 +57,22 @@ class AdminController extends Controller
     {
         $admin = Admin::find($request->id);
         if(isset($admin)){
-            
+            $image = $request->hinh;
+            $image_name = 'images/' . time() . '-' . 'admin' . '.'. $image->extension();
+            $image->move(public_path('images'), $image_name);
+            $tenAdmin = $request->ten;
+            $soDienThoai = $request->soDienThoai;
+            $soTaiKhoanNganHang = $request->soTaiKhoanNganHang;
+            $tenChuTaiKhoan= $request->tenChuTaiKhoan;
+            return $admin->update(['ten' => $tenAdmin,'hinh'=>$image_name,'soDienThoai'=>$soDienThoai,'soTaiKhoanNganHang'=>$soTaiKhoanNganHang,'tenChuTaiKhoan'=>$tenChuTaiKhoan]);
         }
         return false;
     }
 
     public function uploadImage(Request $request) {
         $image = $request->hinh;
-        $image_name = 'hinh/' . time() . '-' . 'admin' . '.'. $image->extension();
-        $image->move(public_path('hinh'), $image_name);
+        $image_name = 'images/' . time() . '-' . 'admin' . '.'. $image->extension();
+        $image->move(public_path('images'), $image_name);
         $admin = Admin::find(1);
         return $admin->update(['hinh' => $image_name]);
 

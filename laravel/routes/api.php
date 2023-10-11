@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChinhSachController;
+use App\Http\Controllers\PhuongController;
+use App\Http\Controllers\QuanController;
 use App\Http\Controllers\TaiKhoanController;
+use App\Http\Controllers\TienIchController;
 use App\Models\ChinhSach;
+use App\Models\Phuong;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,18 +29,25 @@ use Illuminate\Support\Facades\Route;
 //Start Nghiem
 Route::get('/taikhoan',[TaiKhoanController::class,'layTaiKhoanTheoId']);
 Route::get('/thongtinadmin',[AdminController::class,'thongTinAdmin']);
-
 Route::patch('/doimatkhautaikhoan',[TaiKhoanController::class,'doiMatKhauTaiKhoan']);
+Route::post('/capnhatthongtinadmin',[AdminController::class,'capNhatThongTinAdmin']);
 
-Route::put('/capnhatthongtinadmin',[AdminController::class,'capNhatThongTinAdmin']);
 Route::patch('/capnhattrangthai',[TaiKhoanController::class,'capNhatTrangThai']);
 Route::patch('/capnhatxacthuc',[TaiKhoanController::class,'capNhatXacThuc']);
-
 Route::get('/kiemtradangnhap',[TaiKhoanController::class,'kiemTraDangNhap']);
 
 Route::put('/chinhsach',[ChinhSachController::class,'layChinhSachTheoId']);
 Route::put('/capnhatchinhsach',[ChinhSachController::class,'capNhatChinhSach']);
 
+Route::post('/themtienich',[TienIchController::class,'themTienIch']);
+Route::post('/capnhattienich',[TienIchController::class,'capNhatTienIch']);
+
+
+Route::post('/themquan',[QuanController::class,'themQuan']);
+Route::post('/capnhatquan',[QuanController::class,'capNhatQuan']);
+
+Route::post('/themphuong',[PhuongController::class,'themPhuong']);
+Route::post('/capnhatphuong',[PhuongController::class,'capNhatPhuong']);
 //UpAnh
 Route::post('/uploadimage',[AdminController::class,'uploadImage']);
 
