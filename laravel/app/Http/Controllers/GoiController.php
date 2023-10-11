@@ -61,6 +61,8 @@ class GoiController extends Controller
         return Goi::where('trangThai', 0)->get();
     }
 
+    
+
     public function themGoiDichVuAPI(Request $request)
     {
 
@@ -79,7 +81,24 @@ class GoiController extends Controller
             "thoiHan" => $request->thoiHan,
             "soLuongPhongToiDa" => $request->soLuongPhongToiDa,
             "gia" => $request->gia,
-            "trangThai" =>  $request->trangThai
+        ]);
+    }
+
+    public function khoaGoiDichVuAPI(Request $request)
+    {
+        
+        return Goi::where('id', $request->id)->update([
+            
+            "trangThai" =>  1
+        ]);
+    }
+
+    public function moKhoaGoiDichVuAPI(Request $request)
+    {
+        
+        return Goi::where('id', $request->id)->update([
+            
+            "trangThai" =>  0
         ]);
     }
 }
