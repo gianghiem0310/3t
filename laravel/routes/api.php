@@ -65,10 +65,17 @@ Route::get('/goi/chitiet',[GoiController::class,'layThongTinChiTietTheoIDGoiAPI'
 Route::get('/goi/all/condung',[GoiController::class,'layTatCaGoiTrangThaiConDungAPI']);
 Route::post('/goi/add',[GoiController::class, 'themGoiDichVuAPI']);
 Route::put('/goi/update',[GoiController::class, 'suaGoiDichVuAPI']);
+Route::get('/goi/lock',[GoiController::class, 'khoaGoiDichVuAPI']);
+Route::get('/goi/unLock',[GoiController::class, 'moKhoaGoiDichVuAPI']);
+
 
 Route::get('/chutro/all',[ChuTroController::class,'layTatCaThongTinChuTroAPI']);
 Route::get('/chutro/chuaxacthuc',[ChuTroController::class,'layTatCaThongTinChuTroChuaXacThucAPI']);
 Route::get('/chutro/daxacthuc',[ChuTroController::class,'layTatCaThongTinChuTroDaXacThucAPI']);
+Route::get('/chutro/timKiemTen',[ChuTroController::class,'timChuTroTheoTen']);
+Route::get('/chutro/timKiemSDT',[ChuTroController::class,'timChuTroTheoSDT']);
+Route::get('/chutro/lock',[ChuTroController::class, 'khoaChuTroAPI']);
+Route::get('/chutro/unLock',[ChuTroController::class, 'moKhoaChuTroAPI']);
 Route::get('/chutro/chitiet',[ChuTroController::class,'layThongTinTheoIDTaiKhoanAPI']);  // Chuyền theo id tài khoản
 Route::patch('/chutro/chapnhanxacthuc',[ChuTroController::class,'xacNhanThongTinChuTroTheoIDTaiKhoanAPI']); 
 
