@@ -11,7 +11,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChinhSachController;
 use App\Http\Controllers\PhuongController;
 use App\Http\Controllers\QuanController;
-use App\Http\Controllers\TaiKhoanController;
 use App\Http\Controllers\TienIchController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

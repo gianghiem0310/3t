@@ -19,7 +19,7 @@ class ChuTro extends Model
     ];
 
     public function xacThucChuTro(){
-        $this->setAttribute("thongTinXacThucCuaChuTro", $this->hasOne(XacThucChuTro::class, 'idChuTro', 'id')->first());
+        $this->setAttribute("yeuCauXacThuc", $this->hasOne(XacThucChuTro::class, 'idChuTro', 'id')->first());
     }
 
     public static function layThongTinXacThucTheoTaiKhoan($idTaiKhoan) {
