@@ -22,4 +22,7 @@ class ChuTroController extends Controller
     public function layThongTinTheoIDTaiKhoanAPI(Request $request){
         return ChuTro::layThongTinXacThucTheoTaiKhoan($request->idTaiKhoan);
     }
+    public function xacNhanThongTinChuTroTheoIDTaiKhoanAPI(Request $request){
+        return ChuTro::where('id', $request->id)->update(['xacThuc'=>1]);
+    }
 }

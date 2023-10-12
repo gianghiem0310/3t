@@ -70,6 +70,7 @@ Route::get('/chutro/all',[ChuTroController::class,'layTatCaThongTinChuTroAPI']);
 Route::get('/chutro/chuaxacthuc',[ChuTroController::class,'layTatCaThongTinChuTroChuaXacThucAPI']);
 Route::get('/chutro/daxacthuc',[ChuTroController::class,'layTatCaThongTinChuTroDaXacThucAPI']);
 Route::get('/chutro/chitiet',[ChuTroController::class,'layThongTinTheoIDTaiKhoanAPI']);  // Chuyền theo id tài khoản
+Route::patch('/chutro/chapnhanxacthuc',[ChuTroController::class,'xacNhanThongTinChuTroTheoIDTaiKhoanAPI']); 
 
 Route::get('/yeucaudangky/all',[YeuCauDangKyGoiController::class,'danhSachYeuCauDangKyGoiAPI']);
 Route::get('/yeucaudangky/chitiet',[YeuCauDangKyGoiController::class,'thongTinChiTietYeuCauDangKyGoiAPI']);
