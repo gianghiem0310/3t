@@ -19,13 +19,18 @@ class ChuTro extends Model
     ];
 
     public function xacThucChuTro(){
-        $this->setAttribute("thongTinXacThucCuaChuTro", $this->hasOne(XacThucChuTro::class, 'idChuTro', 'id')->first());
+        $this->setAttribute("yeuCauXacThuc", $this->hasOne(XacThucChuTro::class, 'idChuTro', 'id')->first());
+    }
+
+    public function taiKhoan(){
+        $this->setAttribute("taiKhoan", $this->hasOne(TaiKhoan::class, 'id', 'idTaiKhoan')->first());
     }
 
     public static function layThongTinXacThucTheoTaiKhoan($idTaiKhoan) {
         $result = self::where('idTaiKhoan', "=", $idTaiKhoan)->first();
 
         $result->xacThucChuTro();
+        $result->taiKhoan();
         return $result;
     }
 }

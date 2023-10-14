@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
 
 class XacThucChuTroController extends Controller
 {
@@ -45,5 +46,19 @@ class XacThucChuTroController extends Controller
     public function destroy(XacThucChuTro $xacThucChuTro)
     {
         //
+    }
+    public function layTatCaYeuCauXacThucAPI(){
+        return XacThucChuTro::layTatCaYeuCauXacThucChuTro(); //
+    }
+    public function xacThucYeuCauTheoIdChuTroAPI(Request $request)
+    {
+        return XacThucChuTro::where(['idChuTro' => $request->idChuTro])->update(['trangThaiXacThuc'=>1]);
+    }
+
+    public function layThongTinYeuCauXacThucAPI(Request $request){
+        return XacThucChuTro::layThongTinYeuCauXacThuc($request->idChuTro);
+    }
+    public  function  xoaYeuXauXacThucAPI(Request $request){
+        return XacThucChuTro::where(['idChuTro' => $request->idChuTro])->delete();
     }
 }

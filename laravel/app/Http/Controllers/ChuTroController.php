@@ -49,4 +49,7 @@ class ChuTroController extends Controller
             "xacThuc" =>  0
         ]);
     }
+    public function xacNhanThongTinChuTroTheoIDTaiKhoanAPI(Request $request){
+        return ChuTro::where('id', $request->id)->update(['xacThuc'=>1]);
+    }
 }
