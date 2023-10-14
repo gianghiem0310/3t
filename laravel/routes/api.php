@@ -12,6 +12,8 @@ use App\Http\Controllers\ChinhSachController;
 use App\Http\Controllers\PhuongController;
 use App\Http\Controllers\QuanController;
 use App\Http\Controllers\TienIchController;
+use App\Http\Controllers\XacThucChuTroController;
+use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -94,4 +96,9 @@ Route::get('/banner/all',[BannerController::class,'layTatCaBannerAPI']);
 Route::post('/banner/create',[BannerController::class,'themHinhAPI']);
 Route::post('/banner/edit',[BannerController::class,'suaHinhAPI']);
 Route::delete('/banner/delete',[BannerController::class,'xoaHinhAPI']);
+
+Route::get('xacthucchutro/all', [XacThucChuTroController::class,"layTatCaYeuCauXacThucAPI"]);
+Route::patch('xacthucchutro/xacthuc', [XacThucChuTroController::class,"xacThucYeuCauTheoIdChuTroAPI"]);
+Route::get('xacthucchutro/chitiet', [XacThucChuTroController::class,"layThongTinYeuCauXacThucAPI"]);
+Route::delete('xacthucchutro/xoa', [XacThucChuTroController::class,"xoaYeuXauXacThucAPI"]);
 //End Minh
