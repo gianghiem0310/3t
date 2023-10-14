@@ -33,4 +33,5 @@ class ChuTro extends Model
         $result->taiKhoan();
         return $result;
     }
+
 }

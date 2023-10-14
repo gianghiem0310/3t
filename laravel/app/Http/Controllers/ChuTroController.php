@@ -32,24 +32,21 @@ class ChuTroController extends Controller
         $q = '%'. $request->soDienThoai.'%';
         return ChuTro::where('soDienThoai','like', $q)->get();
     }
-    public function khoaChuTroAPI(Request $request)
-    {
-        
-        return ChuTro::where('id', $request->id)->update([
-            
-            "xacThuc" =>  1
-        ]);
-    }
+    // public function khoaChuTroAPI(Request $request)
+    // {
+    //     return ChuTro::khoaChuTroTheoIDTaiKhoan($request->idTaiKhoan);
+    // }
 
-    public function moKhoaChuTroAPI(Request $request)
+    // public function moKhoaChuTroAPI(Request $request)
+    // {
+    //     return ChuTro::moKhoaChuTroTheoIDTaiKhoan($request->idTaiKhoan);
+    // }
+    public function layThongTinChuTroIdTaiKhoanAPI(Request $request)
     {
-        
-        return ChuTro::where('id', $request->id)->update([
-            
-            "xacThuc" =>  0
-        ]);
+        return ChuTro::layThongTinTheoTaiKhoan($request->idTaiKhoan);
     }
     public function xacNhanThongTinChuTroTheoIDTaiKhoanAPI(Request $request){
         return ChuTro::where('id', $request->id)->update(['xacThuc'=>1]);
     }
+
 }
