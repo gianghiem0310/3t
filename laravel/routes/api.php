@@ -77,7 +77,7 @@ Route::get('/chutro/daxacthuc',[ChuTroController::class,'layTatCaThongTinChuTroD
 Route::get('/chutro/timKiemTen',[ChuTroController::class,'timChuTroTheoTen']);
 Route::get('/chutro/timKiemSDT',[ChuTroController::class,'timChuTroTheoSDT']);
 Route::get('/chutro/lock',[ChuTroController::class, 'khoaChuTroAPI']);
-Route::get('/chutro/unLock',[ChuTroController::class, 'moKhoaChuTroAPI']);
+Route::get('/chutro/unLock',[ChuTroController::class, 'moKhoaChuTroTheoIDTaiKhoanAPI']);
 Route::get('/chutro/chitiet',[ChuTroController::class,'layThongTinTheoIDTaiKhoanAPI']);  // Chuyền theo id tài khoản
 Route::patch('/chutro/chapnhanxacthuc',[ChuTroController::class,'xacNhanThongTinChuTroTheoIDTaiKhoanAPI']); 
 
