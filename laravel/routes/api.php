@@ -37,12 +37,13 @@ Route::get('/taikhoan',[TaiKhoanController::class,'layTaiKhoanTheoId']);
 Route::get('/thongtinadmin',[AdminController::class,'thongTinAdmin']);
 Route::patch('/doimatkhautaikhoan',[TaiKhoanController::class,'doiMatKhauTaiKhoan']);
 Route::post('/capnhatthongtinadmin',[AdminController::class,'capNhatThongTinAdmin']);
+Route::post('/capnhatthongtinadmin2',[AdminController::class,'capNhatThongTinAdmin2']);
 
 Route::patch('/capnhattrangthai',[TaiKhoanController::class,'capNhatTrangThai']);
 Route::patch('/capnhatxacthuc',[TaiKhoanController::class,'capNhatXacThuc']);
 Route::get('/kiemtradangnhap',[TaiKhoanController::class,'kiemTraDangNhap']);
 
-Route::put('/chinhsach',[ChinhSachController::class,'layChinhSachTheoId']);
+Route::get('/chinhsach',[ChinhSachController::class,'layChinhSachTheoId']);
 Route::put('/capnhatchinhsach',[ChinhSachController::class,'capNhatChinhSach']);
 
 Route::post('/themtienich',[TienIchController::class,'themTienIch']);
