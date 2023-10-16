@@ -42,8 +42,11 @@ Route::get('/chinhsach',[ChinhSachController::class,'layChinhSachTheoId']);
 Route::put('/capnhatchinhsach',[ChinhSachController::class,'capNhatChinhSach']);
 
 Route::get('/laytatcatienich',[TienIchController::class,'layTatCaTienIch']);
+Route::get('/laytienichtheoid',[TienIchController::class,'layTienIchTheoId']);
 Route::post('/themtienich',[TienIchController::class,'themTienIch']);
 Route::post('/capnhattienich',[TienIchController::class,'capNhatTienIch']);
+Route::patch('/capnhattienich2',[TienIchController::class,'capNhatTienIch2']);
+Route::patch('/capnhattrangthaitienich',[TienIchController::class,'capNhatTrangThai']);
 
 Route::get('/laytatcaquan',[QuanController::class,'layTatCaQuan']);
 Route::post('/themquan',[QuanController::class,'themQuan']);

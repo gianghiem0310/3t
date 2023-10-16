@@ -69,12 +69,29 @@ class TienIchController extends Controller
             $trangThai = $request->trangThai;
             return $tienIch->update(['ten'=>$ten,'hinh'=>$image_name,'trangThai'=>$trangThai]);
         }
-        return null;
-
+    }
+    public function capNhatTienIch2(Request $request) {
+        $tienIch = TienIch::find($request->id);
+        if(isset($tienIch)){
+            $ten = $request->ten;
+            $trangThai = $request->trangThai;
+            return $tienIch->update(['ten'=>$ten,'trangThai'=>$trangThai]);
+        }
+    }
+    public function capNhatTrangThai(Request $request)  {
+        $tienIch = TienIch::find($request->id);
+        $trangThai = $tienIch->trangThai;
+        if($trangThai==0){
+            return $tienIch->update(['trangThai'=>1]);
+        }
+        return $tienIch->update(['trangThai'=>0]);
     }
 
     public function layTatCaTienIch(){
         return TienIch::all();
+    }
+    public function layTienIchTheoId(Request $request) {
+        return TienIch::find($request->id);
     }
 //End: Nguyen Gia Nghiem
     
