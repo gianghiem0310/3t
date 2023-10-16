@@ -89,7 +89,7 @@ Route::delete('/yeucaudangky/huy',[YeuCauDangKyGoiController::class,'huyYeuCauDa
 
 Route::get('/yeucauxoaphong/all',[YeuCauXoaPhongController::class,'layTatCaYeuCauXoaPhongAPI']);
 Route::get('/yeucauxoaphong/chitiet',[YeuCauXoaPhongController::class,'thongTinChiTietCuaYeuCauXoaPhongAPI']);
-Route::get('/yeucauxoaphong/huy',[YeuCauXoaPhongController::class,'huyYeuCauXoaPhongAPI']);
+Route::delete('/yeucauxoaphong/huy',[YeuCauXoaPhongController::class,'huyYeuCauXoaPhongAPI']);
 
 Route::delete('/phongtro/delete',[PhongTroController::class,'xoaPhongTheoIdAPI']);
 
