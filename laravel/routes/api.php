@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 //Start Nghiem
 Route::get('/taikhoan',[TaiKhoanController::class,'layTaiKhoanTheoId']);
+
 Route::get('/thongtinadmin',[AdminController::class,'thongTinAdmin']);
 Route::patch('/doimatkhautaikhoan',[TaiKhoanController::class,'doiMatKhauTaiKhoan']);
 Route::post('/capnhatthongtinadmin',[AdminController::class,'capNhatThongTinAdmin']);

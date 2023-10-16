@@ -52,7 +52,12 @@ class TienIchController extends Controller
         $image_name = 'images/' . time() . '-' . 'tienich' . '.'. $image_tienich->extension();
         $image_tienich->move(public_path('images'), $image_name);
         $ten = $request->ten;
-        return TienIch::create(['ten'=>$ten,'hinh'=>$image_name,'trangThai'=>0]);
+        $tienich =  TienIch::create(['ten'=>$ten,'hinh'=>$image_name,'trangThai'=>0]);
+        if(!empty($tienich)){
+            return true;
+        }
+        return false;
+       
     }
     public function capNhatTienIch(Request $request) {
         $tienIch = TienIch::find($request->id);
