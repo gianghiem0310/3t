@@ -68,6 +68,9 @@ class QuanController extends Controller
         return null;
 
     }
+    public function layTatCaQuan()  {
+        return Quan::all();
+    }
    
     //END: NGUYEN GIA NGHIEM
 }

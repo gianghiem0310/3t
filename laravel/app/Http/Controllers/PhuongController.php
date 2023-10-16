@@ -65,6 +65,9 @@ class PhuongController extends Controller
         }
         return null;
   }
+  public function layTatCaPhuong(){
+    return Phuong::all();
+  }
     
      //END: NGUYEN GIA NGHIEM
 }
