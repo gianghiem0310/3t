@@ -46,17 +46,23 @@ Route::get('/kiemtradangnhap',[TaiKhoanController::class,'kiemTraDangNhap']);
 Route::get('/chinhsach',[ChinhSachController::class,'layChinhSachTheoId']);
 Route::put('/capnhatchinhsach',[ChinhSachController::class,'capNhatChinhSach']);
 
+Route::get('/laytatcatienich',[TienIchController::class,'layTatCaTienIch']);
 Route::post('/themtienich',[TienIchController::class,'themTienIch']);
 Route::post('/capnhattienich',[TienIchController::class,'capNhatTienIch']);
 
-
+Route::get('/laytatcaquan',[QuanController::class,'layTatCaQuan']);
 Route::post('/themquan',[QuanController::class,'themQuan']);
 Route::post('/capnhatquan',[QuanController::class,'capNhatQuan']);
 
+Route::get('/laytatcaphuong',[TienIchController::class,'layTatCaPhuong']);
 Route::post('/themphuong',[PhuongController::class,'themPhuong']);
 Route::post('/capnhatphuong',[PhuongController::class,'capNhatPhuong']);
 //UpAnh
 Route::post('/uploadimage',[AdminController::class,'uploadImage']);
+
+
+//Anh tien ich
+
 
 //Nghiem NguoiThue
 
