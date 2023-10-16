@@ -79,4 +79,24 @@ class TaiKhoanController extends Controller
 
    
       //End: Nguyen Gia Nghiem
+
+      //Start Kiet
+      public function khoaTaiKhoanAPI(Request $request)
+      {
+          
+          return TaiKhoan::where('id', $request->id)->update([
+              
+              "trangThai" =>  1
+          ]);
+      }
+      public function moKhoaTaiKhoanAPI(Request $request)
+      {
+          
+          return TaiKhoan::where('id', $request->id)->update([
+              
+              "trangThai" =>  0
+          ]);
+      }
+
+      //End Kiet
 }
