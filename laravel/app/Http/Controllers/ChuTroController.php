@@ -22,15 +22,23 @@ class ChuTroController extends Controller
     public function layThongTinTheoIDTaiKhoanAPI(Request $request){
         return ChuTro::layThongTinXacThucTheoTaiKhoan($request->idTaiKhoan);
     }
-    public function timChuTroTheoTen(Request $request)
+    public function timChuTroXacThucTheoTen(Request $request)
     {
         $q = '%'. $request->ten.'%';
-        return ChuTro::where('ten','like', $q)->get();
+        //return ChuTro::where('ten','like', $q)->get();
+        return ChuTro::where([
+            ['ten', 'like', $q],
+            ['xacThuc', 1]
+        ])->get();
     }
-    public function timChuTroTheoSDT(Request $request)
+    public function timChuTroXacThucTheoSDT(Request $request)
     {
         $q = '%'. $request->soDienThoai.'%';
-        return ChuTro::where('soDienThoai','like', $q)->get();
+        //return ChuTro::where('soDienThoai','like', $q , 'and' , 'xacThuc' == 1)->get();
+        return ChuTro::where([
+            ['soDienThoai', 'like', $q],
+            ['xacThuc', 1]
+        ])->get();
     }
     // public function khoaChuTroAPI(Request $request)
     // {
