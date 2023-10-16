@@ -62,6 +62,12 @@ Route::post('/uploadimage',[AdminController::class,'uploadImage']);
 
 //End Nghiem
 
+//Start Kiet
+Route::put('/taikhoan/khoa',[TaiKhoanController::class,'khoaTaiKhoanAPI']);
+Route::put('/taikhoan/moKhoa',[TaiKhoanController::class,'moKhoaTaiKhoanAPI']);
+
+//End Kiet
+
 //Start Minh
 Route::get('/goi/all',[GoiController::class,'layTatCaGoiAPI']);
 Route::get('/goi/chitiet',[GoiController::class,'layThongTinChiTietTheoIDGoiAPI']);
@@ -75,8 +81,8 @@ Route::get('/goi/unLock',[GoiController::class, 'moKhoaGoiDichVuAPI']);
 Route::get('/chutro/all',[ChuTroController::class,'layTatCaThongTinChuTroAPI']);
 Route::get('/chutro/chuaxacthuc',[ChuTroController::class,'layTatCaThongTinChuTroChuaXacThucAPI']);
 Route::get('/chutro/daxacthuc',[ChuTroController::class,'layTatCaThongTinChuTroDaXacThucAPI']);
-Route::get('/chutro/timKiemTen',[ChuTroController::class,'timChuTroTheoTen']);
-Route::get('/chutro/timKiemSDT',[ChuTroController::class,'timChuTroTheoSDT']);
+Route::get('/chutro/timKiemTenChuTroXacThuc',[ChuTroController::class,'timChuTroXacThucTheoTen']);
+Route::get('/chutro/timKiemSDTChuTroXacThuc',[ChuTroController::class,'timChuTroXacThucTheoSDT']);
 Route::get('/chutro/lock',[ChuTroController::class, 'khoaChuTroAPI']);
 Route::get('/chutro/unLock',[ChuTroController::class, 'moKhoaChuTroTheoIDTaiKhoanAPI']);
 Route::get('/chutro/chitiet',[ChuTroController::class,'layThongTinTheoIDTaiKhoanAPI']);  // Chuyền theo id tài khoản
