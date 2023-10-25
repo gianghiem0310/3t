@@ -9,9 +9,12 @@ use App\Http\Controllers\YeuCauDangKyGoiController;
 use App\Http\Controllers\YeuCauXoaPhongController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChinhSachController;
+use App\Http\Controllers\NguoiThueController;
+use App\Http\Controllers\PhongTinNhanController;
 use App\Http\Controllers\PhuongController;
 use App\Http\Controllers\QuanController;
 use App\Http\Controllers\TienIchController;
+use App\Http\Controllers\TinNhanController;
 use App\Http\Controllers\XacThucChuTroController;
 use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
@@ -60,7 +63,22 @@ Route::post('/capnhatphuong',[PhuongController::class,'capNhatPhuong']);
 //UpAnh
 Route::post('/uploadimage',[AdminController::class,'uploadImage']);
 
+//Start Nghiêm Part 2
 
+Route::get('chutro/thongtinchitiet',[ChuTroController::class,'layThongTinChuTroTheoId']);
+Route::get('nguoithue/thongtinchitiet',[NguoiThueController::class,'layThongTinNguoiThueTheoId']);
+Route::get('phongtinnhan',[PhongTinNhanController::class,'layIdPhongTinNhan']);
+Route::get('danhsachtinnhan',[TinNhanController::class,'layDanhSachTinNhan']);
+Route::get('laytaikhoandoiphuong',[TaiKhoanController::class,'layTaiKhoanDoiPhuong']);
+Route::post('guitinnhan',[TinNhanController::class,'guiTinNhan']);
+Route::get('danhsachtinnhantheoidtaikhoan',[PhongTinNhanController::class,'layDanhSachTinNhanTheoIdTaiKhoan']);
+Route::post('capnhattinnhanmoinhat',[PhongTinNhanController::class,'capNhatTinNhanMoiNhat']);
+Route::post('capnhattrangthaidaxem',[PhongTinNhanController::class,'capNhatTrangThaiDaXem']);
+
+Route::post('capnhatthongtinchutro',[ChuTroController::class,'capNhatThongTinChuTro']);
+Route::post('capnhatthongtinchutro2',[ChuTroController::class,'capNhatThongTinChuTro2']);
+
+//End Nghiêm Part 2
 //Anh tien ich
 
 

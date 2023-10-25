@@ -46,4 +46,11 @@ class NguoiThueController extends Controller
     {
         //
     }
+
+    
+    //Start Nghiem Part 2
+    public function layThongTinNguoiThueTheoId(Request $request)  {
+        return NguoiThue::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
+    }
+    //End Nghiem Part 2
 }

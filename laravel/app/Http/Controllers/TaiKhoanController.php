@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChuTro;
+use App\Models\NguoiThue;
 use App\Models\TaiKhoan;
 use Illuminate\Http\Request;
 
@@ -80,6 +82,11 @@ class TaiKhoanController extends Controller
    public function layTatCaTaiKhoan()  {
     return TaiKhoan::all();
    }
+   public function layTaiKhoanDoiPhuong(Request $request)  {
+    return TaiKhoan::find($request->idDoiPhuong);
+   }
+
+   
       //End: Nguyen Gia Nghiem
 
       //Start Kiet

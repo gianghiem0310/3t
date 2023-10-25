@@ -57,4 +57,38 @@ class ChuTroController extends Controller
         return ChuTro::where('id', $request->id)->update(['xacThuc'=>1]);
     }
 
+    //Start Nghiem Part 2
+    public function layThongTinChuTroTheoId(Request $request)  {
+        return ChuTro::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
+    }
+
+
+    public function capNhatThongTinChuTro(Request $request)
+    {
+        $chuTro = ChuTro::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
+        if(isset($chuTro)){
+            $image = $request->hinh;
+            $image_name = 'images/' . time() . '-' . 'chutro' . '.'. $image->extension();
+            $image->move(public_path('images'), $image_name);
+            $tenChuTro = $request->ten;
+            $soDienThoai = $request->soDienThoai;
+            $soTaiKhoanNganHang = $request->soTaiKhoanNganHang;
+            $tenChuTaiKhoanNganHang= $request->tenChuTaiKhoanNganHang;
+            return $chuTro->update(['ten'=>$tenChuTro,'hinh'=>$image_name,'soDienThoai'=>$soDienThoai,'soTaiKhoanNganHang'=>$soTaiKhoanNganHang,'tenChuTaiKhoanNganHang'=>$tenChuTaiKhoanNganHang]);
+        }
+        return false;
+    }
+    public function capNhatThongTinChuTro2(Request $request)
+    {
+        $chuTro = ChuTro::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
+        if(isset($chuTro)){
+            $tenChuTro = $request->ten;
+            $soDienThoai = $request->soDienThoai;
+            $soTaiKhoanNganHang = $request->soTaiKhoanNganHang;
+            $tenChuTaiKhoanNganHang= $request->tenChuTaiKhoanNganHang;
+            return $chuTro->update(['ten'=>$tenChuTro,'soDienThoai'=>$soDienThoai,'soTaiKhoanNganHang'=>$soTaiKhoanNganHang,'tenChuTaiKhoanNganHang'=>$tenChuTaiKhoanNganHang]);
+        }
+        return false;
+    }
+    //End Nghiem Part 2
 }
