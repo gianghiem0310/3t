@@ -46,4 +46,31 @@ class QuanController extends Controller
     {
         //
     }
+    //START: NGUYEN GIA NGHIEM
+    public function themQuan(Request $request) 
+    {
+        $image_quan = $request->hinh;
+        $image_name = 'images/' . time() . '-' . 'quan' . '.'. $image_quan->extension();
+        $image_quan->move(public_path('images'), $image_name);
+        $ten = $request->tenQuan;
+        return Quan::create(['tenQuan'=>$ten,'hinh'=>$image_name,'trangThai'=>0]);
+    }
+    public function capNhatQuan(Request $request) {
+        $quan = Quan::find($request->id);
+        if(isset($quan)){
+            $image_quan = $request->hinh;
+            $image_name = 'images/' . time() . '-' . 'quan' . '.'. $image_quan->extension();
+            $image_quan->move(public_path('images'), $image_name);
+            $ten = $request->tenQuan;
+            $trangThai = $request->trangThai;
+            return $quan->update(['tenQuan'=>$ten,'hinh'=>$image_name,'trangThai'=>$trangThai]);
+        }
+        return null;
+
+    }
+    public function layTatCaQuan()  {
+        return Quan::all();
+    }
+   
+    //END: NGUYEN GIA NGHIEM
 }

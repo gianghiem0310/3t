@@ -46,4 +46,31 @@ class TienIchController extends Controller
     {
         //
     }
+    //START: NGUYEN GIA NGHIEM
+    public function themTienIch(Request $request) {
+        $image_tienich = $request->hinh;
+        $image_name = 'images/' . time() . '-' . 'tienich' . '.'. $image_tienich->extension();
+        $image_tienich->move(public_path('images'), $image_name);
+        $ten = $request->ten;
+        return TienIch::create(['ten'=>$ten,'hinh'=>$image_name,'trangThai'=>0]);
+    }
+    public function capNhatTienIch(Request $request) {
+        $tienIch = TienIch::find($request->id);
+        if(isset($tienIch)){
+            $image_tienich = $request->hinh;
+            $image_name = 'images/' . time() . '-' . 'tienich' . '.'. $image_tienich->extension();
+            $image_tienich->move(public_path('images'), $image_name);
+            $ten = $request->ten;
+            $trangThai = $request->trangThai;
+            return $tienIch->update(['ten'=>$ten,'hinh'=>$image_name,'trangThai'=>$trangThai]);
+        }
+        return null;
+
+    }
+
+    public function layTatCaTienIch(){
+        return TienIch::all();
+    }
+//End: Nguyen Gia Nghiem
+    
 }

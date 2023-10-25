@@ -46,4 +46,28 @@ class PhuongController extends Controller
     {
         //
     }
+     //START: NGUYEN GIA NGHIEM
+
+
+     public function themPhuong(Request $request)
+    {
+        $ten = $request->tenPhuong;
+        $idQuan = $request->idQuan;    
+        return Phuong::create(['tenPhuong'=>$ten,'idQuan'=>$idQuan,'trangThai'=>0]);
+    }
+  public function capNhatPhuong(Request $request){
+        $phuong = Phuong::find($request->id);
+        if(isset($phuong)){
+            $ten = $request->tenPhuong;
+            $idQuan = $request->idQuan;    
+            $trangThai = $request->trangThai;
+            return $phuong->update(['tenPhuong'=>$ten,'idQuan'=>$idQuan,'trangThai'=>$trangThai]);
+        }
+        return null;
+  }
+  public function layTatCaPhuong(){
+    return Phuong::all();
+  }
+    
+     //END: NGUYEN GIA NGHIEM
 }
