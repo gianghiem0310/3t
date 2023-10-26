@@ -9,10 +9,14 @@ use App\Http\Controllers\YeuCauDangKyGoiController;
 use App\Http\Controllers\YeuCauXoaPhongController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChinhSachController;
+use App\Http\Controllers\HinhAnhController;
+use App\Http\Controllers\PhongTroChuTroController;
 use App\Http\Controllers\PhuongController;
 use App\Http\Controllers\QuanController;
+use App\Http\Controllers\ThongBaoController;
 use App\Http\Controllers\TienIchController;
 use App\Http\Controllers\XacThucChuTroController;
+use App\Models\HinhAnh;
 use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -110,8 +114,17 @@ Route::post('/banner/create',[BannerController::class,'themHinhAPI']);
 Route::post('/banner/edit',[BannerController::class,'suaHinhAPI']);
 Route::delete('/banner/delete',[BannerController::class,'xoaHinhAPI']);
 
-Route::get('xacthucchutro/all', [XacThucChuTroController::class,"layTatCaYeuCauXacThucAPI"]);
-Route::patch('xacthucchutro/xacthuc', [XacThucChuTroController::class,"xacThucYeuCauTheoIdChuTroAPI"]);
-Route::get('xacthucchutro/chitiet', [XacThucChuTroController::class,"layThongTinYeuCauXacThucAPI"]);
-Route::delete('xacthucchutro/xoa', [XacThucChuTroController::class,"xoaYeuXauXacThucAPI"]);
+Route::get('/xacthucchutro/all', [XacThucChuTroController::class,"layTatCaYeuCauXacThucAPI"]);
+Route::patch('/xacthucchutro/xacthuc', [XacThucChuTroController::class,"xacThucYeuCauTheoIdChuTroAPI"]);
+Route::get('/xacthucchutro/chitiet', [XacThucChuTroController::class,"layThongTinYeuCauXacThucAPI"]);
+Route::delete('/xacthucchutro/xoa', [XacThucChuTroController::class,"xoaYeuXauXacThucAPI"]);
+
+
+// Chủ trọ (
+// start
+Route::get('/thongbao/all', [ThongBaoController::class,"layTatCaThongBaoTheoIDNguoiNhanAPI"]);
+
+Route::get('/phongtrochutro/all', [PhongTroChuTroController::class, "layDanhSachPhongTheoIDChuTroAPI"]);
+Route::post('/phonghinhanh/create', [HinhAnhController::class, "uploadmultiple"]);
+// end )
 //End Minh
