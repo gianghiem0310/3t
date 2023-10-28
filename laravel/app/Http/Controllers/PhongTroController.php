@@ -10,4 +10,5 @@ class PhongTroController extends Controller
     public static function xoaPhongTheoIdAPI(Request $request){
         return PhongTro::where('id', $request->id)->delete();
     }
+    
 }
