@@ -47,26 +47,33 @@ class BannerController extends Controller
         //
     }
 
-    public static function layTatCaBannerAPI(){
+    public static function layTatCaBannerAPI()
+    {
         return Banner::all();
     }
 
-    public static function themHinhAPI(Request $request){
+    public static function themHinhAPI(Request $request)
+    {
         $image = $request->hinh;
-        $image_name = 'images/' . time() . '-' . 'banner' . '.'. $image->extension();
+        $image_name = 'images/' . time() . '-' . 'banner' . '.' . $image->extension();
         $image->move(public_path('images'), $image_name);
-        Banner::create(['hinhBanner' => $image_name]);
-
+        if (Banner::create(['hinhBanner' => $image_name])) {
+            return true;
+        }
+        return false;
     }
-    public static function suaHinhAPI(Request $request){
+    public static function suaHinhAPI(Request $request)
+    {
         $image = $request->hinh;
-        $image_name = 'images/' . time() . '-' . 'banner' . '.'. $image->extension();
+        $image_name = 'images/' . time() . '-' . 'banner' . '.' . $image->extension();
         $image->move(public_path('images'), $image_name);
-        Banner::where('id', $request->id)->update(['hinhBanner' => $image_name]);
-
+        if (Banner::where('id', $request->id)->update(['hinhBanner' => $image_name])) {
+            return true;
+        }
+        return false;
     }
-    public static function xoaHinhAPI(Request $request){
+    public static function xoaHinhAPI(Request $request)
+    {
         Banner::where('id', $request->id)->delete();
-
     }
 }

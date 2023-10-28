@@ -19,12 +19,13 @@ class ChuTroController extends Controller
     {
         return ChuTro::where('xacThuc', 1)->get();
     }
-    public function layThongTinTheoIDTaiKhoanAPI(Request $request){
+    public function layThongTinTheoIDTaiKhoanAPI(Request $request)
+    {
         return ChuTro::layThongTinXacThucTheoTaiKhoan($request->idTaiKhoan);
     }
     public function timChuTroXacThucTheoTen(Request $request)
     {
-        $q = '%'. $request->ten.'%';
+        $q = '%' . $request->ten . '%';
         //return ChuTro::where('ten','like', $q)->get();
         return ChuTro::where([
             ['ten', 'like', $q],
@@ -33,7 +34,7 @@ class ChuTroController extends Controller
     }
     public function timChuTroXacThucTheoSDT(Request $request)
     {
-        $q = '%'. $request->soDienThoai.'%';
+        $q = '%' . $request->soDienThoai . '%';
         //return ChuTro::where('soDienThoai','like', $q , 'and' , 'xacThuc' == 1)->get();
         return ChuTro::where([
             ['soDienThoai', 'like', $q],
@@ -53,8 +54,12 @@ class ChuTroController extends Controller
     {
         return ChuTro::layThongTinTheoTaiKhoan($request->idTaiKhoan);
     }
-    public function xacNhanThongTinChuTroTheoIDTaiKhoanAPI(Request $request){
-        return ChuTro::where('id', $request->id)->update(['xacThuc'=>1]);
+    public function layThongTinTheoIDTaiKhoanAPI2(Request $request)
+    {
+        return ChuTro::where('idTaiKhoan', '=', $request->idTaiKhoan)->first();
     }
-
+    public function xacNhanThongTinChuTroTheoIDTaiKhoanAPI(Request $request)
+    {
+        return ChuTro::where('id', $request->id)->update(['xacThuc' => 1]);
+    }
 }
