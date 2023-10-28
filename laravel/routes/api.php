@@ -119,7 +119,7 @@ Route::patch('/xacthucchutro/xacthuc', [XacThucChuTroController::class,"xacThucY
 Route::get('/xacthucchutro/chitiet', [XacThucChuTroController::class,"layThongTinYeuCauXacThucAPI"]);
 Route::delete('/xacthucchutro/xoa', [XacThucChuTroController::class,"xoaYeuXauXacThucAPI"]);
 
-
+Route::get('/phuong/layphuongtheoquan', [PhuongController::class,"layPhuongTheoIDQuanAPI"]);
 // Chủ trọ (
 // start
 Route::get('/thongbao/all', [ThongBaoController::class,"layTatCaThongBaoTheoIDNguoiNhanAPI"]);
