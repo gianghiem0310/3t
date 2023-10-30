@@ -46,4 +46,7 @@ class NguoiThueController extends Controller
     {
         //
     }
+    public function layChiTietNguoiThueAPI(Request $request){
+        return NguoiThue::where("id", $request->id)->first();
+    }
 }
