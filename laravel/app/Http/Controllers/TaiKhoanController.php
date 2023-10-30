@@ -46,59 +46,67 @@ class TaiKhoanController extends Controller
     {
         //
     }
-      //Start: Nguyen Gia Nghiem
-    public function layTaiKhoanTheoId(Request $request) 
+    //Start: Nguyen Gia Nghiem
+    public function layTaiKhoanTheoId(Request $request)
     {
         return TaiKhoan::find($request->id);
     }
-    public function doiMatKhauTaiKhoan(Request $request){
-        return TaiKhoan::where('id','=',$request->id)->update(['matKhau'=>$request->matkhaumoi]);
+    public function doiMatKhauTaiKhoan(Request $request)
+    {
+        return TaiKhoan::where('id', '=', $request->id)->update(['matKhau' => $request->matkhaumoi]);
     }
 
-    public function capNhatTrangThai(Request $request) 
+    public function capNhatTrangThai(Request $request)
     {
         $taikhoan = TaiKhoan::find($request->id);
-        if($taikhoan->trangThai == 0){
+        if ($taikhoan->trangThai == 0) {
             $taikhoan->trangThai  = 1;
-        }else{
+        } else {
             $taikhoan->trangThai = 0;
         }
         return $taikhoan->update();
     }
 
-
-    public function kiemTraDangNhap(Request $request) {
+    public function kiemTraDangNhap(Request $request)
+    {
         $tenTaiKhoan = $request->tenTaiKhoan;
         $matKhau = $request->matKhau;
-        $taiKhoan = TaiKhoan::where('tenTaiKhoan','=',$tenTaiKhoan)->where('matKhau','=',$matKhau)->first();
-        if(isset($taiKhoan)){
-            return $taiKhoan;
-        }
-        return null;
+        $taiKhoan = TaiKhoan::where('tenTaiKhoan', '=', $tenTaiKhoan)->where('matKhau', '=', $matKhau)->first();
+        return $taiKhoan;
     }
 
-   public function layTatCaTaiKhoan()  {
-    return TaiKhoan::all();
-   }
-      //End: Nguyen Gia Nghiem
+    public function layTatCaTaiKhoan()
+    {
+        return TaiKhoan::all();
+    }
 
-      //Start Kiet
-      public function khoaTaiKhoanAPI(Request $request)
-      {
-          
-          return TaiKhoan::where('id', $request->id)->update([
-              
-              "trangThai" =>  1
-          ]);
-      }
-      public function moKhoaTaiKhoanAPI(Request $request)
-      {
-          
-          return TaiKhoan::where('id', $request->id)->update([
-              
-              "trangThai" =>  0
-          ]);
-      }
 
-      //End Kiet
+    public function doiMatKhauTaiKhoanAPI(Request $request)
+    {
+        return TaiKhoan::where([
+            ['id', '=', $request->id],
+            ['matKhau', '=', $request->matKhaucu]
+        ])->update(['matKhau' => $request->matKhaumoi]);
+    }
+    //End: Nguyen Gia Nghiem
+
+    //Start Kiet
+    public function khoaTaiKhoanAPI(Request $request)
+    {
+
+        return TaiKhoan::where('id', $request->id)->update([
+
+            "trangThai" =>  1
+        ]);
+    }
+    public function moKhoaTaiKhoanAPI(Request $request)
+    {
+
+        return TaiKhoan::where('id', $request->id)->update([
+
+            "trangThai" =>  0
+        ]);
+    }
+
+    //End Kiet
 }
