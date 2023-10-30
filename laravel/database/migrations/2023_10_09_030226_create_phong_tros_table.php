@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('loaiPhong');
             $table->integer('soLuongToiDa');
             $table->integer('tienCoc');
+            $table->integer('gioiTinh');
             $table->timestamps();
         });
     }
