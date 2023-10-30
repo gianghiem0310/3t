@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NguoiThue;
 use App\Models\PhongNguoiThue;
 use Illuminate\Http\Request;
 
@@ -45,5 +46,9 @@ class PhongNguoiThueController extends Controller
     public function destroy(PhongNguoiThue $phongNguoiThue)
     {
         //
+    }
+
+    public function latTatCaNguoiThueTheoIDPhongAPI(Request $request){
+        return PhongNguoiThue::layNguoiThueTheoIDPhong($request->idPhong);
     }
 }
