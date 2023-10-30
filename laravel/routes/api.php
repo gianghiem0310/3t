@@ -63,7 +63,8 @@ Route::post('/themphuong',[PhuongController::class,'themPhuong']);
 Route::post('/capnhatphuong',[PhuongController::class,'capNhatPhuong']);
 //UpAnh
 Route::post('/uploadimage',[AdminController::class,'uploadImage']);
-
+Route::post('/capnhatthongtinchutrocohinh', [ChuTroController::class, 'capNhatThongTinChuTroCoHinh']);
+Route::post('/capnhatthongtinchutrokhonghinh', [ChuTroController::class, 'capNhatThongTinChuTroKhongHinh']);
 
 //Anh tien ich
 
@@ -79,6 +80,7 @@ Route::put('/taikhoan/moKhoa',[TaiKhoanController::class,'moKhoaTaiKhoanAPI']);
 //End Kiet
 
 //Start Minh
+Route::patch('/taikhoan/doimatkhau', [TaiKhoanController::class, 'doiMatKhauTaiKhoanAPI']);
 Route::get('/goi/all',[GoiController::class,'layTatCaGoiAPI']);
 Route::get('/goi/chitiet',[GoiController::class,'layThongTinChiTietTheoIDGoiAPI']);
 Route::get('/goi/all/condung',[GoiController::class,'layTatCaGoiTrangThaiConDungAPI']);

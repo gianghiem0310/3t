@@ -19,12 +19,13 @@ class ChuTroController extends Controller
     {
         return ChuTro::where('xacThuc', 1)->get();
     }
-    public function layThongTinTheoIDTaiKhoanAPI(Request $request){
+    public function layThongTinTheoIDTaiKhoanAPI(Request $request)
+    {
         return ChuTro::layThongTinXacThucTheoTaiKhoan($request->idTaiKhoan);
     }
     public function timChuTroXacThucTheoTen(Request $request)
     {
-        $q = '%'. $request->ten.'%';
+        $q = '%' . $request->ten . '%';
         //return ChuTro::where('ten','like', $q)->get();
         return ChuTro::where([
             ['ten', 'like', $q],
@@ -33,7 +34,7 @@ class ChuTroController extends Controller
     }
     public function timChuTroXacThucTheoSDT(Request $request)
     {
-        $q = '%'. $request->soDienThoai.'%';
+        $q = '%' . $request->soDienThoai . '%';
         //return ChuTro::where('soDienThoai','like', $q , 'and' , 'xacThuc' == 1)->get();
         return ChuTro::where([
             ['soDienThoai', 'like', $q],
@@ -53,8 +54,40 @@ class ChuTroController extends Controller
     {
         return ChuTro::layThongTinTheoTaiKhoan($request->idTaiKhoan);
     }
-    public function xacNhanThongTinChuTroTheoIDTaiKhoanAPI(Request $request){
-        return ChuTro::where('id', $request->id)->update(['xacThuc'=>1]);
+    public function layThongTinTheoIDTaiKhoanAPI2(Request $request)
+    {
+        return ChuTro::where('idTaiKhoan', '=', $request->idTaiKhoan)->first();
+    }
+    public function xacNhanThongTinChuTroTheoIDTaiKhoanAPI(Request $request)
+    {
+        return ChuTro::where('id', $request->id)->update(['xacThuc' => 1]);
     }
 
+    public function capNhatThongTinChuTroCoHinh(Request $request)
+    {
+        $chuTro = ChuTro::where('idTaiKhoan', '=', $request->idTaiKhoan)->first();
+        if (isset($chuTro)) {
+            $image = $request->hinh;
+            $image_name = 'images/' . time() . '-' . 'chutro' . '.' . $image->extension();
+            $image->move(public_path('images'), $image_name);
+            $tenChuTro = $request->ten;
+            $soDienThoai = $request->soDienThoai;
+            $soTaiKhoanNganHang = $request->soTaiKhoanNganHang;
+            $tenChuTaiKhoanNganHang = $request->tenChuTaiKhoanNganHang;
+            return $chuTro->update(['ten' => $tenChuTro, 'hinh' => $image_name, 'soDienThoai' => $soDienThoai, 'soTaiKhoanNganHang' => $soTaiKhoanNganHang, 'tenChuTaiKhoanNganHang' => $tenChuTaiKhoanNganHang]);
+        }
+        return false;
+    }
+    public function capNhatThongTinChuTroKhongHinh(Request $request)
+    {
+        $chuTro = ChuTro::where('idTaiKhoan', '=', $request->idTaiKhoan)->first();
+        if (isset($chuTro)) {
+            $tenChuTro = $request->ten;
+            $soDienThoai = $request->soDienThoai;
+            $soTaiKhoanNganHang = $request->soTaiKhoanNganHang;
+            $tenChuTaiKhoanNganHang = $request->tenChuTaiKhoanNganHang;
+            return $chuTro->update(['ten' => $tenChuTro, 'soDienThoai' => $soDienThoai, 'soTaiKhoanNganHang' => $soTaiKhoanNganHang, 'tenChuTaiKhoanNganHang' => $tenChuTaiKhoanNganHang]);
+        }
+        return false;
+    }
 }
