@@ -9,10 +9,16 @@ class PhongNguoiThue extends Model
 {
     use HasFactory;
     public function nguoiThue(){
-        $this->setAttribute("nguoiThue", $this->hasOne(NguoiThue::class, "idNguoiThue",  "id"));
+        $this->setAttribute("nguoiThue", $this->hasOne(NguoiThue::class, "id",  "idNguoiThue")->first());
     }
 
-    public static function layNguoiThueTheoIDPhong($idNguoiThue){
-        $result = self::where('idNguoiThue', $idNguoiThue)->get();
+    public static function layNguoiThueTheoIDPhong($idPhong){
+        $result = self::where('idPhong', $idPhong)->get();
+
+        foreach ($result as $item){
+            $item->nguoiThue();
+        }
+
+        return $result;
     }
 }
