@@ -55,18 +55,28 @@ class BannerController extends Controller
         $image = $request->hinh;
         $image_name = 'images/' . time() . '-' . 'banner' . '.'. $image->extension();
         $image->move(public_path('images'), $image_name);
-        Banner::create(['hinhBanner' => $image_name]);
+        if(Banner::create(['hinhBanner' => $image_name]))
+        {
+            return true;
+        }
+        return false;
 
     }
     public static function suaHinhAPI(Request $request){
         $image = $request->hinh;
         $image_name = 'images/' . time() . '-' . 'banner' . '.'. $image->extension();
         $image->move(public_path('images'), $image_name);
-        Banner::where('id', $request->id)->update(['hinhBanner' => $image_name]);
+        if(  Banner::where('id', $request->id)->update(['hinhBanner' => $image_name])){
+            return true;
+        }
+        return false;
 
     }
+
+
     public static function xoaHinhAPI(Request $request){
-        Banner::where('id', $request->id)->delete();
-
+      return Banner::where('id', $request->id)->delete();
     }
+	
+	 
 }

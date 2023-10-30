@@ -14,6 +14,6 @@ class YeuCauXoaPhongController extends Controller
         return YeuCauXoaPhong::thongTinYeuCauXoaPhong($request->id);
     }
     public static function huyYeuCauXoaPhongAPI(Request $request){
-        return YeuCauXoaPhong::where('id', $request->id)->delete;
+        return YeuCauXoaPhong::where('id', $request->id)->delete();
     }
 }

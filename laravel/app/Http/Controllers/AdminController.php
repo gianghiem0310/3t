@@ -66,7 +66,17 @@ class AdminController extends Controller
             $tenChuTaiKhoan= $request->tenChuTaiKhoan;
             return $admin->update(['ten' => $tenAdmin,'hinh'=>$image_name,'soDienThoai'=>$soDienThoai,'soTaiKhoanNganHang'=>$soTaiKhoanNganHang,'tenChuTaiKhoan'=>$tenChuTaiKhoan]);
         }
-        return false;
+    }
+    public function capNhatThongTinAdmin2(Request $request)
+    {
+        $admin = Admin::find($request->id);
+        if(isset($admin)){
+            $tenAdmin = $request->ten;
+            $soDienThoai = $request->soDienThoai;
+            $soTaiKhoanNganHang = $request->soTaiKhoanNganHang;
+            $tenChuTaiKhoan= $request->tenChuTaiKhoan;
+            return $admin->update(['ten' => $tenAdmin,'soDienThoai'=>$soDienThoai,'soTaiKhoanNganHang'=>$soTaiKhoanNganHang,'tenChuTaiKhoan'=>$tenChuTaiKhoan]);
+        }
     }
 
     public function uploadImage(Request $request) {

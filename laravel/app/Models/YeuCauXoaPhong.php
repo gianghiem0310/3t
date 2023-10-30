@@ -16,7 +16,7 @@ class YeuCauXoaPhong extends Model
 
     public function xoaPhong()
     {
-        $this->setAttribute("phongtro", $this->hasOne(PhongTro::class, 'id', 'idPhong')->first());
+        $this->setAttribute("phongTro", $this->hasOne(PhongTro::class, 'id', 'idPhong')->first());
     }
 
     public static function danhSachYeuCauXoaPhong()

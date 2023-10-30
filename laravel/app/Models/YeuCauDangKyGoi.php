@@ -20,7 +20,7 @@ class YeuCauDangKyGoi extends Model
 
     public function goiDangKy()
     {
-        $this->setAttribute("goiDangKy", $this->hasOne(Goi::class, 'id', 'idGoi')->first());
+        $this->setAttribute("goi", $this->hasOne(Goi::class, 'id', 'idGoi')->first());
     }
 
     public static function danhSachYeuCauDangKy()

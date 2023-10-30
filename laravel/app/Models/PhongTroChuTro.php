@@ -7,5 +7,37 @@ use Illuminate\Database\Eloquent\Model;
 
 class PhongTroChuTro extends Model
 {
+    public function thongTinChuTro()
+    {
+        $this->setAttribute("chuTro", $this->hasOne(ChuTro::class, 'id', 'idChuTro')->first());
+    }
+    public function thongTinPhong()
+    {
+        $this->setAttribute("phongTro", $this->hasOne(PhongTro::class, 'id', 'idPhongTro')->first());
+    }
+    public function hinhAnhCuaPhong()
+    {
+        $this->setAttribute("hinhAnh", $this->hasMany(HinhAnh::class, 'idPhong', 'idPhongTro')->get());
+    }
+    public function demSoLuongBinhLuan()
+    {
+        $this->setAttribute("binhLuan", $this->hasMany(PhongBinhLuan::class, 'idPhong', 'idPhongTro')->count());
+    }
+    public function trungBinhDanhGia()
+    {
+        $this->setAttribute("danhGia", $this->hasMany(PhongDanhGia::class, 'idPhong', 'idPhongTro')->avg("danhGia"));
+    }
     use HasFactory;
+    public static function layDanhSachPhongTheoIDChuTro($idChuTro){
+        $result = self::where('idChuTro', "=", $idChuTro)->get();
+
+        foreach($result as $item){
+            $item->thongTinChuTro();
+            $item->thongTinPhong();
+            $item->hinhAnhCuaPhong();
+            $item->demSoLuongBinhLuan(); 
+            $item->trungBinhDanhGia();
+        }
+        return $result;
+    }
 }

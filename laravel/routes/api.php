@@ -9,10 +9,14 @@ use App\Http\Controllers\YeuCauDangKyGoiController;
 use App\Http\Controllers\YeuCauXoaPhongController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChinhSachController;
+use App\Http\Controllers\HinhAnhController;
+use App\Http\Controllers\PhongTroChuTroController;
 use App\Http\Controllers\PhuongController;
 use App\Http\Controllers\QuanController;
+use App\Http\Controllers\ThongBaoController;
 use App\Http\Controllers\TienIchController;
 use App\Http\Controllers\XacThucChuTroController;
+use App\Models\HinhAnh;
 use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,25 +41,32 @@ Route::get('/taikhoan',[TaiKhoanController::class,'layTaiKhoanTheoId']);
 Route::get('/thongtinadmin',[AdminController::class,'thongTinAdmin']);
 Route::patch('/doimatkhautaikhoan',[TaiKhoanController::class,'doiMatKhauTaiKhoan']);
 Route::post('/capnhatthongtinadmin',[AdminController::class,'capNhatThongTinAdmin']);
+Route::post('/capnhatthongtinadmin2',[AdminController::class,'capNhatThongTinAdmin2']);
 
 Route::patch('/capnhattrangthai',[TaiKhoanController::class,'capNhatTrangThai']);
 Route::patch('/capnhatxacthuc',[TaiKhoanController::class,'capNhatXacThuc']);
 Route::get('/kiemtradangnhap',[TaiKhoanController::class,'kiemTraDangNhap']);
 
-Route::put('/chinhsach',[ChinhSachController::class,'layChinhSachTheoId']);
+Route::get('/chinhsach',[ChinhSachController::class,'layChinhSachTheoId']);
 Route::put('/capnhatchinhsach',[ChinhSachController::class,'capNhatChinhSach']);
 
+Route::get('/laytatcatienich',[TienIchController::class,'layTatCaTienIch']);
 Route::post('/themtienich',[TienIchController::class,'themTienIch']);
 Route::post('/capnhattienich',[TienIchController::class,'capNhatTienIch']);
 
-
+Route::get('/laytatcaquan',[QuanController::class,'layTatCaQuan']);
 Route::post('/themquan',[QuanController::class,'themQuan']);
 Route::post('/capnhatquan',[QuanController::class,'capNhatQuan']);
 
+Route::get('/laytatcaphuong',[TienIchController::class,'layTatCaPhuong']);
 Route::post('/themphuong',[PhuongController::class,'themPhuong']);
 Route::post('/capnhatphuong',[PhuongController::class,'capNhatPhuong']);
 //UpAnh
 Route::post('/uploadimage',[AdminController::class,'uploadImage']);
+
+
+//Anh tien ich
+
 
 //Nghiem NguoiThue
 
@@ -94,7 +105,7 @@ Route::delete('/yeucaudangky/huy',[YeuCauDangKyGoiController::class,'huyYeuCauDa
 
 Route::get('/yeucauxoaphong/all',[YeuCauXoaPhongController::class,'layTatCaYeuCauXoaPhongAPI']);
 Route::get('/yeucauxoaphong/chitiet',[YeuCauXoaPhongController::class,'thongTinChiTietCuaYeuCauXoaPhongAPI']);
-Route::get('/yeucauxoaphong/huy',[YeuCauXoaPhongController::class,'huyYeuCauXoaPhongAPI']);
+Route::delete('/yeucauxoaphong/huy',[YeuCauXoaPhongController::class,'huyYeuCauXoaPhongAPI']);
 
 Route::delete('/phongtro/delete',[PhongTroController::class,'xoaPhongTheoIdAPI']);
 
@@ -103,8 +114,17 @@ Route::post('/banner/create',[BannerController::class,'themHinhAPI']);
 Route::post('/banner/edit',[BannerController::class,'suaHinhAPI']);
 Route::delete('/banner/delete',[BannerController::class,'xoaHinhAPI']);
 
-Route::get('xacthucchutro/all', [XacThucChuTroController::class,"layTatCaYeuCauXacThucAPI"]);
-Route::patch('xacthucchutro/xacthuc', [XacThucChuTroController::class,"xacThucYeuCauTheoIdChuTroAPI"]);
-Route::get('xacthucchutro/chitiet', [XacThucChuTroController::class,"layThongTinYeuCauXacThucAPI"]);
-Route::delete('xacthucchutro/xoa', [XacThucChuTroController::class,"xoaYeuXauXacThucAPI"]);
+Route::get('/xacthucchutro/all', [XacThucChuTroController::class,"layTatCaYeuCauXacThucAPI"]);
+Route::patch('/xacthucchutro/xacthuc', [XacThucChuTroController::class,"xacThucYeuCauTheoIdChuTroAPI"]);
+Route::get('/xacthucchutro/chitiet', [XacThucChuTroController::class,"layThongTinYeuCauXacThucAPI"]);
+Route::delete('/xacthucchutro/xoa', [XacThucChuTroController::class,"xoaYeuXauXacThucAPI"]);
+
+Route::get('/phuong/layphuongtheoquan', [PhuongController::class,"layPhuongTheoIDQuanAPI"]);
+// Chủ trọ (
+// start
+Route::get('/thongbao/all', [ThongBaoController::class,"layTatCaThongBaoTheoIDNguoiNhanAPI"]);
+
+Route::get('/phongtrochutro/all', [PhongTroChuTroController::class, "layDanhSachPhongTheoIDChuTroAPI"]);
+Route::post('/phonghinhanh/create', [HinhAnhController::class, "uploadmultiple"]);
+// end )
 //End Minh

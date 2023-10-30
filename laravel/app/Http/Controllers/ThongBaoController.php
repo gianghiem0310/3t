@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PhongTroChuTro;
+use App\Models\ThongBao;
 use Illuminate\Http\Request;
 
-class PhongTroChuTroController extends Controller
+class ThongBaoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +26,7 @@ class PhongTroChuTroController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PhongTroChuTro $phongTroChuTro)
+    public function show(ThongBao $thongBao)
     {
         //
     }
@@ -34,7 +34,7 @@ class PhongTroChuTroController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PhongTroChuTro $phongTroChuTro)
+    public function update(Request $request, ThongBao $thongBao)
     {
         //
     }
@@ -42,12 +42,11 @@ class PhongTroChuTroController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PhongTroChuTro $phongTroChuTro)
+    public function destroy(ThongBao $thongBao)
     {
         //
     }
-
-    public static function layDanhSachPhongTheoIDChuTroAPI(Request $request){
-        return PhongTroChuTro::layDanhSachPhongTheoIDChuTro($request->idChuTro);
+    public function layTatCaThongBaoTheoIDNguoiNhanAPI(Request $request){
+        return ThongBao::layTatCaThongBaoTheoIDNguoiNhan(2);
     }
 }

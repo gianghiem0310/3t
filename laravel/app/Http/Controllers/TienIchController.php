@@ -67,6 +67,10 @@ class TienIchController extends Controller
         return null;
 
     }
+
+    public function layTatCaTienIch(){
+        return TienIch::all();
+    }
 //End: Nguyen Gia Nghiem
     
 }

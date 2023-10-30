@@ -77,7 +77,9 @@ class TaiKhoanController extends Controller
         return null;
     }
 
-   
+   public function layTatCaTaiKhoan()  {
+    return TaiKhoan::all();
+   }
       //End: Nguyen Gia Nghiem
 
       //Start Kiet

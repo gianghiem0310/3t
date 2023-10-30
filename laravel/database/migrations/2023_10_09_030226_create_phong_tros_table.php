@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('phong_tros', function (Blueprint $table) {
             $table->id();
             $table->integer('soPhong');
-            $table->string('tenPhong');
             $table->integer('gia');
             $table->integer('dienTich');
             $table->string('moTa');
