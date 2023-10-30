@@ -10,6 +10,7 @@ use App\Http\Controllers\YeuCauXoaPhongController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChinhSachController;
 use App\Http\Controllers\HinhAnhController;
+use App\Http\Controllers\NguoiThueController;
 use App\Http\Controllers\PhongNguoiThueController;
 use App\Http\Controllers\PhongTroChuTroController;
 use App\Http\Controllers\PhuongController;
@@ -135,4 +136,6 @@ Route::post('/phonghinhanh/create', [HinhAnhController::class, "uploadmultiple"]
 
 // Lay nguoi thue theo id phong
 Route::get('/phongnguoithue/all', [PhongNguoiThueController::class, "latTatCaNguoiThueTheoIDPhongAPI"]);
+// Lấy chi tiết người thuê
+Route::get('/nguoithue/chitiet', [NguoiThueController::class, "layChiTietNguoiThueAPI"]);
 //End Minh
