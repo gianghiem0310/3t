@@ -130,6 +130,8 @@ Route::get('/thongbao/all', [ThongBaoController::class,"layTatCaThongBaoTheoIDNg
 Route::get('/phongtrochutro/all', [PhongTroChuTroController::class, "layDanhSachPhongTheoIDChuTroAPI"]);
 Route::post('/phonghinhanh/create', [HinhAnhController::class, "uploadmultiple"]);
 
+Route::post('/phongtro/create', [PhongTroController::class, "themPhongAPI"]);
+Route::get('/quan/all', [QuanController::class, "layTatCaQuanAPI"]);
 // end )
 
 // Lay nguoi thue theo id phong
