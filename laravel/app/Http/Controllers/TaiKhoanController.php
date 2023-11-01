@@ -90,9 +90,28 @@ class TaiKhoanController extends Controller
         $tenTaiKhoan = $request->tenTaiKhoan;
         $matKhau = $request->matKhau;
         $email = $request->email;
-        TaiKhoan::create(['tenTaiKhoan'=>$tenTaiKhoan,'matKhau'=>$matKhau,'email'=>$email]);
-        
+        $tenNguoiDung= $request->ten;
+        $gioiTinh = $request->gioiTinh;
+        TaiKhoan::create(['tenTaiKhoan'=>$tenTaiKhoan,'matKhau'=>$matKhau,'email'=>$email,'trangThai'=>0,'loaiTaiKhoan'=>0]);
+        $taiKhoan = TaiKhoan::where('tenTaiKhoan','=',$tenTaiKhoan)->where('matKhau','=',$matKhau)->first();
+        if(isset($taiKhoan)){
+            return NguoiThue::create(['idTaiKhoan'=>$taiKhoan->id,'ten'=>$tenNguoiDung,'gioiTinh'=>$gioiTinh]);
+        }
+        return null;
    }
+   public function taoTaiKhoanChuTro(Request $request) {
+    $tenTaiKhoan = $request->tenTaiKhoan;
+    $matKhau = $request->matKhau;
+    $email = $request->email;
+    $tenNguoiDung= $request->ten;
+    TaiKhoan::create(['tenTaiKhoan'=>$tenTaiKhoan,'matKhau'=>$matKhau,'email'=>$email,'trangThai'=>0,'loaiTaiKhoan'=>1]);
+    $taiKhoan = TaiKhoan::where('tenTaiKhoan','=',$tenTaiKhoan)->where('matKhau','=',$matKhau)->where('loaiTaiKhoan','=',1)->first();
+    if(isset($taiKhoan)){
+        $id = $taiKhoan->id;
+        return ChuTro::create(['idTaiKhoan'=>$id,'ten'=>$tenNguoiDung,'xacThuc'=>0]);
+    }
+    return null;
+}
 
 
    
