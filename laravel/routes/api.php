@@ -130,6 +130,7 @@ Route::get('/phuong/layphuongtheoquan', [PhuongController::class, "layPhuongTheo
 Route::get('/thongbao/all', [ThongBaoController::class, "layTatCaThongBaoTheoIDNguoiNhanAPI"]);
 //Start Kiet
 Route::get('/thongbao/chitiet', [ThongBaoController::class, "chitietThongBao"]);
+Route::get('/thongbao/xoa', [ThongBaoController::class, "xoaThongBao"]);
 //End Kiet
 Route::get('/phongtrochutro/all', [PhongTroChuTroController::class, "layDanhSachPhongTheoIDChuTroAPI"]);
 Route::post('/phonghinhanh/create', [HinhAnhController::class, "uploadmultiple"]);

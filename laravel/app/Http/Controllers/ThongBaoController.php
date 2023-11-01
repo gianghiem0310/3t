@@ -56,5 +56,9 @@ class ThongBaoController extends Controller
         ThongBao::where('id', $request->id)->update(['trangThai' => 1]);
         return ThongBao::where('id', $request->id)->first();
     }
+    public function xoaThongBao(Request $request)
+    {
+        return ThongBao::where('id', $request->id)->delete();
+    }
     //End Kiet
 }
