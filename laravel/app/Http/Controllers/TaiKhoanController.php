@@ -86,6 +86,15 @@ class TaiKhoanController extends Controller
     return TaiKhoan::find($request->idDoiPhuong);
    }
 
+   public function taoTaiKhoanNguoiThue(Request $request) {
+        $tenTaiKhoan = $request->tenTaiKhoan;
+        $matKhau = $request->matKhau;
+        $email = $request->email;
+        TaiKhoan::create(['tenTaiKhoan'=>$tenTaiKhoan,'matKhau'=>$matKhau,'email'=>$email]);
+        
+   }
+
+
    
       //End: Nguyen Gia Nghiem
 
