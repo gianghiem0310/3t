@@ -46,7 +46,19 @@ class ThongBaoController extends Controller
     {
         //
     }
-    public function layTatCaThongBaoTheoIDNguoiNhanAPI(Request $request){
-        return ThongBao::layTatCaThongBaoTheoIDNguoiNhan(2);
+    public function layTatCaThongBaoTheoIDNguoiNhanAPI(Request $request)
+    {
+        return ThongBao::layTatCaThongBaoTheoIDNguoiNhan($request->idTaiKhoanNhan);
     }
+    //Start Kiet
+    public function chitietThongBao(Request $request)
+    {
+        ThongBao::where('id', $request->id)->update(['trangThai' => 1]);
+        return ThongBao::where('id', $request->id)->first();
+    }
+    public function xoaThongBao(Request $request)
+    {
+        return ThongBao::where('id', $request->id)->delete();
+    }
+    //End Kiet
 }
