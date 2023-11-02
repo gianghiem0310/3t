@@ -20,6 +20,7 @@ use App\Http\Controllers\TienIchController;
 use App\Http\Controllers\XacThucChuTroController;
 use App\Models\HinhAnh;
 use App\Models\PhongNguoiThue;
+use App\Models\PhongTro;
 use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -132,6 +133,8 @@ Route::post('/phonghinhanh/create', [HinhAnhController::class, "uploadmultiple"]
 
 Route::post('/phongtro/create', [PhongTroController::class, "themPhongAPI"]);
 Route::get('/quan/all', [QuanController::class, "layTatCaQuanAPI"]);
+
+Route::get('/xacthucchutro/create', [XacThucChuTroController::class, "guiYeuCauXacThucAPI"]);
 // end )
 
 // Lay nguoi thue theo id phong

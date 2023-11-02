@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class XacThucChuTro extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        "id",
+        "idChuTro",
+        "cccdMatTruoc",
+        "cccdMatSau",
+        "trangThaiXacThuc"
+    ];
 
     public function layThongTinChuTro(){
         $this->setAttribute("chuTro", $this->hasOne(ChuTro::class, 'id', 'idChuTro')->first());
@@ -31,4 +38,5 @@ class XacThucChuTro extends Model
         return $result;
     }
 
+    
 }

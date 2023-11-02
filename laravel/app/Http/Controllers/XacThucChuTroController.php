@@ -47,18 +47,36 @@ class XacThucChuTroController extends Controller
     {
         //
     }
-    public function layTatCaYeuCauXacThucAPI(){
+    public function layTatCaYeuCauXacThucAPI()
+    {
         return XacThucChuTro::layTatCaYeuCauXacThucChuTro(); //
     }
     public function xacThucYeuCauTheoIdChuTroAPI(Request $request)
     {
-        return XacThucChuTro::where(['idChuTro' => $request->idChuTro])->update(['trangThaiXacThuc'=>1]);
+        return XacThucChuTro::where(['idChuTro' => $request->idChuTro])->update(['trangThaiXacThuc' => 1]);
     }
 
-    public function layThongTinYeuCauXacThucAPI(Request $request){
+    public function layThongTinYeuCauXacThucAPI(Request $request)
+    {
         return XacThucChuTro::layThongTinYeuCauXacThuc($request->idChuTro);
     }
-    public  function  xoaYeuXauXacThucAPI(Request $request){
+    public  function  xoaYeuXauXacThucAPI(Request $request)
+    {
         return XacThucChuTro::where(['idChuTro' => $request->idChuTro])->delete();
+    }
+
+    public function guiYeuCauXacThucAPI(Request $request)
+    {
+        $result = XacThucChuTro::create([
+            "idChuTro" => $request->idChuTro,
+            "cccdMatTruoc" => $request->cccdMatTruoc,
+            "cccdMatSau" => $request->cccdMatSau,
+            "trangThaiXacThuc" => $request->trangThaiXacThuc
+        ]);
+        if($result == null){
+            return false;
+        } else{
+            return true;
+        }
     }
 }
