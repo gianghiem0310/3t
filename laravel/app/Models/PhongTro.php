@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class PhongTro extends Model
 {
-    use HasFactory;
-    
+    protected $fillable = [
+        'soPhong',
+        'gia',
+        'dienTich',
+        'moTa',
+        'idQuan',
+        'idPhuong',
+        'diaChiChiTiet',
+        'loaiPhong',
+        'soLuongToiDa',
+        'tienCoc',
+        'gioiTinh'
+    ];
 }

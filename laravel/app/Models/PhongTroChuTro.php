@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class PhongTroChuTro extends Model
 {
+    use HasFactory;
+    protected $fillable = [
+        'idChuTro',
+        'idPhongTro'
+    ];
     public function thongTinChuTro()
     {
         $this->setAttribute("chuTro", $this->hasOne(ChuTro::class, 'id', 'idChuTro')->first());
@@ -27,9 +32,9 @@ class PhongTroChuTro extends Model
     {
         $this->setAttribute("danhGia", $this->hasMany(PhongDanhGia::class, 'idPhong', 'idPhongTro')->avg("danhGia"));
     }
-    use HasFactory;
+    
     public static function layDanhSachPhongTheoIDChuTro($idChuTro){
-        $result = self::where('idChuTro', "=", $idChuTro)->get();
+        $result = self::where('idChuTro', "=", $idChuTro)->orderBy('idPhongTro', 'DESC')->get();
 
         foreach($result as $item){
             $item->thongTinChuTro();
