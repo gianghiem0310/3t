@@ -84,6 +84,8 @@ Route::post('capnhatthongtinchutro2',[ChuTroController::class,'capNhatThongTinCh
 Route::post('taotaikhoannguoithue',[TaiKhoanController::class,'taoTaiKhoanNguoiThue']);
 Route::post('taotaikhoanchutro',[TaiKhoanController::class,'taoTaiKhoanChuTro']);
 
+
+
 //End Nghiêm Part 2
 //Anh tien ich
 
