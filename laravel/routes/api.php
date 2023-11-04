@@ -20,6 +20,7 @@ use App\Http\Controllers\TienIchController;
 use App\Http\Controllers\XacThucChuTroController;
 use App\Models\HinhAnh;
 use App\Models\PhongNguoiThue;
+use App\Models\PhongTro;
 use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -135,10 +136,15 @@ Route::get('/thongbao/xoa', [ThongBaoController::class, "xoaThongBao"]);
 Route::get('/phongtrochutro/all', [PhongTroChuTroController::class, "layDanhSachPhongTheoIDChuTroAPI"]);
 Route::post('/phonghinhanh/create', [HinhAnhController::class, "uploadmultiple"]);
 
+Route::post('/phongtro/create', [PhongTroController::class, "themPhongAPI"]);
+Route::get('/quan/all', [QuanController::class, "layTatCaQuanAPI"]);
+
+Route::get('/xacthucchutro/create', [XacThucChuTroController::class, "guiYeuCauXacThucAPI"]);
 // end )
 
 // Lay nguoi thue theo id phong
 Route::get('/phongnguoithue/all', [PhongNguoiThueController::class, "latTatCaNguoiThueTheoIDPhongAPI"]);
 // Lấy chi tiết người thuê
 Route::get('/nguoithue/chitiet', [NguoiThueController::class, "layChiTietNguoiThueAPI"]);
+Route::get('/banner/chitiet',[BannerController::class,'layBannerChiTietAPI']);
 //End Minh
