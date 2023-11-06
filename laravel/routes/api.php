@@ -170,4 +170,5 @@ Route::get('/xacthucchutro/create', [XacThucChuTroController::class, "guiYeuCauX
 Route::get('/phongnguoithue/all', [PhongNguoiThueController::class, "latTatCaNguoiThueTheoIDPhongAPI"]);
 // Lấy chi tiết người thuê
 Route::get('/nguoithue/chitiet', [NguoiThueController::class, "layChiTietNguoiThueAPI"]);
+Route::get('/banner/chitiet',[BannerController::class,'layBannerChiTietAPI']);
 //End Minh

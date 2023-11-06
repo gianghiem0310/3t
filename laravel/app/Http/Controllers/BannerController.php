@@ -77,6 +77,7 @@ class BannerController extends Controller
     public static function xoaHinhAPI(Request $request){
       return Banner::where('id', $request->id)->delete();
     }
-	
-	 
+	public static function layBannerChiTietAPI(Request $request){
+        return Banner::find($request->id);
+    }
 }
