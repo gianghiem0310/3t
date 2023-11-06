@@ -67,7 +67,20 @@ class TienIchController extends Controller
         return null;
 
     }
+    public function capNhatTrangThaiTienIch(Request $request) {
+        $tienich = TienIch::find($request->id);
+        if(isset($tienich)){
+            if($tienich->trangThai==0){
+                return $tienich->update(['trangThai'=>1]);
+            }else{
+                return $tienich->update(['trangThai'=>0]);
+            }
+        }
+    }
 
+    public function layTienIchTheoId(Request $request)  {
+        return TienIch::find($request->id);
+    }
     public function layTatCaTienIch(){
         return TienIch::all();
     }
