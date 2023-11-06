@@ -12,11 +12,13 @@ use App\Http\Controllers\ChinhSachController;
 use App\Http\Controllers\HinhAnhController;
 use App\Http\Controllers\NguoiThueController;
 use App\Http\Controllers\PhongNguoiThueController;
+use App\Http\Controllers\PhongTinNhanController;
 use App\Http\Controllers\PhongTroChuTroController;
 use App\Http\Controllers\PhuongController;
 use App\Http\Controllers\QuanController;
 use App\Http\Controllers\ThongBaoController;
 use App\Http\Controllers\TienIchController;
+use App\Http\Controllers\TinNhanController;
 use App\Http\Controllers\XacThucChuTroController;
 use App\Models\HinhAnh;
 use App\Models\PhongNguoiThue;
@@ -84,12 +86,11 @@ Route::post('guitinnhan',[TinNhanController::class,'guiTinNhan']);
 Route::get('danhsachtinnhantheoidtaikhoan',[PhongTinNhanController::class,'layDanhSachTinNhanTheoIdTaiKhoan']);
 Route::post('capnhattinnhanmoinhat',[PhongTinNhanController::class,'capNhatTinNhanMoiNhat']);
 Route::post('capnhattrangthaidaxem',[PhongTinNhanController::class,'capNhatTrangThaiDaXem']);
-
 Route::post('capnhatthongtinchutro',[ChuTroController::class,'capNhatThongTinChuTro']);
 Route::post('capnhatthongtinchutro2',[ChuTroController::class,'capNhatThongTinChuTro2']);
-
 Route::post('taotaikhoannguoithue',[TaiKhoanController::class,'taoTaiKhoanNguoiThue']);
 Route::post('taotaikhoanchutro',[TaiKhoanController::class,'taoTaiKhoanChuTro']);
+Route::post('taophongtinnhan',[PhongTinNhanController::class,'taoPhongTinNhan']);
 
 
 
