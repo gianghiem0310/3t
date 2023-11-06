@@ -78,7 +78,13 @@ class TienIchController extends Controller
         }
     }
 
+    public function layIdTienIchCuoiCung(Request $request) {
+        $list = TienIch::all();
+     
+        return $list[count($list)-1]->id;
+    }
     public function layTienIchTheoId(Request $request)  {
+        
         return TienIch::find($request->id);
     }
     public function layTatCaTienIch(){
