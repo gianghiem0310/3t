@@ -32,7 +32,6 @@ class PhongTroChuTro extends Model
     {
         $this->setAttribute("danhGia", $this->hasMany(PhongDanhGia::class, 'idPhong', 'idPhongTro')->avg("danhGia"));
     }
-    
     public static function layDanhSachPhongTheoIDChuTro($idChuTro){
         $result = self::where('idChuTro', "=", $idChuTro)->orderBy('idPhongTro', 'DESC')->get();
 
@@ -42,6 +41,7 @@ class PhongTroChuTro extends Model
             $item->hinhAnhCuaPhong();
             $item->demSoLuongBinhLuan(); 
             $item->trungBinhDanhGia();
+            
         }
         return $result;
     }

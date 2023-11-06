@@ -18,6 +18,17 @@ class PhongTro extends Model
         'loaiPhong',
         'soLuongToiDa',
         'tienCoc',
-        'gioiTinh'
+        'gioiTinh',
+        'tienDien',
+        'tienNuoc'
     ];
+    public function tienIch()
+    {
+        $this->setAttribute("tienIch", $this->belongsToMany(TienIch::class, PhongTroTienIch::class, 'idPhong', "idTienIch")->get());
+    }
+    public static function  layyPhongTroTheoID($id){
+        $result = self::find($id);
+        $result->tienIch();
+        return $result;
+    }
 }
