@@ -55,9 +55,11 @@ Route::get('/kiemtradangnhap', [TaiKhoanController::class, 'kiemTraDangNhap']);
 Route::get('/chinhsach', [ChinhSachController::class, 'layChinhSachTheoId']);
 Route::put('/capnhatchinhsach', [ChinhSachController::class, 'capNhatChinhSach']);
 
+Route::get('/laytienichtheoid',[TienIchController::class,'layTienIchTheoId']);
 Route::get('/laytatcatienich', [TienIchController::class, 'layTatCaTienIch']);
 Route::post('/themtienich', [TienIchController::class, 'themTienIch']);
 Route::post('/capnhattienich', [TienIchController::class, 'capNhatTienIch']);
+Route::patch('/capnhattrangthaitienich',[TienIchController::class,'capNhatTrangThaiTienIch']);
 
 Route::get('/laytatcaquan', [QuanController::class, 'layTatCaQuan']);
 Route::post('/themquan', [QuanController::class, 'themQuan']);
@@ -71,6 +73,28 @@ Route::post('/uploadimage', [AdminController::class, 'uploadImage']);
 Route::post('/capnhatthongtinchutrocohinh', [ChuTroController::class, 'capNhatThongTinChuTroCoHinh']);
 Route::post('/capnhatthongtinchutrokhonghinh', [ChuTroController::class, 'capNhatThongTinChuTroKhongHinh']);
 
+
+//Start Nghiêm Part 2
+Route::get('/tatcataikhoan',[TaiKhoanController::class,'layTatCaTaiKhoan']);
+Route::get('chutro/thongtinchitiet',[ChuTroController::class,'layThongTinChuTroTheoId']);
+Route::get('nguoithue/thongtinchitiet',[NguoiThueController::class,'layThongTinNguoiThueTheoId']);
+Route::get('phongtinnhan',[PhongTinNhanController::class,'layIdPhongTinNhan']);
+Route::get('danhsachtinnhan',[TinNhanController::class,'layDanhSachTinNhan']);
+Route::get('laytaikhoandoiphuong',[TaiKhoanController::class,'layTaiKhoanDoiPhuong']);
+Route::post('guitinnhan',[TinNhanController::class,'guiTinNhan']);
+Route::get('danhsachtinnhantheoidtaikhoan',[PhongTinNhanController::class,'layDanhSachTinNhanTheoIdTaiKhoan']);
+Route::post('capnhattinnhanmoinhat',[PhongTinNhanController::class,'capNhatTinNhanMoiNhat']);
+Route::post('capnhattrangthaidaxem',[PhongTinNhanController::class,'capNhatTrangThaiDaXem']);
+
+Route::post('capnhatthongtinchutro',[ChuTroController::class,'capNhatThongTinChuTro']);
+Route::post('capnhatthongtinchutro2',[ChuTroController::class,'capNhatThongTinChuTro2']);
+
+Route::post('taotaikhoannguoithue',[TaiKhoanController::class,'taoTaiKhoanNguoiThue']);
+Route::post('taotaikhoanchutro',[TaiKhoanController::class,'taoTaiKhoanChuTro']);
+
+
+
+//End Nghiêm Part 2
 //Anh tien ich
 
 
