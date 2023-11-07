@@ -24,7 +24,7 @@ class PhongTroController extends Controller
             'idQuan' => $request->idQuan != null ? $request->idQuan : -1,
             'idPhuong' => $request->idPhuong != null ? $request->idPhuong : -1,
             'diaChiChiTiet' => $request->diaChiChiTiet != null ? $request->diaChiChiTiet : -1,
-            'loaiPhong' => $request->loaiPhong != null ? $request->loaiPhong : -1,
+            'loaiPhong' => $request->loaiPhong != null ? $request->loaiPhong : 0,
             'soLuongToiDa' => $request->soLuongToiDa != null ? $request->soLuongToiDa : -1,
             'tienCoc' => $request->tenCoc != null? $request->tienCoc : -1,
             'gioiTinh' => $request->gioiTinh != null? $request->gioiTinh : -1,
