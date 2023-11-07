@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChinhSachController;
 use App\Http\Controllers\HinhAnhController;
 use App\Http\Controllers\NguoiThueController;
+use App\Http\Controllers\PhongBinhLuanController;
 use App\Http\Controllers\PhongNguoiThueController;
 use App\Http\Controllers\PhongTroChuTroController;
 use App\Http\Controllers\PhuongController;
@@ -148,4 +149,7 @@ Route::get('/phongnguoithue/all', [PhongNguoiThueController::class, "latTatCaNgu
 // Lấy chi tiết người thuê
 Route::get('/nguoithue/chitiet', [NguoiThueController::class, "layChiTietNguoiThueAPI"]);
 Route::get('/banner/chitiet',[BannerController::class,'layBannerChiTietAPI']);
+// Lấy bình luận có phân trang của phòng
+Route::get('/phongbinhluan/all',[PhongBinhLuanController::class,'layBinhLuanCuaPhongCoPhanTrangAPI']);
+Route::put("/phongbinhluan/create", [PhongBinhLuanController::class, "vietBinhLuanCuaPhongAPI"]);
 //End Minh
