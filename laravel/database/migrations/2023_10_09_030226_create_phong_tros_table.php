@@ -24,6 +24,8 @@ return new class extends Migration
             $table->integer('soLuongToiDa');
             $table->integer('tienCoc');
             $table->integer('gioiTinh');
+            $table->integer('tienDien');
+            $table->integer('tienNuoc');
             $table->timestamps();
         });
     }

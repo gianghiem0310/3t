@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HinhAnh;
 use App\Models\PhongTro;
 use App\Models\PhongTroChuTro;
+use App\Models\PhongTroTienIch;
 use Illuminate\Http\Request;
 
 class PhongTroController extends Controller
@@ -23,10 +24,12 @@ class PhongTroController extends Controller
             'idQuan' => $request->idQuan != null ? $request->idQuan : -1,
             'idPhuong' => $request->idPhuong != null ? $request->idPhuong : -1,
             'diaChiChiTiet' => $request->diaChiChiTiet != null ? $request->diaChiChiTiet : -1,
-            'loaiPhong' => $request->loaiPhong != null ? $request->loaiPhong : -1,
+            'loaiPhong' => $request->loaiPhong != null ? $request->loaiPhong : 0,
             'soLuongToiDa' => $request->soLuongToiDa != null ? $request->soLuongToiDa : -1,
             'tienCoc' => $request->tenCoc != null? $request->tienCoc : -1,
-            'gioiTinh' => $request->gioiTinh != null? $request->gioiTinh : -1
+            'gioiTinh' => $request->gioiTinh != null? $request->gioiTinh : -1,
+            'tienDien' => $request->tienDien != null? $request->tienDien : -1,
+            'tienNuoc' => $request->tienNuoc != null? $request->tienNuoc : -1,
         ]);
         if ($phong == null){
             return 0;
@@ -41,6 +44,17 @@ class PhongTroController extends Controller
                 HinhAnh::create(['idPhong' => $phong->id, 'hinh' => $image_name]);
             }
         }
+        if ($request->tienIch && $phong != null) {
+            $jsonList = $request->tienIch;
+            $list = json_decode($jsonList, true);
+            
+            foreach ($list as $key => $value) {
+                 PhongTroTienIch::create([
+                    'idPhong' => $phong->id,
+                    'idTienIch' => $value["id"]
+                ]);
+            }
+        }
         if ($phong){
             $phongChu = PhongTroChuTro::create([
                 'idChuTro' => $request->idChuTro,
@@ -51,6 +65,10 @@ class PhongTroController extends Controller
             }
         }
         return 1;
+    }
+
+    public function layThongTinPhongTheoIDAPI(Request $request){
+        return PhongTro::layyPhongTroTheoID($request->id);
     }
     public function myRandom()
     {

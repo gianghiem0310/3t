@@ -48,6 +48,6 @@ class PhongTroChuTroController extends Controller
     }
 
     public static function layDanhSachPhongTheoIDChuTroAPI(Request $request){
-        return PhongTroChuTro::layDanhSachPhongTheoIDChuTro($request->idChuTro);
+        return PhongTroChuTro::layDanhSachPhongTheoIDChuTro($request->idChuTro, $request->page, $request->quantity);
     }
 }
