@@ -91,9 +91,6 @@ class ChuTroController extends Controller
         }
         return false;
     }
-   public function xacNhanThongTinChuTroTheoIDTaiKhoanAPI(Request $request){
-        return ChuTro::where('id', $request->id)->update(['xacThuc'=>1]);
-    }
 
     //Start Nghiem Part 2
     public function layThongTinChuTroTheoId(Request $request)  {

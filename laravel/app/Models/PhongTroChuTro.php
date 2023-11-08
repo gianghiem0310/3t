@@ -47,7 +47,7 @@ class PhongTroChuTro extends Model
         return $result;
     }
     public static function layDanhSachPhongTheoIDChuTro($idChuTro){
-        $result = self::orderBy('idPhongTro', 'DESC')->get();
+        $result = self::where("idChuTro", $idChuTro)->orderBy('idPhongTro', 'DESC')->get();
 
         foreach($result as $item){
             $item->thongTinChuTro();
