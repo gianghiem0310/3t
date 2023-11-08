@@ -12,6 +12,7 @@ use App\Http\Controllers\ChinhSachController;
 use App\Http\Controllers\HinhAnhController;
 use App\Http\Controllers\NguoiThueController;
 use App\Http\Controllers\PhongBinhLuanController;
+use App\Http\Controllers\PhongDanhGiaController;
 use App\Http\Controllers\PhongNguoiThueController;
 use App\Http\Controllers\PhongTroChuTroController;
 use App\Http\Controllers\PhuongController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\ThongBaoController;
 use App\Http\Controllers\TienIchController;
 use App\Http\Controllers\XacThucChuTroController;
 use App\Models\HinhAnh;
+use App\Models\PhongDanhGia;
 use App\Models\PhongNguoiThue;
 use App\Models\PhongTro;
 use App\Models\XacThucChuTro;
@@ -178,4 +180,5 @@ Route::get('/banner/chitiet',[BannerController::class,'layBannerChiTietAPI']);
 // Lấy bình luận có phân trang của phòng
 Route::get('/phongbinhluan/all',[PhongBinhLuanController::class,'layBinhLuanCuaPhongCoPhanTrangAPI']);
 Route::put("/phongbinhluan/create", [PhongBinhLuanController::class, "vietBinhLuanCuaPhongAPI"]);
+Route::put("/phongdanhgia/create", [PhongDanhGiaController::class, "danhGiaAPI"]);
 //End Minh

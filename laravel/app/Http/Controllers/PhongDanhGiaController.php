@@ -46,4 +46,27 @@ class PhongDanhGiaController extends Controller
     {
         //
     }
+    public function danhGiaAPI(Request $request)
+    {
+        $result = null;
+        $find = PhongDanhGia::where([
+            "idTaiKhoan" => $request->idTaiKhoan,
+            "idPhong" => $request->idPhong
+        ])->first();
+        if ($find == null) {
+            $result = PhongDanhGia::create([
+                "idTaiKhoan" => $request->idTaiKhoan,
+                "idPhong" => $request->idPhong,
+                "danhGia" => $request->danhGia
+            ]);
+        } else {
+            $result = PhongDanhGia::where([
+                ["idTaiKhoan", $request->idTaiKhoan],
+                ["idPhong", $request->idPhong]
+            ])->update([
+                "danhGia" => $request->danhGia
+            ]);
+        }
+       return $result != null; // 1=true, 0=false
+    }
 }
