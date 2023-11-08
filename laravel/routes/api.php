@@ -93,6 +93,7 @@ Route::post('taotaikhoanchutro',[TaiKhoanController::class,'taoTaiKhoanChuTro'])
 Route::post('taophongtinnhan',[PhongTinNhanController::class,'taoPhongTinNhan']);
 
 
+Route::post('uploadfile',[TienIchController::class,'uploadFileAnh']);
 
 //End Nghiêm Part 2
 //Anh tien ich

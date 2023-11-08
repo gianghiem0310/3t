@@ -16,7 +16,8 @@ class PhongTinNhan extends Model
         'tinNhanMoiNhat',
         'thoiGianCuaTinNhan',
         'trangThai1',
-        'trangThai2'
+        'trangThai2',
+        'updated_at'
     ];
     public function taiKhoan1(){
       $this->setAttribute("nguoiThue", $this->hasOne(NguoiThue::class, 'idTaiKhoan', 'idTaiKhoan1')->first());
@@ -32,7 +33,7 @@ class PhongTinNhan extends Model
 
   public static function layDanhSachThongTin($idTaiKhoan) {
 
-    $danhSach = PhongTinNhan::where(['idTaiKhoan1'=>$idTaiKhoan])->orWhere(['idTaiKhoan2'=>$idTaiKhoan])->get();
+    $danhSach = PhongTinNhan::where(['idTaiKhoan1'=>$idTaiKhoan])->orWhere(['idTaiKhoan2'=>$idTaiKhoan])->orderBy('updated_at','desc')->get();
       foreach ($danhSach as $item) {
         if($idTaiKhoan!=$item->idTaiKhoan1){
           $item->where('idTaiKhoan1', "=", $item->idTaiKhoan1)->first();

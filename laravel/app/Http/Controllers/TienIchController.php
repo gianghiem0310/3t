@@ -84,6 +84,15 @@ class TienIchController extends Controller
     public function layTatCaTienIch(){
         return TienIch::all();
     }
+
+
+    public function uploadFileAnh(Request $request) {
+        $image_tienich = $request->hinh;
+
+        $image_name = 'images/vd/' . $image_tienich->getClientOriginalName();
+        $image_tienich->move(public_path('images/vd'), $image_name);
+        return TienIch::create(['hinh'=>$image_name]);
+    }
 //End: Nguyen Gia Nghiem
     
 }

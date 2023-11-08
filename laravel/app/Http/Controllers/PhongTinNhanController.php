@@ -66,10 +66,14 @@ class PhongTinNhanController extends Controller
     }
     public  function capNhatTinNhanMoiNhat(Request $request) {
         $phongTn = PhongTinNhan::find($request->id);
+        $idSender = $request->idTaiKhoan;
         if(isset($phongTn)){
             $tinNhanMoiNhat = $request->tinNhanMoiNhat;
             $thoiGian = $request->thoiGian;
-            return $phongTn->update(['tinNhanMoiNhat'=>$tinNhanMoiNhat,'thoiGianCuaTinNhan'=>$thoiGian]);
+            if($phongTn->idTaiKhoan1==$idSender){
+                return $phongTn->update(['tinNhanMoiNhat'=>$tinNhanMoiNhat,'thoiGianCuaTinNhan'=>$thoiGian,'trangThai2'=>0]);
+            }
+            return $phongTn->update(['tinNhanMoiNhat'=>$tinNhanMoiNhat,'thoiGianCuaTinNhan'=>$thoiGian,'trangThai1'=>0]);
         }
         return false;
     }
@@ -79,12 +83,11 @@ class PhongTinNhanController extends Controller
         $idPhong = $request->idPhong;
         $phongTn = PhongTinNhan::find($idPhong);
         if(isset($phongTn)){
-            if($phongTn->idTaiKhoan1==$idTaiKhoan){
-               
+            if($phongTn->idTaiKhoan1==$idTaiKhoan&&$phongTn->trangThai1==0){
                 $phongTn->update(['trangThai1'=>1]);
                 return $phongTn;
             }
-            else if($phongTn->idTaiKhoan2==$idTaiKhoan){
+            else if($phongTn->idTaiKhoan2==$idTaiKhoan&&$phongTn->trangThai2==0){
                 $phongTn->update(['trangThai2'=>1]);
                 return $phongTn;
             }
