@@ -24,6 +24,7 @@ use App\Models\HinhAnh;
 use App\Models\PhongDanhGia;
 use App\Models\PhongNguoiThue;
 use App\Models\PhongTro;
+use App\Models\PhongTroChuTro;
 use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -181,4 +182,6 @@ Route::get('/banner/chitiet',[BannerController::class,'layBannerChiTietAPI']);
 Route::get('/phongbinhluan/all',[PhongBinhLuanController::class,'layBinhLuanCuaPhongCoPhanTrangAPI']);
 Route::put("/phongbinhluan/create", [PhongBinhLuanController::class, "vietBinhLuanCuaPhongAPI"]);
 Route::put("/phongdanhgia/create", [PhongDanhGiaController::class, "danhGiaAPI"]);
+Route::get("/phongdanhgia/laydanhgia", [PhongDanhGiaController::class, "layDanhGiaCuaChuTroChoPhongAPI"]);
+Route::delete("/phongtrochutro/delete", [PhongTroChuTroController::class, "xoaPhongAPI"]);
 //End Minh

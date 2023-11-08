@@ -69,4 +69,11 @@ class PhongDanhGiaController extends Controller
         }
        return $result != null; // 1=true, 0=false
     }
+    public function layDanhGiaCuaChuTroChoPhongAPI(Request $request)
+    {
+        return PhongDanhGia::where([
+            ["idTaiKhoan", $request->idTaiKhoan],
+            ["idPhong", $request->idPhong],
+        ])->first();
+    }
 }

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HinhAnh;
+use App\Models\PhongBinhLuan;
+use App\Models\PhongDanhGia;
+use App\Models\PhongTro;
 use App\Models\PhongTroChuTro;
+use App\Models\PhongTroTienIch;
 use Illuminate\Http\Request;
 
 class PhongTroChuTroController extends Controller
@@ -52,5 +57,19 @@ class PhongTroChuTroController extends Controller
     }
     public static function layDanhSachPhongTheoIDChuTroAPI(Request $request){
         return PhongTroChuTro::layDanhSachPhongTheoIDChuTro($request->idChuTro);
+    }
+    public function xoaPhongAPI(Request $request)
+    {
+
+        $result = PhongTroChuTro::where([
+            ["idChuTro" , $request->idChuTro],
+            ["idPhongTro" , $request->idPhongTro]
+        ])->delete();
+        PhongTro::where("id", $request->idPhongTro)->delete();
+        HinhAnh::where("idPhong", $request->idPhongTro)->delete();
+        PhongTroTienIch::where("idPhong", $request->idPhongTro)->delete();
+        PhongBinhLuan::where("idPhong", $request->idPhongTro)->delete();
+        PhongDanhGia::where("idPhong", $request->idPhongTro)->delete();
+        return $result;
     }
 }
