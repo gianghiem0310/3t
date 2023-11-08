@@ -84,4 +84,7 @@ class PhongTroController extends Controller
         $string = str_shuffle($pin);
         return $string;
     }
+    public function thongTinChiTietPhong(Request $request) {
+        return PhongTro::layThongTinPhong($request->idPhong);
+    }
 }
