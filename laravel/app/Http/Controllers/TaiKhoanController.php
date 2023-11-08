@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChuTro;
+use App\Models\NguoiThue;
 use App\Models\TaiKhoan;
 use Illuminate\Http\Request;
 
