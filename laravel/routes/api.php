@@ -158,6 +158,7 @@ Route::get('/thongbao/all', [ThongBaoController::class, "layTatCaThongBaoTheoIDN
 Route::get('/thongbao/chitiet', [ThongBaoController::class, "chitietThongBao"]);
 Route::get('/thongbao/xoa', [ThongBaoController::class, "xoaThongBao"]);
 //End Kiet
+Route::get('/phongtrochutro/phantrang', [PhongTroChuTroController::class, "layDanhSachPhongTheoIDChuTroPhanTrangAPI"]);
 Route::get('/phongtrochutro/all', [PhongTroChuTroController::class, "layDanhSachPhongTheoIDChuTroAPI"]);
 Route::get('/phongtro/chitiet', [PhongTroController::class, "layThongTinPhongTheoIDAPI"]);
 Route::post('/phonghinhanh/create', [HinhAnhController::class, "uploadmultiple"]);
