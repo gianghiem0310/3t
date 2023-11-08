@@ -166,7 +166,7 @@ Route::post('/phonghinhanh/create', [HinhAnhController::class, "uploadmultiple"]
 Route::post('/phongtro/create', [PhongTroController::class, "themPhongAPI"]);
 Route::get('/quan/all', [QuanController::class, "layTatCaQuanAPI"]);
 
-Route::get('/xacthucchutro/create', [XacThucChuTroController::class, "guiYeuCauXacThucAPI"]);
+Route::post('/xacthucchutro/create', [XacThucChuTroController::class, "guiYeuCauXacThucAPI"]);
 // end )
 
 // Lay nguoi thue theo id phong
