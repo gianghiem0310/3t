@@ -140,4 +140,11 @@ class TaiKhoanController extends Controller
     }
     return null;
 	}
+
+    public function kiemTraDangNhapAPI(Request $request)
+    {
+        $tenTaiKhoan = $request->tenTaiKhoan;
+        $matKhau = $request->matKhau;
+        return TaiKhoan::kiemTraDangNhap($tenTaiKhoan, $matKhau);
+    }
 }

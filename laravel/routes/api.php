@@ -110,6 +110,7 @@ Route::put('/taikhoan/moKhoa', [TaiKhoanController::class, 'moKhoaTaiKhoanAPI'])
 
 //Start Minh
 Route::patch('/taikhoan/doimatkhau', [TaiKhoanController::class, 'doiMatKhauTaiKhoanAPI']);
+Route::get('/taikhoan/dangnhap', [TaiKhoanController::class, 'kiemTraDangNhapAPI']);
 Route::get('/goi/all', [GoiController::class, 'layTatCaGoiAPI']);
 Route::get('/goi/chitiet', [GoiController::class, 'layThongTinChiTietTheoIDGoiAPI']);
 Route::get('/goi/all/condung', [GoiController::class, 'layTatCaGoiTrangThaiConDungAPI']);
