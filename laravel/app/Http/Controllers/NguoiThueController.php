@@ -49,4 +49,7 @@ class NguoiThueController extends Controller
     public function layChiTietNguoiThueAPI(Request $request){
         return NguoiThue::where("id", $request->id)->first();
     }
+    public function layThongTinNguoiThueTheoId(Request $request)  {
+        return NguoiThue::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
+    }
 }

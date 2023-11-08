@@ -9,6 +9,7 @@ class ChuTro extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'idTaiKhoan',
         "hinh",
         "ten",
         "soDienThoai",
