@@ -91,9 +91,7 @@ Route::post('capnhatthongtinchutro2',[ChuTroController::class,'capNhatThongTinCh
 Route::post('taotaikhoannguoithue',[TaiKhoanController::class,'taoTaiKhoanNguoiThue']);
 Route::post('taotaikhoanchutro',[TaiKhoanController::class,'taoTaiKhoanChuTro']);
 Route::post('taophongtinnhan',[PhongTinNhanController::class,'taoPhongTinNhan']);
-
-
-Route::post('uploadfile',[TienIchController::class,'uploadFileAnh']);
+Route::get('thongtinphongtro',[PhongTroController::class,'thongTinChiTietPhong']);
 
 //End Nghiêm Part 2
 //Anh tien ich

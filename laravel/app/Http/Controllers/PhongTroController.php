@@ -52,6 +52,14 @@ class PhongTroController extends Controller
         }
         return 1;
     }
+
+    // Start nghiem 2-2
+    public function thongTinChiTietPhong(Request $request) {
+        return PhongTro::layThongTinPhong($request->idPhong);
+    }
+    // End Start Nghiem 2-2
+    
+
     public function myRandom()
     {
         // Available alpha caracters
