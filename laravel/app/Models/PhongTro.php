@@ -39,10 +39,14 @@ class PhongTro extends Model
      {
          $this->setAttribute("danhSachTienIch", $this->belongsToMany(TienIch::class, PhongTroTienIch::class,"idPhong",  "idTienIch")->get());
      }
+     public function danhSachHinhAnh(){
+        $this->setAttribute("hinhAnhPhongTro", $this->hasMany(HinhAnh::class, "idPhong",  "id")->get());
+    }
      public static function layThongTinPhong($idPhong) {
          $result = PhongTro::find($idPhong);
         $result->thongTinChuTro();
         $result->danhSachTienIch();
+        $result->danhSachHinhAnh();
           return $result;
      }
 }
