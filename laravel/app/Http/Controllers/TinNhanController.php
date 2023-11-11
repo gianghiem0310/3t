@@ -51,6 +51,9 @@ class TinNhanController extends Controller
         return TinNhan::where(['idPhong'=>$request->idPhong])->orderBy('id','asc')->get();
     }
     public function guiTinNhan(Request $request) {
+
+
+        
         $idPhong = $request->idPhong;
         $idTaiKhoan = $request->idTaiKhoan;
         $noiDung = $request->noiDung;
