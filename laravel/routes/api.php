@@ -56,6 +56,7 @@ Route::get('/kiemtradangnhap', [TaiKhoanController::class, 'kiemTraDangNhap']);
 
 Route::get('/chinhsach', [ChinhSachController::class, 'layChinhSachTheoId']);
 Route::put('/capnhatchinhsach', [ChinhSachController::class, 'capNhatChinhSach']);
+Route::post('/capnhatchinhsach2', [ChinhSachController::class, 'capNhatChinhSach2']);
 
 Route::get('/laytienichtheoid',[TienIchController::class,'layTienIchTheoId']);
 Route::get('/laytatcatienich', [TienIchController::class, 'layTatCaTienIch']);
