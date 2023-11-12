@@ -48,7 +48,7 @@ class PhongBinhLuanController extends Controller
     }
     public function layBinhLuanCuaPhongCoPhanTrangAPI(Request $request)
     {
-        return PhongBinhLuan::layBinhLuanCuaPhongTheoIDPhong($request->idPhong, $request->page, $request->quantity);
+        return PhongBinhLuan::layBinhLuanCuaPhongTheoIDPhong($request->idPhong);
     }
     public function vietBinhLuanCuaPhongAPI(Request $request)
     {

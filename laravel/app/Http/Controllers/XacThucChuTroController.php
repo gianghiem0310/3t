@@ -67,10 +67,16 @@ class XacThucChuTroController extends Controller
 
     public function guiYeuCauXacThucAPI(Request $request)
     {
+        $cccdMatTruoc = $request->cccdMatTruoc;
+        $cccdMatTruoc_name = 'images/' . time() . '-' . 'banner' . '.'. $cccdMatTruoc->extension();
+        $cccdMatTruoc->move(public_path('images'), $cccdMatTruoc_name);
+        $cccdMatSau = $request->cccdMatSau;
+        $cccdMatSau_name = 'images/' . time() . '-' . 'banner' . '.'. $cccdMatSau->extension();
+        $cccdMatSau->move(public_path('images'), $cccdMatSau_name);
         $result = XacThucChuTro::create([
             "idChuTro" => $request->idChuTro,
-            "cccdMatTruoc" => $request->cccdMatTruoc,
-            "cccdMatSau" => $request->cccdMatSau,
+            "cccdMatTruoc" => $cccdMatTruoc_name,
+            "cccdMatSau" => $cccdMatSau_name,
             "trangThaiXacThuc" => $request->trangThaiXacThuc
         ]);
         if($result == null){

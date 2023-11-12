@@ -29,9 +29,8 @@ class PhongBinhLuan extends Model
         
     }
 
-    public static function layBinhLuanCuaPhongTheoIDPhong($idPhong, $page, $quantity){
-        $offset = ($page - 1)*$quantity;
-        $result = self::where("idPhong", $idPhong)->orderBy('updated_at', 'DESC')->offset($offset)->limit($quantity)->get();
+    public static function layBinhLuanCuaPhongTheoIDPhong($idPhong){
+        $result = self::where("idPhong", $idPhong)->orderBy('updated_at', 'DESC')->get();
 
         foreach ($result as $item){
             $loaiTaiKhoan = TaiKhoan::where("id", $item['idTaiKhoan'])->first()->loaiTaiKhoan;
