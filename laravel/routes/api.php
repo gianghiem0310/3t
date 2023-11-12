@@ -131,6 +131,9 @@ Route::get('/chutro/lock', [ChuTroController::class, 'khoaChuTroAPI']);
 Route::get('/chutro/unLock', [ChuTroController::class, 'moKhoaChuTroTheoIDTaiKhoanAPI']);
 Route::get('/chutro/chitiet', [ChuTroController::class, 'layThongTinTheoIDTaiKhoanAPI']);  // Chuyền theo id tài khoản
 Route::patch('/chutro/chapnhanxacthuc', [ChuTroController::class, 'xacNhanThongTinChuTroTheoIDTaiKhoanAPI']);
+//Start Kiet
+Route::patch('/chutro/xoadichvu', [ChuTroController::class, 'xacNhanThongTinChuTroTheoIDTaiKhoanAPI']);
+//End Kiet
 
 Route::get('/yeucaudangky/all', [YeuCauDangKyGoiController::class, 'danhSachYeuCauDangKyGoiAPI']);
 Route::get('/yeucaudangky/chitiet', [YeuCauDangKyGoiController::class, 'thongTinChiTietYeuCauDangKyGoiAPI']);
