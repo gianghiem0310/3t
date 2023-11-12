@@ -63,6 +63,13 @@ class ChuTroController extends Controller
         return ChuTro::where('id', $request->id)->update(['xacThuc' => 1]);
     }
 
+    //Start Kiet
+    public function xoaGoiDichVuChuTroTheoIDTaiKhoanAPI(Request $request)
+    {
+        return ChuTro::where('id', $request->id)->update(['idGoi' => 0]);
+    }
+    //End Kiet
+
     public function capNhatThongTinChuTroCoHinh(Request $request)
     {
         $chuTro = ChuTro::where('idTaiKhoan', '=', $request->idTaiKhoan)->first();
@@ -78,7 +85,7 @@ class ChuTroController extends Controller
         }
         return false;
     }
-    
+
     public function capNhatThongTinChuTroKhongHinh(Request $request)
     {
         $chuTro = ChuTro::where('idTaiKhoan', '=', $request->idTaiKhoan)->first();
@@ -91,12 +98,10 @@ class ChuTroController extends Controller
         }
         return false;
     }
-   public function xacNhanThongTinChuTroTheoIDTaiKhoanAPI(Request $request){
-        return ChuTro::where('id', $request->id)->update(['xacThuc'=>1]);
-    }
 
     //Start Nghiem Part 2
-    public function layThongTinChuTroTheoId(Request $request)  {
-        return ChuTro::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
+    public function layThongTinChuTroTheoId(Request $request)
+    {
+        return ChuTro::where('idTaiKhoan', '=', $request->idTaiKhoan)->first();
     }
 }
