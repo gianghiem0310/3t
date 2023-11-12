@@ -59,11 +59,11 @@ Route::get('/kiemtradangnhap', [TaiKhoanController::class, 'kiemTraDangNhap']);
 Route::get('/chinhsach', [ChinhSachController::class, 'layChinhSachTheoId']);
 Route::put('/capnhatchinhsach', [ChinhSachController::class, 'capNhatChinhSach']);
 
-Route::get('/laytienichtheoid',[TienIchController::class,'layTienIchTheoId']);
+Route::get('/laytienichtheoid', [TienIchController::class, 'layTienIchTheoId']);
 Route::get('/laytatcatienich', [TienIchController::class, 'layTatCaTienIch']);
 Route::post('/themtienich', [TienIchController::class, 'themTienIch']);
 Route::post('/capnhattienich', [TienIchController::class, 'capNhatTienIch']);
-Route::patch('/capnhattrangthaitienich',[TienIchController::class,'capNhatTrangThaiTienIch']);
+Route::patch('/capnhattrangthaitienich', [TienIchController::class, 'capNhatTrangThaiTienIch']);
 
 Route::get('/laytatcaquan', [QuanController::class, 'layTatCaQuan']);
 Route::post('/themquan', [QuanController::class, 'themQuan']);
@@ -79,22 +79,22 @@ Route::post('/capnhatthongtinchutrokhonghinh', [ChuTroController::class, 'capNha
 
 
 //Start Nghiêm Part 2
-Route::get('/tatcataikhoan',[TaiKhoanController::class,'layTatCaTaiKhoan']);
-Route::get('chutro/thongtinchitiet',[ChuTroController::class,'layThongTinChuTroTheoId']);
-Route::get('nguoithue/thongtinchitiet',[NguoiThueController::class,'layThongTinNguoiThueTheoId']);
-Route::get('phongtinnhan',[PhongTinNhanController::class,'layIdPhongTinNhan']);
-Route::get('danhsachtinnhan',[TinNhanController::class,'layDanhSachTinNhan']);
-Route::get('laytaikhoandoiphuong',[TaiKhoanController::class,'layTaiKhoanDoiPhuong']);
-Route::post('guitinnhan',[TinNhanController::class,'guiTinNhan']);
-Route::get('danhsachtinnhantheoidtaikhoan',[PhongTinNhanController::class,'layDanhSachTinNhanTheoIdTaiKhoan']);
-Route::post('capnhattinnhanmoinhat',[PhongTinNhanController::class,'capNhatTinNhanMoiNhat']);
-Route::post('capnhattrangthaidaxem',[PhongTinNhanController::class,'capNhatTrangThaiDaXem']);
-Route::post('capnhatthongtinchutro',[ChuTroController::class,'capNhatThongTinChuTro']);
-Route::post('capnhatthongtinchutro2',[ChuTroController::class,'capNhatThongTinChuTro2']);
-Route::post('taotaikhoannguoithue',[TaiKhoanController::class,'taoTaiKhoanNguoiThue']);
-Route::post('taotaikhoanchutro',[TaiKhoanController::class,'taoTaiKhoanChuTro']);
-Route::post('taophongtinnhan',[PhongTinNhanController::class,'taoPhongTinNhan']);
-Route::get('thongtinphongtro',[PhongTroController::class,'thongTinChiTietPhong']);
+Route::get('/tatcataikhoan', [TaiKhoanController::class, 'layTatCaTaiKhoan']);
+Route::get('chutro/thongtinchitiet', [ChuTroController::class, 'layThongTinChuTroTheoId']);
+Route::get('nguoithue/thongtinchitiet', [NguoiThueController::class, 'layThongTinNguoiThueTheoId']);
+Route::get('phongtinnhan', [PhongTinNhanController::class, 'layIdPhongTinNhan']);
+Route::get('danhsachtinnhan', [TinNhanController::class, 'layDanhSachTinNhan']);
+Route::get('laytaikhoandoiphuong', [TaiKhoanController::class, 'layTaiKhoanDoiPhuong']);
+Route::post('guitinnhan', [TinNhanController::class, 'guiTinNhan']);
+Route::get('danhsachtinnhantheoidtaikhoan', [PhongTinNhanController::class, 'layDanhSachTinNhanTheoIdTaiKhoan']);
+Route::post('capnhattinnhanmoinhat', [PhongTinNhanController::class, 'capNhatTinNhanMoiNhat']);
+Route::post('capnhattrangthaidaxem', [PhongTinNhanController::class, 'capNhatTrangThaiDaXem']);
+Route::post('capnhatthongtinchutro', [ChuTroController::class, 'capNhatThongTinChuTro']);
+Route::post('capnhatthongtinchutro2', [ChuTroController::class, 'capNhatThongTinChuTro2']);
+Route::post('taotaikhoannguoithue', [TaiKhoanController::class, 'taoTaiKhoanNguoiThue']);
+Route::post('taotaikhoanchutro', [TaiKhoanController::class, 'taoTaiKhoanChuTro']);
+Route::post('taophongtinnhan', [PhongTinNhanController::class, 'taoPhongTinNhan']);
+Route::get('thongtinphongtro', [PhongTroController::class, 'thongTinChiTietPhong']);
 
 //End Nghiêm Part 2
 //Anh tien ich
@@ -132,7 +132,7 @@ Route::get('/chutro/unLock', [ChuTroController::class, 'moKhoaChuTroTheoIDTaiKho
 Route::get('/chutro/chitiet', [ChuTroController::class, 'layThongTinTheoIDTaiKhoanAPI']);  // Chuyền theo id tài khoản
 Route::patch('/chutro/chapnhanxacthuc', [ChuTroController::class, 'xacNhanThongTinChuTroTheoIDTaiKhoanAPI']);
 //Start Kiet
-Route::patch('/chutro/xoadichvu', [ChuTroController::class, 'xacNhanThongTinChuTroTheoIDTaiKhoanAPI']);
+Route::patch('/chutro/xoadichvu', [ChuTroController::class, 'xoaGoiDichVuChuTroTheoIDTaiKhoanAPI']);
 //End Kiet
 
 Route::get('/yeucaudangky/all', [YeuCauDangKyGoiController::class, 'danhSachYeuCauDangKyGoiAPI']);
@@ -179,9 +179,9 @@ Route::post('/xacthucchutro/create', [XacThucChuTroController::class, "guiYeuCau
 Route::get('/phongnguoithue/all', [PhongNguoiThueController::class, "latTatCaNguoiThueTheoIDPhongAPI"]);
 // Lấy chi tiết người thuê
 Route::get('/nguoithue/chitiet', [NguoiThueController::class, "layChiTietNguoiThueAPI"]);
-Route::get('/banner/chitiet',[BannerController::class,'layBannerChiTietAPI']);
+Route::get('/banner/chitiet', [BannerController::class, 'layBannerChiTietAPI']);
 // Lấy bình luận có phân trang của phòng
-Route::get('/phongbinhluan/all',[PhongBinhLuanController::class,'layBinhLuanCuaPhongCoPhanTrangAPI']);
+Route::get('/phongbinhluan/all', [PhongBinhLuanController::class, 'layBinhLuanCuaPhongCoPhanTrangAPI']);
 Route::put("/phongbinhluan/create", [PhongBinhLuanController::class, "vietBinhLuanCuaPhongAPI"]);
 Route::put("/phongdanhgia/create", [PhongDanhGiaController::class, "danhGiaAPI"]);
 //End Minh
