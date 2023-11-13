@@ -169,6 +169,7 @@ Route::get('/phongtro/chitiet', [PhongTroController::class, "layThongTinPhongThe
 Route::post('/phonghinhanh/create', [HinhAnhController::class, "uploadmultiple"]);
 
 Route::post('/phongtro/create', [PhongTroController::class, "themPhongAPI"]);
+Route::post('/phongtro/update', [PhongTroController::class, "suaPhongAPI"]);
 Route::get('/quan/all', [QuanController::class, "layTatCaQuanAPI"]);
 
 Route::post('/xacthucchutro/create', [XacThucChuTroController::class, "guiYeuCauXacThucAPI"]);
