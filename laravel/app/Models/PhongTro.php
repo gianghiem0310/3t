@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use App\Models\PhongTroChuTro;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,27 +27,41 @@ class PhongTro extends Model
     {
         $this->setAttribute("tienIch", $this->belongsToMany(TienIch::class, PhongTroTienIch::class, 'idPhong', "idTienIch")->get());
     }
-    public static function  layyPhongTroTheoID($id){
+    public function quan()
+    {
+        $this->setAttribute("quan", $this->hasOne(Quan::class, 'id', "idQuan")->first());
+    }
+    public function phuong()
+    {
+        $this->setAttribute("phuong", $this->hasOne(Phuong::class, 'id', "idPhuong")->first());
+    }
+    public static function layyPhongTroTheoID($id)
+    {
         $result = self::find($id);
+        $result->quan();
+        $result->phuong();
         $result->tienIch();
+        $result->danhSachHinhAnh();
         return $result;
     }
-      public function thongTinChuTro()
-     {
-         $this->setAttribute("phongTroChuTro", $this->belongsToMany(ChuTro::class, PhongTroChuTro::class,"idPhongTro",  "idChuTro")->first());
-     }
-     public function danhSachTienIch()
-     {
-         $this->setAttribute("danhSachTienIch", $this->belongsToMany(TienIch::class, PhongTroTienIch::class,"idPhong",  "idTienIch")->get());
-     }
-     public function danhSachHinhAnh(){
+    public function thongTinChuTro()
+    {
+        $this->setAttribute("phongTroChuTro", $this->belongsToMany(ChuTro::class, PhongTroChuTro::class, "idPhongTro",  "idChuTro")->first());
+    }
+    public function danhSachTienIch()
+    {
+        $this->setAttribute("danhSachTienIch", $this->belongsToMany(TienIch::class, PhongTroTienIch::class, "idPhong",  "idTienIch")->get());
+    }
+    public function danhSachHinhAnh()
+    {
         $this->setAttribute("hinhAnhPhongTro", $this->hasMany(HinhAnh::class, "idPhong",  "id")->get());
     }
-     public static function layThongTinPhong($idPhong) {
-         $result = PhongTro::find($idPhong);
+    public static function layThongTinPhong($idPhong)
+    {
+        $result = PhongTro::find($idPhong);
         $result->thongTinChuTro();
         $result->danhSachTienIch();
         $result->danhSachHinhAnh();
-          return $result;
-     }
+        return $result;
+    }
 }
