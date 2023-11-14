@@ -14,5 +14,8 @@ class TinNhan extends Model
         'idTaiKhoan',
         'noiDung'
     ];
+
+
+  
       //End: Nguyen Gia Nghiem
 }

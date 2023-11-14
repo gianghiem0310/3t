@@ -35,12 +35,12 @@ class PhongTinNhan extends Model
 
     
 }
-  public static function layThongTinTheoTaiKhoan($idTaiKhoan) {
-      $result = self::where('idTaiKhoan', "=", $idTaiKhoan)->first();
-      $result->taiKhoan();
-      return $result;
-  }
 
+public static function layThongTinTheoTaiKhoan($idTaiKhoan) {
+  $result = self::where('idTaiKhoan', "=", $idTaiKhoan)->first();
+  $result->taiKhoan();
+  return $result;
+}
   public static function layDanhSachThongTin($idTaiKhoan) {
 
     $danhSach = PhongTinNhan::where(['idTaiKhoan1'=>$idTaiKhoan])->orWhere(['idTaiKhoan2'=>$idTaiKhoan])->orderBy('updated_at','desc')->get();
@@ -68,5 +68,23 @@ class PhongTinNhan extends Model
     }
     return true;
  }
+
+ 
+
+ public static function thongTinDoiPhuong($idSender,$idDoiPhuong,$idPhong){
+  $dp=TaiKhoan::find($idDoiPhuong);
+  $phong = PhongTinNhan::find($idPhong);
+  if($phong->idTaiKhoan1!=$idSender){
+    $dp->joinNghiem($dp->loaiTaiKhoan);
+  }else if($phong->idTaiKhoan2!=$idSender){
+    $dp->joinNghiem($dp->loaiTaiKhoan);
+  }
+  return $dp;
+}
+
+
+
+
+
       //End: Nguyen Gia Nghiem
 }
