@@ -198,4 +198,6 @@ Route::post('/yeucaudangkygoi/create', [YeuCauDangKyGoiController::class, "guiYe
 //Đếm thông báo cho màn hình admin
 Route::get('/notification/number', [NotificationController::class, "demSoThongBaoChoAdminAPI"]);
 Route::delete('/hinhcuaphong/delete', [HinhAnhController::class, "deleteHinhAnhAPI"]);
+//Thông báo 
+Route::get('/thongbao/demthongbaocuataikhoan', [ThongBaoController::class, "laySoLuongThongBaoCuaTaiKhoanAPI"]);
 //End Minh

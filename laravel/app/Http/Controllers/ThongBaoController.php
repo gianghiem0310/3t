@@ -50,6 +50,12 @@ class ThongBaoController extends Controller
     {
         return ThongBao::layTatCaThongBaoTheoIDNguoiNhan($request->idTaiKhoanNhan);
     }
+    public function laySoLuongThongBaoCuaTaiKhoanAPI(Request $request){
+        return ThongBao::where([
+            ['idTaiKhoanNhan', $request->idTaiKhoan],
+            ['trangThai', 0]
+            ])->count();
+    }
     //Start Kiet
     public function chitietThongBao(Request $request)
     {
