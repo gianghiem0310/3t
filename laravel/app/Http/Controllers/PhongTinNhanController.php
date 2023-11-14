@@ -50,7 +50,7 @@ class PhongTinNhanController extends Controller
     public function taoPhongTinNhan(Request $request) {
         $idTaiKhoan1 = $request->idTaiKhoan1;
         $idTaiKhoan2 = $request->idTaiKhoan2;
-        return PhongTinNhan::create(['idTaiKhoan1'=>$idTaiKhoan1,'idTaiKhoan2'=>$idTaiKhoan2,"tinNhanMoiNhat"=>"",'trangThai1'=>0,'trangThai2'=>0]);
+        return PhongTinNhan::create(['idTaiKhoan1'=>$idTaiKhoan1,'idTaiKhoan2'=>$idTaiKhoan2,"tinNhanMoiNhat"=>"",'trangThai1'=>1,'trangThai2'=>0]);
     }
     public function layIdPhongTinNhan(Request $request) {
         $phongTn = PhongTinNhan::where(['idTaiKhoan1'=>$request->idTaiKhoan1])->where(['idtaiKhoan2'=>$request->idTaiKhoan2])->orWhere(['idTaiKhoan1'=>$request->idTaiKhoan2])->where(['idTaiKhoan2'=>$request->idTaiKhoan1])->get();

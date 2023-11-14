@@ -88,6 +88,9 @@ Route::get('nguoithue/thongtinchitiet', [NguoiThueController::class, 'layThongTi
 Route::get('phongtinnhan', [PhongTinNhanController::class, 'layIdPhongTinNhan']);
 Route::get('danhsachtinnhan', [TinNhanController::class, 'layDanhSachTinNhan']);
 Route::get('laytaikhoandoiphuong', [TaiKhoanController::class, 'layTaiKhoanDoiPhuong']);
+Route::get('layanhvatendoiphuong',[TinNhanController::class,'layAnhVaTenDoiPhuong']);
+
+
 Route::post('guitinnhan', [TinNhanController::class, 'guiTinNhan']);
 Route::get('danhsachtinnhantheoidtaikhoan', [PhongTinNhanController::class, 'layDanhSachTinNhanTheoIdTaiKhoan']);
 Route::post('capnhattinnhanmoinhat', [PhongTinNhanController::class, 'capNhatTinNhanMoiNhat']);

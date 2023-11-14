@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhongTinNhan;
 use App\Models\TinNhan;
 use Illuminate\Http\Request;
 
@@ -51,13 +52,14 @@ class TinNhanController extends Controller
         return TinNhan::where(['idPhong'=>$request->idPhong])->orderBy('id','asc')->get();
     }
     public function guiTinNhan(Request $request) {
-
-
-        
         $idPhong = $request->idPhong;
         $idTaiKhoan = $request->idTaiKhoan;
         $noiDung = $request->noiDung;
         return TinNhan::create(['idPhong'=>$idPhong,'idTaiKhoan'=>$idTaiKhoan,'noiDung'=>$noiDung]);
+    }
+
+    public function layAnhVaTenDoiPhuong(Request $request) {
+        return PhongTinNhan::thongTinDoiPhuong($request->idSender,$request->idDoiPhuong,$request->idPhong);
     }
     //End nghiêm
 }
