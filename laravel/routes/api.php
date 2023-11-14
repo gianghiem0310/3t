@@ -197,4 +197,5 @@ Route::delete("/phongtrochutro/delete", [PhongTroChuTroController::class, "xoaPh
 Route::post('/yeucaudangkygoi/create', [YeuCauDangKyGoiController::class, "guiYeuCauDangKyGoiAPI"]);
 //Đếm thông báo cho màn hình admin
 Route::get('/notification/number', [NotificationController::class, "demSoThongBaoChoAdminAPI"]);
+Route::delete('/hinhcuaphong/delete', [HinhAnhController::class, "deleteHinhAnhAPI"]);
 //End Minh

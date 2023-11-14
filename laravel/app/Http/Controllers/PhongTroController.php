@@ -84,7 +84,7 @@ class PhongTroController extends Controller
             'tienDien' => $request->tienDien != null? $request->tienDien : -1,
             'tienNuoc' => $request->tienNuoc != null? $request->tienNuoc : -1,
         ]);
-        HinhAnh::where("idPhong", $request->idPhong)->delete();
+        // Thêm mới hình
         if ($request->hinh) {
             $files[] = $request->hinh;
             $images = $files[0];

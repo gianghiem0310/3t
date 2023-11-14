@@ -47,6 +47,8 @@ class HinhAnhController extends Controller
         //
     }
 
+    
+
     public function uploadmultiple(Request $request)
     {
         $count = 0;
@@ -79,5 +81,8 @@ class HinhAnhController extends Controller
         // shuffle the result
         $string = str_shuffle($pin);
         return $string;
+    }
+    public function deleteHinhAnhAPI(Request $request){
+        return HinhAnh::where("id", $request->idHinh)->delete();
     }
 }
