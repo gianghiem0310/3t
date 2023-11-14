@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChinhSachController;
 use App\Http\Controllers\HinhAnhController;
 use App\Http\Controllers\NguoiThueController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PhongBinhLuanController;
 use App\Http\Controllers\PhongDanhGiaController;
 use App\Http\Controllers\PhongNguoiThueController;
@@ -191,4 +192,6 @@ Route::get("/phongdanhgia/laydanhgia", [PhongDanhGiaController::class, "layDanhG
 Route::delete("/phongtrochutro/delete", [PhongTroChuTroController::class, "xoaPhongAPI"]);
 //Gui yeu cau dang ky goi
 Route::post('/yeucaudangkygoi/create', [YeuCauDangKyGoiController::class, "guiYeuCauDangKyGoiAPI"]);
+//Đếm thông báo cho màn hình admin
+Route::get('/notification/number', [NotificationController::class, "demSoThongBaoChoAdminAPI"]);
 //End Minh
