@@ -186,4 +186,6 @@ Route::put("/phongbinhluan/create", [PhongBinhLuanController::class, "vietBinhLu
 Route::put("/phongdanhgia/create", [PhongDanhGiaController::class, "danhGiaAPI"]);
 Route::get("/phongdanhgia/laydanhgia", [PhongDanhGiaController::class, "layDanhGiaCuaChuTroChoPhongAPI"]);
 Route::delete("/phongtrochutro/delete", [PhongTroChuTroController::class, "xoaPhongAPI"]);
+//Gui yeu cau dang ky goi
+Route::post('/yeucaudangkygoi/create', [YeuCauDangKyGoiController::class, "guiYeuCauDangKyGoiAPI"]);
 //End Minh
