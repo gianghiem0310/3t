@@ -37,12 +37,12 @@ class YeuCauDangKyGoiController extends Controller
         return YeuCauDangKyGoi::create([
             'idChuTro' => $request->idChuTro,
             'idGoi' => $request->idGoi,
-            'trangThaiXacThuc' => $request->trangThaiXacThuc,
+            'trangThaiXacThuc' => 0,
             'hinhAnhChuyenKhoan' => $hinhAnhChuyenKhoan_name
         ]);
     }
 
-    public function myRandom()
+    public static function myRandom()
     {
         // Available alpha caracters
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
