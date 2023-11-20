@@ -23,6 +23,7 @@ use App\Http\Controllers\ThongBaoController;
 use App\Http\Controllers\TienIchController;
 use App\Http\Controllers\TinNhanController;
 use App\Http\Controllers\XacThucChuTroController;
+use App\Http\Controllers\YeuCauDatPhongController;
 use App\Models\HinhAnh;
 use App\Models\PhongDanhGia;
 use App\Models\PhongNguoiThue;
@@ -197,4 +198,6 @@ Route::get('/notification/number', [NotificationController::class, "demSoThongBa
 Route::delete('/hinhcuaphong/delete', [HinhAnhController::class, "deleteHinhAnhAPI"]);
 //Thông báo 
 Route::get('/thongbao/demthongbaocuataikhoan', [ThongBaoController::class, "laySoLuongThongBaoCuaTaiKhoanAPI"]);
+Route::get('/thongbao/demyeucaudatphong', [YeuCauDatPhongController::class, "demSoYeuCauDangKyPhongAPI"]);
+Route::get('/thongbao/demthongbao', [ThongBaoController::class, "demTongSoThongBaoAPI"]);
 //End Minh
