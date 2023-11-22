@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class YeuCauDangKyGoiController extends Controller
 {
+    public function test(){
+        $res = YeuCauDangKyGoi::danhSachYeuCauDangKyDaXacThuc()[0];
+        return $res;
+        
+    }
     public static function danhSachYeuCauDangKyGoiAPI(Request $request)
     {
         return YeuCauDangKyGoi::danhSachYeuCauDangKy();
@@ -56,4 +61,5 @@ class YeuCauDangKyGoiController extends Controller
         $string = str_shuffle($pin);
         return $string;
     }
+    
 }

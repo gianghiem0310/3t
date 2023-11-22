@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('gioiTinh');
             $table->integer('tienDien');
             $table->integer('tienNuoc');
+            $table->integer('hoatDong'); // 0: là không hiển thị phía người thuê cần gia hạn gói, 1: hiển thị phía người thuê đã gia hạn gói
             $table->timestamps();
         });
     }

@@ -56,12 +56,76 @@ class PhongTro extends Model
     {
         $this->setAttribute("hinhAnhPhongTro", $this->hasMany(HinhAnh::class, "idPhong",  "id")->get());
     }
+    public function demSoLuongBinhLuan()
+    {
+        $this->setAttribute("binhLuan", $this->hasMany(PhongBinhLuan::class, 'idPhong', 'id')->count());
+    }
+    public function trungBinhDanhGia()
+    {
+        $this->setAttribute("danhGia", $this->hasMany(PhongDanhGia::class, 'idPhong', 'id')->avg("danhGia"));
+    }
     public static function layThongTinPhong($idPhong)
     {
         $result = PhongTro::find($idPhong);
         $result->thongTinChuTro();
         $result->danhSachTienIch();
         $result->danhSachHinhAnh();
+        return $result;
+    }
+    public static function layTatCaPhong($loaiPhong, $sapXep)
+    {
+        $result = self::where([
+            ["loaiPhong", $loaiPhong],
+            ["hoatDong", 1]
+        ])->orderBy('gia', $sapXep)->get();
+
+        
+        foreach ($result as $item) {
+            $item->thongTinChuTro();
+            $item->danhSachTienIch();
+            $item->danhSachHinhAnh();
+            $item->demSoLuongBinhLuan();
+            $item->trungBinhDanhGia();
+        }
+
+        return $result;
+    }
+
+    public static function layPhongTroTheoQuan($idQuan,$arrange)
+    {
+        $result = self::where([
+            ["loaiPhong", 0],
+            ["hoatDong", 1],
+            ['idQuan', $idQuan]
+        ])->orderBy('gia', $arrange)->get();
+
+        
+        foreach ($result as $item) {
+            $item->thongTinChuTro();
+            $item->danhSachTienIch();
+            $item->danhSachHinhAnh();
+            $item->demSoLuongBinhLuan();
+            $item->trungBinhDanhGia();
+        }
+
+        return $result;
+    }
+    public static function randomPhong()
+    {
+        $result = self::where([
+            ["loaiPhong", 0],
+            ["hoatDong", 1],
+        ])->inRandomOrder()->get();
+
+        
+        foreach ($result as $item) {
+            $item->thongTinChuTro();
+            $item->danhSachTienIch();
+            $item->danhSachHinhAnh();
+            $item->demSoLuongBinhLuan();
+            $item->trungBinhDanhGia();
+        }
+
         return $result;
     }
 }
