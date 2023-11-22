@@ -50,5 +50,13 @@ class TaiKhoan extends Model
         $this->setAttribute("thongTin", $this->hasOne(ChuTro::class, 'idTaiKhoan', 'id')->first(["hinh",  "ten"]));
     }
   }
+  public static function kiemTraDangNhapFB($tenTaiKhoan)
+  {
+    $result = self::where('email', '=', $tenTaiKhoan)->first();
+    if ($result) {
+      $result->joinTheoLoaiTaiKhoan($result["loaiTaiKhoan"]);
+    }
+    return $result;
+  }
   
 }

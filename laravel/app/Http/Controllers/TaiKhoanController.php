@@ -147,4 +147,9 @@ class TaiKhoanController extends Controller
         $matKhau = $request->matKhau;
         return TaiKhoan::kiemTraDangNhap($tenTaiKhoan, $matKhau);
     }
+    public function kiemTraDangNhapFB(Request $request)
+    {
+        $tenTaiKhoan = $request->email;
+        return TaiKhoan::kiemTraDangNhapFB($tenTaiKhoan);
+    }
 }
