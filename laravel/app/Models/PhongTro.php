@@ -72,6 +72,13 @@ class PhongTro extends Model
     {
         $this->setAttribute("chuTro", $this->belongsToMany(ChuTro::class, PhongTroChuTro::class, "idPhongTro",  "idChuTro")->first());
     }
+
+
+
+
+
+
+
     public static function danhSachPhongGoiY($idTaiKhoan) {
         $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan',$idTaiKhoan)->get();
         if($phongTroGoiY==null){
@@ -87,6 +94,7 @@ class PhongTro extends Model
                 )->orWhere('tienCoc','<',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
                 $danhSachPhong= [];
                 foreach ($danhSachBanDau as $item) {
+                    
                     if($item->hoatDong!=1){
                         $danhSachPhong[]= $item;
                     }
