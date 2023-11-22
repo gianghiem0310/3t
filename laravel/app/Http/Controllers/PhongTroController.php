@@ -131,4 +131,8 @@ class PhongTroController extends Controller
     public function thongTinChiTietPhong(Request $request) {
         return PhongTro::layThongTinPhong($request->idPhong);
     }
+
+    public function layDanhSachPhongGoiY(Request $request) {
+        return PhongTro::danhSachPhongGoiY($request->idTaiKhoan);
+    }
 }

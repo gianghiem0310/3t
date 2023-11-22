@@ -3,8 +3,11 @@
 namespace App\Models;
 
 use App\Models\PhongTroChuTro;
+use App\Models\PhongTroGoiY;
+use App\Models\Quan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 
 class PhongTro extends Model
 {
@@ -56,6 +59,7 @@ class PhongTro extends Model
     {
         $this->setAttribute("hinhAnhPhongTro", $this->hasMany(HinhAnh::class, "idPhong",  "id")->get());
     }
+    
     public static function layThongTinPhong($idPhong)
     {
         $result = PhongTro::find($idPhong);
@@ -64,4 +68,31 @@ class PhongTro extends Model
         $result->danhSachHinhAnh();
         return $result;
     }
+    public function thongTinChuTro2()
+    {
+        $this->setAttribute("chuTro", $this->belongsToMany(ChuTro::class, PhongTroChuTro::class, "idPhongTro",  "idChuTro")->first());
+    }
+    public static function danhSachPhongGoiY($idTaiKhoan) {
+        $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan',$idTaiKhoan)->get();
+        if($phongTroGoiY==null){
+            return null;
+        }else{
+            $phong = $phongTroGoiY->first();
+            $idQuan = $phong->idQuan;
+            $tienCoc = $phong->tienCoc;
+            $gioiTinh = $phong->gioiTinh;
+            $danhSachPhong = self::where("idQuan",$idQuan)->orWhere('tienCoc','<',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
+            if($danhSachPhong!=null){
+                for($i =0; $i<count($danhSachPhong);$i++){
+                    $danhSachPhong[$i]->quan();
+                    $danhSachPhong[$i]->thongTinChuTro2();
+                    $danhSachPhong[$i]->danhSachHinhAnh();
+                }
+                return $danhSachPhong;
+            }else{
+                return null;
+            }
+        }
+    }
+    
 }
