@@ -87,7 +87,7 @@ class PhongTro extends Model
                 )->orWhere('tienCoc','<',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
                 $danhSachPhong= [];
                 foreach ($danhSachBanDau as $item) {
-                    if($item->hoatDong==1){
+                    if($item->hoatDong!=1){
                         $danhSachPhong[]= $item;
                     }
                 }
