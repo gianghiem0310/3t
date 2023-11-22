@@ -206,5 +206,5 @@ Route::get('/thongbao/demthongbaocuataikhoan', [ThongBaoController::class, "layS
 
 // Start Nghiem Api
 Route::get('nguoithue/danhsachphonggoiy',[PhongTroController::class,'layDanhSachPhongGoiY']);
-
+Route::get('/taikhoan/dangnhapfb', [TaiKhoanController::class, 'kiemTraDangNhapFB']);
 // End Nghiem Api
