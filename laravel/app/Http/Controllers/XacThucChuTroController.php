@@ -67,16 +67,37 @@ class XacThucChuTroController extends Controller
 
     public function guiYeuCauXacThucAPI(Request $request)
     {
+        $cccdMatTruoc = $request->cccdMatTruoc;
+        $cccdMatTruoc_name = 'images/'.self::myRandom()."-" . now()->getTimestampMs() . '-' . 'banner' . '.'. $cccdMatTruoc->extension();
+        $cccdMatTruoc->move(public_path('images'), $cccdMatTruoc_name);
+        $cccdMatSau = $request->cccdMatSau;
+        $cccdMatSau_name = 'images/'.self::myRandom()."-" . now()->getTimestampMs() . '-' . 'banner' . '.'. $cccdMatSau->extension();
+        $cccdMatSau->move(public_path('images'), $cccdMatSau_name);
         $result = XacThucChuTro::create([
             "idChuTro" => $request->idChuTro,
-            "cccdMatTruoc" => $request->cccdMatTruoc,
-            "cccdMatSau" => $request->cccdMatSau,
-            "trangThaiXacThuc" => $request->trangThaiXacThuc
+            "cccdMatTruoc" => $cccdMatTruoc_name,
+            "cccdMatSau" => $cccdMatSau_name,
+            "trangThaiXacThuc" => 0
         ]);
         if($result == null){
             return false;
         } else{
             return true;
         }
+    }
+
+    public function myRandom()
+    {
+        // Available alpha caracters
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // generate a pin based on 2 * 7 digits + a random character
+        $pin = mt_rand(1000000, 9999999)
+            . mt_rand(1000000, 9999999)
+            . $characters[rand(0, strlen($characters) - 1)];
+
+        // shuffle the result
+        $string = str_shuffle($pin);
+        return $string;
     }
 }

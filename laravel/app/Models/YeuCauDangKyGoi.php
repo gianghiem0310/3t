@@ -10,7 +10,10 @@ class YeuCauDangKyGoi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'trangThaiXacThuc'
+        'idChuTro',
+        'idGoi',
+        'trangThaiXacThuc',
+        'hinhAnhChuyenKhoan'
     ];
 
     public function cuaChuTro()

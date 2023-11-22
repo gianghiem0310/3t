@@ -39,4 +39,16 @@ class TaiKhoan extends Model
     }
     return $result;
   }
+
+
+  public function joinNghiem($loaiTaiKhoan){
+    if($loaiTaiKhoan == 0){
+        $this->setAttribute("thongTin", $this->hasOne(NguoiThue::class, 'idTaiKhoan', 'id')->first(["hinh",  "ten"]));
+       
+    }
+    if($loaiTaiKhoan == 1){
+        $this->setAttribute("thongTin", $this->hasOne(ChuTro::class, 'idTaiKhoan', 'id')->first(["hinh",  "ten"]));
+    }
+  }
+  
 }

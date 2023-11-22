@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\TinNhan;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,28 +25,66 @@ class PhongTinNhan extends Model
   }
   public function taiKhoan2(){
     $this->setAttribute("nguoiThue", $this->hasOne(NguoiThue::class, 'idTaiKhoan', 'idTaiKhoan2')->first());
-}
-  public static function layThongTinTheoTaiKhoan($idTaiKhoan) {
-      $result = self::where('idTaiKhoan', "=", $idTaiKhoan)->first();
-      $result->taiKhoan();
-      return $result;
   }
 
+    public function taiKhoanChuTro1(){
+      $this->setAttribute("chuTro", $this->hasOne(ChuTro::class, 'idTaiKhoan', 'idTaiKhoan1')->first());
+  }
+  public function taiKhoanChuTro2(){
+    $this->setAttribute("chuTro", $this->hasOne(ChuTro::class, 'idTaiKhoan', 'idTaiKhoan2')->first());
+
+    
+}
+
+public static function layThongTinTheoTaiKhoan($idTaiKhoan) {
+  $result = self::where('idTaiKhoan', "=", $idTaiKhoan)->first();
+  $result->taiKhoan();
+  return $result;
+}
   public static function layDanhSachThongTin($idTaiKhoan) {
 
     $danhSach = PhongTinNhan::where(['idTaiKhoan1'=>$idTaiKhoan])->orWhere(['idTaiKhoan2'=>$idTaiKhoan])->orderBy('updated_at','desc')->get();
-      foreach ($danhSach as $item) {
-        if($idTaiKhoan!=$item->idTaiKhoan1){
-          $item->where('idTaiKhoan1', "=", $item->idTaiKhoan1)->first();
-          $item->taikhoan1();
-        }
-        if($idTaiKhoan!=$item->idTaiKhoan2){
-          $item->where('idTaiKhoan2', "=", $item->idTaiKhoan2)->first();
-          $item->taikhoan2();
+    $danhSachAPi = []; 
+    foreach ($danhSach as $item) {
+      $kt = self::kiemTraRong($item->id);
+        if($kt==true){
+          if($idTaiKhoan!=$item->idTaiKhoan1){
+            $item->taiKhoanChuTro1();
+            $item->taikhoan1();
+          }
+          if($idTaiKhoan!=$item->idTaiKhoan2){
+            $item->taiKhoanChuTro2();
+            $item->taikhoan2();
+          }
+          $danhSachAPi[] = $item;
         }
       }
-      return $danhSach;
+      return $danhSachAPi;
   }
+ public static function kiemTraRong($idPhong) {
+    $tinNhan = TinNhan::where('idPhong', "=", $idPhong)->get();
+    if(count($tinNhan)==0){
+      return false;
+    }
+    return true;
+ }
+
  
+
+ public static function thongTinDoiPhuong($idSender,$idDoiPhuong,$idPhong){
+  $dp=TaiKhoan::find($idDoiPhuong);
+  $phong = PhongTinNhan::find($idPhong);
+  if($phong->idTaiKhoan1!=$idSender){
+    $dp->joinNghiem($dp->loaiTaiKhoan);
+  }else if($phong->idTaiKhoan2!=$idSender){
+    $dp->joinNghiem($dp->loaiTaiKhoan);
+  }
+  return $dp;
+}
+
+
+
+
+
       //End: Nguyen Gia Nghiem
 }

@@ -32,6 +32,15 @@ class PhongTroChuTro extends Model
     {
         $this->setAttribute("danhGia", $this->hasMany(PhongDanhGia::class, 'idPhong', 'idPhongTro')->avg("danhGia"));
     }
+    public function tienIch($idPhong)
+    {
+        $phongTienIch = PhongTroTienIch::where("idPhong", $idPhong)->get();
+        $tienIch = [];
+        foreach ($phongTienIch as $item){
+            array_push($tienIch, TienIch::find($item['idTienIch']));
+        }
+        $this->setAttribute("danhSachTienIch", $tienIch);
+    }
     public static function layDanhSachPhongTheoIDChuTroPhanTrang($idChuTro, $page, $quantity){
         $offset = ($page - 1)*$quantity;
         $result = self::where('idChuTro', "=", $idChuTro)->orderBy('idPhongTro', 'DESC')->offset($offset)->limit($quantity)->get();
@@ -55,8 +64,10 @@ class PhongTroChuTro extends Model
             $item->hinhAnhCuaPhong();
             $item->demSoLuongBinhLuan(); 
             $item->trungBinhDanhGia();
+            $item->tienIch($item['idPhongTro']);
             
         }
         return $result;
     }
+   
 }

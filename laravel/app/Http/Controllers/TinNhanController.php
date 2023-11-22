@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhongTinNhan;
 use App\Models\TinNhan;
 use Illuminate\Http\Request;
 
@@ -55,6 +56,10 @@ class TinNhanController extends Controller
         $idTaiKhoan = $request->idTaiKhoan;
         $noiDung = $request->noiDung;
         return TinNhan::create(['idPhong'=>$idPhong,'idTaiKhoan'=>$idTaiKhoan,'noiDung'=>$noiDung]);
+    }
+
+    public function layAnhVaTenDoiPhuong(Request $request) {
+        return PhongTinNhan::thongTinDoiPhuong($request->idSender,$request->idDoiPhuong,$request->idPhong);
     }
     //End nghiêm
 }

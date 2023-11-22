@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ThongBao;
+use App\Models\YeuCauDatPhong;
 use Illuminate\Http\Request;
 
 class ThongBaoController extends Controller
@@ -50,6 +51,22 @@ class ThongBaoController extends Controller
     {
         return ThongBao::layTatCaThongBaoTheoIDNguoiNhan($request->idTaiKhoanNhan);
     }
+    public function laySoLuongThongBaoCuaTaiKhoanAPI(Request $request){
+        return ThongBao::where([
+            ['idTaiKhoanNhan', $request->idTaiKhoan],
+            ['trangThai', 0]
+            ])->count();
+    }
+    public function demTongSoThongBaoAPI(Request $request){
+        return ThongBao::where([
+            ['idTaiKhoanNhan', $request->idTaiKhoan],
+            ['trangThai', 0]
+            ])->count() + YeuCauDatPhong::where([
+                ["idTaiKhoanNhan", $request->idTaiKhoan],
+                ["trangThaiThongBao", 0]
+            ])->count();;
+    }
+   
     //Start Kiet
     public function chitietThongBao(Request $request)
     {
