@@ -132,6 +132,7 @@ class PhongTroController extends Controller
         return PhongTro::layThongTinPhong($request->idPhong);
     }
 
+
     public function layTatCaPhongPhanTrangAPI(Request $request) {
         return PhongTro::layTatCaPhong($request->loaiPhong, $request->arrange);
     }
@@ -140,5 +141,13 @@ class PhongTroController extends Controller
     }
     public function layRandomPhongAPI(Request $request) {
         return PhongTro::randomPhong();
+
+
+
+
+    
+    public function layDanhSachPhongGoiY(Request $request) {
+        return PhongTro::danhSachPhongGoiY($request->idTaiKhoan);
+
     }
 }
