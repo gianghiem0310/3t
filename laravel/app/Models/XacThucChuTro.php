@@ -32,9 +32,7 @@ class XacThucChuTro extends Model
 
     public static function layThongTinYeuCauXacThuc($idChuTro){
         $result = self::where("idChuTro", $idChuTro)->first();
-
-        $result->layThongTinChuTro();
-
+            $result->layThongTinChuTro();
         return $result;
     }
 

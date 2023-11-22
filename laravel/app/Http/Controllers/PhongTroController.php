@@ -114,7 +114,7 @@ class PhongTroController extends Controller
     public function layThongTinPhongTheoIDAPI(Request $request){
         return PhongTro::layyPhongTroTheoID($request->id);
     }
-    public static function myRandom()
+    public function myRandom()
     {
         // Available alpha caracters
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -131,10 +131,11 @@ class PhongTroController extends Controller
     public function thongTinChiTietPhong(Request $request) {
         return PhongTro::layThongTinPhong($request->idPhong);
     }
+
     public function layTatCaPhongPhanTrangAPI(Request $request) {
         return PhongTro::layTatCaPhong($request->loaiPhong, $request->arrange);
     }
-    public function layTatCaPhongTroTheQuanAPI(Request $request) {
+     public function layTatCaPhongTroTheQuanAPI(Request $request) {
         return PhongTro::layPhongTroTheoQuan($request->idQuan, $request->arrange);
     }
     public function layRandomPhongAPI(Request $request) {

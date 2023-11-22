@@ -71,7 +71,9 @@ Route::patch('/capnhattrangthaitienich', [TienIchController::class, 'capNhatTran
 
 Route::get('/laytatcaquan', [QuanController::class, 'layTatCaQuan']);
 Route::post('/themquan', [QuanController::class, 'themQuan']);
+Route::get('/layquantheoid', [QuanController::class, 'layTatCaQuanTheoID']);
 Route::post('/capnhatquan', [QuanController::class, 'capNhatQuan']);
+Route::patch('/capnhattrangthaiquan', [QuanController::class, 'capNhatTrangThaiQuan']);
 
 Route::get('/laytatcaphuong', [TienIchController::class, 'layTatCaPhuong']);
 Route::post('/themphuong', [PhuongController::class, 'themPhuong']);
@@ -89,6 +91,9 @@ Route::get('nguoithue/thongtinchitiet', [NguoiThueController::class, 'layThongTi
 Route::get('phongtinnhan', [PhongTinNhanController::class, 'layIdPhongTinNhan']);
 Route::get('danhsachtinnhan', [TinNhanController::class, 'layDanhSachTinNhan']);
 Route::get('laytaikhoandoiphuong', [TaiKhoanController::class, 'layTaiKhoanDoiPhuong']);
+Route::get('layanhvatendoiphuong',[TinNhanController::class,'layAnhVaTenDoiPhuong']);
+
+
 Route::post('guitinnhan', [TinNhanController::class, 'guiTinNhan']);
 Route::get('danhsachtinnhantheoidtaikhoan', [PhongTinNhanController::class, 'layDanhSachTinNhanTheoIdTaiKhoan']);
 Route::post('capnhattinnhanmoinhat', [PhongTinNhanController::class, 'capNhatTinNhanMoiNhat']);
@@ -198,10 +203,18 @@ Route::get('/notification/number', [NotificationController::class, "demSoThongBa
 Route::delete('/hinhcuaphong/delete', [HinhAnhController::class, "deleteHinhAnhAPI"]);
 //Thông báo 
 Route::get('/thongbao/demthongbaocuataikhoan', [ThongBaoController::class, "laySoLuongThongBaoCuaTaiKhoanAPI"]);
+
 Route::get('/thongbao/demyeucaudatphong', [YeuCauDatPhongController::class, "demSoYeuCauDangKyPhongAPI"]);
 Route::get('/thongbao/demthongbao', [ThongBaoController::class, "demTongSoThongBaoAPI"]);
 Route::get('/phongtro/all', [PhongtroController::class, "layTatCaPhongPhanTrangAPI"]);
 Route::get('/phongtro/quan', [PhongtroController::class, "layTatCaPhongTroTheQuanAPI"]);
 Route::get('/phongtro/random', [PhongtroController::class, "layRandomPhongAPI"]);
 Route::get('/test', [YeuCauDangKyGoiController::class, "test"]);
-//End Minh
+
+
+
+// Start Nghiem Api
+Route::get('nguoithue/danhsachphonggoiy',[PhongTroController::class,'layDanhSachPhongGoiY']);
+
+// End Nghiem Api
+

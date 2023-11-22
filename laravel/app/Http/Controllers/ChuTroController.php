@@ -66,7 +66,7 @@ class ChuTroController extends Controller
     //Start Kiet
     public function xoaGoiDichVuChuTroTheoIDTaiKhoanAPI(Request $request)
     {
-        return ChuTro::where('id', $request->id)->update(['idGoi' => 0]);
+        return ChuTro::where('idTaiKhoan', $request->idTaiKhoan)->update(['idGoi' => 0]);
     }
     //End Kiet
 
