@@ -46,4 +46,15 @@ class YeuCauDangKyGoi extends Model
         $result->goiDangKy();
         return $result;
     }
+    public static function danhSachYeuCauDangKyDaXacThuc()
+    {
+        $result = self::where('trangThaiXacThuc', 1)->get();
+        if ($result) {
+            foreach ($result as $item) {
+                $item->cuaChuTro();
+                $item->goiDangKy();
+            }
+        }
+        return $result;
+    }
 }

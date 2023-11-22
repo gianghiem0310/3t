@@ -206,7 +206,10 @@ Route::get('/thongbao/demthongbaocuataikhoan', [ThongBaoController::class, "layS
 
 Route::get('/thongbao/demyeucaudatphong', [YeuCauDatPhongController::class, "demSoYeuCauDangKyPhongAPI"]);
 Route::get('/thongbao/demthongbao', [ThongBaoController::class, "demTongSoThongBaoAPI"]);
-
+Route::get('/phongtro/all', [PhongtroController::class, "layTatCaPhongPhanTrangAPI"]);
+Route::get('/phongtro/quan', [PhongtroController::class, "layTatCaPhongTroTheQuanAPI"]);
+Route::get('/phongtro/random', [PhongtroController::class, "layRandomPhongAPI"]);
+Route::get('/test', [YeuCauDangKyGoiController::class, "test"]);
 
 
 
