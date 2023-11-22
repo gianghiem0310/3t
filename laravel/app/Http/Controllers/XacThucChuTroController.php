@@ -77,7 +77,7 @@ class XacThucChuTroController extends Controller
             "idChuTro" => $request->idChuTro,
             "cccdMatTruoc" => $cccdMatTruoc_name,
             "cccdMatSau" => $cccdMatSau_name,
-            "trangThaiXacThuc" => $request->trangThaiXacThuc
+            "trangThaiXacThuc" => 0
         ]);
         if($result == null){
             return false;

@@ -19,6 +19,7 @@ use App\Http\Controllers\PhongTinNhanController;
 use App\Http\Controllers\PhongTroChuTroController;
 use App\Http\Controllers\PhuongController;
 use App\Http\Controllers\QuanController;
+use App\Http\Controllers\SinhVienController;
 use App\Http\Controllers\ThongBaoController;
 use App\Http\Controllers\TienIchController;
 use App\Http\Controllers\TinNhanController;
@@ -201,3 +202,9 @@ Route::delete('/hinhcuaphong/delete', [HinhAnhController::class, "deleteHinhAnhA
 //Thông báo 
 Route::get('/thongbao/demthongbaocuataikhoan', [ThongBaoController::class, "laySoLuongThongBaoCuaTaiKhoanAPI"]);
 //End Minh
+
+
+// Start Nghiem Api
+Route::get('nguoithue/danhsachphonggoiy',[PhongTroController::class,'layDanhSachPhongGoiY']);
+
+// End Nghiem Api
