@@ -71,7 +71,9 @@ Route::patch('/capnhattrangthaitienich', [TienIchController::class, 'capNhatTran
 
 Route::get('/laytatcaquan', [QuanController::class, 'layTatCaQuan']);
 Route::post('/themquan', [QuanController::class, 'themQuan']);
+Route::get('/layquantheoid', [QuanController::class, 'layTatCaQuanTheoID']);
 Route::post('/capnhatquan', [QuanController::class, 'capNhatQuan']);
+Route::patch('/capnhattrangthaiquan', [QuanController::class, 'capNhatTrangThaiQuan']);
 
 Route::get('/laytatcaphuong', [TienIchController::class, 'layTatCaPhuong']);
 Route::post('/themphuong', [PhuongController::class, 'themPhuong']);

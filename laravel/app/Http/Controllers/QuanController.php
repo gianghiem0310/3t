@@ -66,13 +66,25 @@ class QuanController extends Controller
             return $quan->update(['tenQuan'=>$ten,'hinh'=>$image_name,'trangThai'=>$trangThai]);
         }
         return null;
-
+    }
+    public function capNhatTrangThaiQuan(Request $request) {
+        $quan = Quan::find($request->id);
+        if(isset($quan)){
+            if($quan->trangThai==0){
+                return $quan->update(['trangThai'=>1]);
+            }else{
+                return $quan->update(['trangThai'=>0]);
+            }
+        }
     }
     public function layTatCaQuan()  {
         return Quan::all();
     }
     public function layTatCaQuanAPI()  {
         return Quan::all();
+    }
+    public function layTatCaQuanTheoID(Request $request)  {
+        return Quan::find($request->id);
     }
    
     //END: NGUYEN GIA NGHIEM
