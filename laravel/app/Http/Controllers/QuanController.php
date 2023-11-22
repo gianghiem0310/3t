@@ -59,14 +59,19 @@ class QuanController extends Controller
         $quan = Quan::find($request->id);
         if(isset($quan)){
             $image_quan = $request->hinh;
-            $image_name = 'images/' . time() . '-' . 'quan' . '.'. $image_quan->extension();
-            $image_quan->move(public_path('images'), $image_name);
             $ten = $request->tenQuan;
             $trangThai = $request->trangThai;
-            return $quan->update(['tenQuan'=>$ten,'hinh'=>$image_name,'trangThai'=>$trangThai]);
+            if(isset($image_quan)){
+                $image_name = 'images/' . time() . '-' . 'quan' . '.'. $image_quan->extension();
+                $image_quan->move(public_path('images'), $image_name);
+                return $quan->update(['tenQuan'=>$ten,'hinh'=>$image_name,'trangThai'=>$trangThai]);
+            }else{
+                return $quan->update(['tenQuan'=>$ten,'trangThai'=>$trangThai]);
+            }
         }
         return null;
     }
+    
     public function capNhatTrangThaiQuan(Request $request) {
         $quan = Quan::find($request->id);
         if(isset($quan)){

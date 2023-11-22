@@ -58,14 +58,17 @@ class TienIchController extends Controller
         $tienIch = TienIch::find($request->id);
         if(isset($tienIch)){
             $image_tienich = $request->hinh;
-            $image_name = 'images/' . time() . '-' . 'tienich' . '.'. $image_tienich->extension();
-            $image_tienich->move(public_path('images'), $image_name);
             $ten = $request->ten;
             $trangThai = $request->trangThai;
-            return $tienIch->update(['ten'=>$ten,'hinh'=>$image_name,'trangThai'=>$trangThai]);
+            if(isset($image_tienich)){
+                $image_name = 'images/' . time() . '-' . 'tienich' . '.'. $image_tienich->extension();
+                $image_tienich->move(public_path('images'), $image_name);
+                return $tienIch->update(['ten'=>$ten,'hinh'=>$image_name,'trangThai'=>$trangThai]);
+            }else{
+                return $tienIch->update(['ten'=>$ten,'trangThai'=>$trangThai]);
+            }
         }
         return null;
-
     }
     public function capNhatTrangThaiTienIch(Request $request) {
         $tienich = TienIch::find($request->id);
