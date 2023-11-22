@@ -142,7 +142,7 @@ class PhongTroController extends Controller
     public function layRandomPhongAPI(Request $request) {
         return PhongTro::randomPhong();
 
-
+    }
 
 
     
