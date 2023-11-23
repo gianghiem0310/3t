@@ -30,6 +30,7 @@ class PhongTroController extends Controller
             'gioiTinh' => $request->gioiTinh != null? $request->gioiTinh : -1,
             'tienDien' => $request->tienDien != null? $request->tienDien : -1,
             'tienNuoc' => $request->tienNuoc != null? $request->tienNuoc : -1,
+            'hoatDong' => 0,
         ]);
         if ($phong == null){
             return 0;
@@ -83,6 +84,7 @@ class PhongTroController extends Controller
             'gioiTinh' => $request->gioiTinh != null? $request->gioiTinh : -1,
             'tienDien' => $request->tienDien != null? $request->tienDien : -1,
             'tienNuoc' => $request->tienNuoc != null? $request->tienNuoc : -1,
+            'hoatDong' => 0,
         ]);
         // Thêm mới hình
         if ($request->hinh) {
@@ -132,6 +134,7 @@ class PhongTroController extends Controller
         return PhongTro::layThongTinPhong($request->idPhong);
     }
 
+
     public function layTatCaPhongPhanTrangAPI(Request $request) {
         return PhongTro::layTatCaPhong($request->loaiPhong, $request->arrange);
     }
@@ -140,5 +143,13 @@ class PhongTroController extends Controller
     }
     public function layRandomPhongAPI(Request $request) {
         return PhongTro::randomPhong();
+
+    }
+
+
+    
+    public function layDanhSachPhongGoiY(Request $request) {
+        return PhongTro::danhSachPhongGoiY($request->idTaiKhoan);
+
     }
 }
