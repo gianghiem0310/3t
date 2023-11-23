@@ -30,6 +30,7 @@ class PhongTroController extends Controller
             'gioiTinh' => $request->gioiTinh != null? $request->gioiTinh : -1,
             'tienDien' => $request->tienDien != null? $request->tienDien : -1,
             'tienNuoc' => $request->tienNuoc != null? $request->tienNuoc : -1,
+            'hoatDong' => 0,
         ]);
         if ($phong == null){
             return 0;
@@ -83,6 +84,7 @@ class PhongTroController extends Controller
             'gioiTinh' => $request->gioiTinh != null? $request->gioiTinh : -1,
             'tienDien' => $request->tienDien != null? $request->tienDien : -1,
             'tienNuoc' => $request->tienNuoc != null? $request->tienNuoc : -1,
+            'hoatDong' => 0,
         ]);
         // Thêm mới hình
         if ($request->hinh) {

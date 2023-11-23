@@ -21,7 +21,8 @@ class PhongTro extends Model
         'tienCoc',
         'gioiTinh',
         'tienDien',
-        'tienNuoc'
+        'tienNuoc',
+        'hoatDong',
     ];
     public function tienIch()
     {
