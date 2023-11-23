@@ -20,6 +20,10 @@ class PhongTroChuTro extends Model
     {
         $this->setAttribute("phongTro", $this->hasOne(PhongTro::class, 'id', 'idPhongTro')->first());
     }
+    public function phongHoatDong()
+    {
+        $this->setAttribute("phongTro", $this->hasOne(PhongTro::class, 'id', 'idPhongTro')->where('hoatDong', 1)->first());
+    }
     public function hinhAnhCuaPhong()
     {
         $this->setAttribute("hinhAnh", $this->hasMany(HinhAnh::class, 'idPhong', 'idPhongTro')->get());
@@ -68,6 +72,14 @@ class PhongTroChuTro extends Model
             
         }
         return $result;
+    }
+    public static function demPhongHoatDongCuaChuTro($idChuTro){
+        $result = self::where("idChuTro", $idChuTro)->get();
+        foreach($result as $item){
+            $item->phongHoatDong();
+            
+        }
+        return $result->where('phongTro',"<>", null)->count();
     }
    
 }
