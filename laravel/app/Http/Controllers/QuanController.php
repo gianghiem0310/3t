@@ -88,6 +88,10 @@ class QuanController extends Controller
     public function layTatCaQuanAPI()  {
         return Quan::all();
     }
+    public function layTatCaQuanHoatDongAPI(Request $request) {
+        return Quan::where("trangThai", 0)->get();
+    }
+    
     public function layTatCaQuanTheoID(Request $request)  {
         return Quan::find($request->id);
     }

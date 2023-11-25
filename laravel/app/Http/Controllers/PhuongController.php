@@ -70,6 +70,9 @@ class PhuongController extends Controller
     {
         return Phuong::all();
     }
+    public function layTatCaPhuongHoatDongAPI(Request $request) {
+        return Phuong::where([["trangThai", 0],["idQuan", $request->idQuan]])->get();
+    }
 
     //END: NGUYEN GIA NGHIEM
 

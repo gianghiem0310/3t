@@ -87,6 +87,9 @@ class TienIchController extends Controller
     public function layTatCaTienIch(){
         return TienIch::all();
     }
+    public function layTatCaTienIchHoatDongAPI(){
+        return TienIch::where("trangThai", 0)->get();
+    }
 
 
     public function uploadFileAnh(Request $request) {
