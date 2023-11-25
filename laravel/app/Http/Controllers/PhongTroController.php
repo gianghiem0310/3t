@@ -102,8 +102,7 @@ class PhongTroController extends Controller
             }
         }
         if ($request->tienIch && $phong != null) {
-            $jsonList = $request->tienIch;
-            $list = json_decode($jsonList, true);
+            $list = $request->tienIch;
 
             foreach ($list as $key => $value) {
                 PhongTroTienIch::create([
