@@ -211,6 +211,10 @@ Route::get('/phongtro/quan', [PhongtroController::class, "layTatCaPhongTroTheQua
 Route::get('/phongtro/random', [PhongtroController::class, "layRandomPhongAPI"]);
 Route::get('/test', [YeuCauDangKyGoiController::class, "test"]);
 Route::patch('/phongtro/hoatdong', [PhongTroController::class, "batTatHoatDongPhongAPI"]);
+Route::get('/quan/all/hoatdong', [QuanController::class, "layTatCaQuanHoatDongAPI"]);
+Route::get('/phuong/all/hoatdong', [PhuongController::class, "layTatCaPhuongHoatDongAPI"]);
+Route::get('/tienich/all/hoatdong', [TienIchController::class, "layTatCaTienIchHoatDongAPI"]);
+Route::post('/phongtro/web/themphong', [PhongTroController::class, "themPhongWebAPI"]);
 
 
 
