@@ -71,7 +71,9 @@ Route::patch('/capnhattrangthaitienich', [TienIchController::class, 'capNhatTran
 
 Route::get('/laytatcaquan', [QuanController::class, 'layTatCaQuan']);
 Route::post('/themquan', [QuanController::class, 'themQuan']);
+Route::get('/layquantheoid', [QuanController::class, 'layTatCaQuanTheoID']);
 Route::post('/capnhatquan', [QuanController::class, 'capNhatQuan']);
+Route::patch('/capnhattrangthaiquan', [QuanController::class, 'capNhatTrangThaiQuan']);
 
 Route::get('/laytatcaphuong', [TienIchController::class, 'layTatCaPhuong']);
 Route::post('/themphuong', [PhuongController::class, 'themPhuong']);
@@ -204,12 +206,20 @@ Route::get('/thongbao/demthongbaocuataikhoan', [ThongBaoController::class, "layS
 
 Route::get('/thongbao/demyeucaudatphong', [YeuCauDatPhongController::class, "demSoYeuCauDangKyPhongAPI"]);
 Route::get('/thongbao/demthongbao', [ThongBaoController::class, "demTongSoThongBaoAPI"]);
-
+Route::get('/phongtro/all', [PhongtroController::class, "layTatCaPhongPhanTrangAPI"]);
+Route::get('/phongtro/quan', [PhongtroController::class, "layTatCaPhongTroTheQuanAPI"]);
+Route::get('/phongtro/random', [PhongtroController::class, "layRandomPhongAPI"]);
+Route::get('/test', [YeuCauDangKyGoiController::class, "test"]);
+Route::patch('/phongtro/hoatdong', [PhongTroController::class, "batTatHoatDongPhongAPI"]);
+Route::get('/quan/all/hoatdong', [QuanController::class, "layTatCaQuanHoatDongAPI"]);
+Route::get('/phuong/all/hoatdong', [PhuongController::class, "layTatCaPhuongHoatDongAPI"]);
+Route::get('/tienich/all/hoatdong', [TienIchController::class, "layTatCaTienIchHoatDongAPI"]);
+Route::post('/phongtro/web/themphong', [PhongTroController::class, "themPhongWebAPI"]);
 
 
 
 // Start Nghiem Api
 Route::get('nguoithue/danhsachphonggoiy',[PhongTroController::class,'layDanhSachPhongGoiY']);
-
+Route::get('/taikhoan/dangnhapfb', [TaiKhoanController::class, 'kiemTraDangNhapFB']);
 // End Nghiem Api
 

@@ -27,6 +27,15 @@ class ChuTro extends Model
         $this->setAttribute("taiKhoan", $this->hasOne(TaiKhoan::class, 'id', 'idTaiKhoan')->first());
     }
 
+    public function goi($idGoi){
+        if($idGoi > 0){
+            $this->setAttribute("goi", $this->hasOne(Goi::class, 'id', 'idGoi')->first());
+        }
+        else{
+            $this->setAttribute("goi", null);
+        }
+    }
+
     public static function layThongTinXacThucTheoTaiKhoan($idTaiKhoan) {
         $result = self::where('idTaiKhoan', "=", $idTaiKhoan)->first();
 
@@ -34,5 +43,13 @@ class ChuTro extends Model
         $result->taiKhoan();
         return $result;
     }
+    public static function layThongTinGoi($idChuTro) {
+        $result = self::where('id', "=", $idChuTro)->first();
 
+        $result->goi($result->idGoi);
+        
+        return $result;
+    }
+
+    
 }

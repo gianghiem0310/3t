@@ -59,20 +59,41 @@ class QuanController extends Controller
         $quan = Quan::find($request->id);
         if(isset($quan)){
             $image_quan = $request->hinh;
-            $image_name = 'images/' . time() . '-' . 'quan' . '.'. $image_quan->extension();
-            $image_quan->move(public_path('images'), $image_name);
             $ten = $request->tenQuan;
             $trangThai = $request->trangThai;
-            return $quan->update(['tenQuan'=>$ten,'hinh'=>$image_name,'trangThai'=>$trangThai]);
+            if(isset($image_quan)){
+                $image_name = 'images/' . time() . '-' . 'quan' . '.'. $image_quan->extension();
+                $image_quan->move(public_path('images'), $image_name);
+                return $quan->update(['tenQuan'=>$ten,'hinh'=>$image_name,'trangThai'=>$trangThai]);
+            }else{
+                return $quan->update(['tenQuan'=>$ten,'trangThai'=>$trangThai]);
+            }
         }
         return null;
-
+    }
+    
+    public function capNhatTrangThaiQuan(Request $request) {
+        $quan = Quan::find($request->id);
+        if(isset($quan)){
+            if($quan->trangThai==0){
+                return $quan->update(['trangThai'=>1]);
+            }else{
+                return $quan->update(['trangThai'=>0]);
+            }
+        }
     }
     public function layTatCaQuan()  {
         return Quan::all();
     }
     public function layTatCaQuanAPI()  {
         return Quan::all();
+    }
+    public function layTatCaQuanHoatDongAPI(Request $request) {
+        return Quan::where("trangThai", 0)->get();
+    }
+    
+    public function layTatCaQuanTheoID(Request $request)  {
+        return Quan::find($request->id);
     }
    
     //END: NGUYEN GIA NGHIEM

@@ -3,11 +3,8 @@
 namespace App\Models;
 
 use App\Models\PhongTroChuTro;
-use App\Models\PhongTroGoiY;
-use App\Models\Quan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 
 class PhongTro extends Model
 {
@@ -24,7 +21,8 @@ class PhongTro extends Model
         'tienCoc',
         'gioiTinh',
         'tienDien',
-        'tienNuoc'
+        'tienNuoc',
+        'hoatDong',
     ];
     public function tienIch()
     {
@@ -59,7 +57,14 @@ class PhongTro extends Model
     {
         $this->setAttribute("hinhAnhPhongTro", $this->hasMany(HinhAnh::class, "idPhong",  "id")->get());
     }
-    
+    public function demSoLuongBinhLuan()
+    {
+        $this->setAttribute("binhLuan", $this->hasMany(PhongBinhLuan::class, 'idPhong', 'id')->count());
+    }
+    public function trungBinhDanhGia()
+    {
+        $this->setAttribute("danhGia", $this->hasMany(PhongDanhGia::class, 'idPhong', 'id')->avg("danhGia"));
+    }
     public static function layThongTinPhong($idPhong)
     {
         $result = PhongTro::find($idPhong);
@@ -68,10 +73,73 @@ class PhongTro extends Model
         $result->danhSachHinhAnh();
         return $result;
     }
+    public static function layTatCaPhong($loaiPhong, $sapXep)
+    {
+        $result = self::where([
+            ["loaiPhong", $loaiPhong],
+            ["hoatDong", 1]
+        ])->orderBy('gia', $sapXep)->get();
+
+        
+        foreach ($result as $item) {
+            $item->thongTinChuTro();
+            $item->danhSachTienIch();
+            $item->danhSachHinhAnh();
+            $item->demSoLuongBinhLuan();
+            $item->trungBinhDanhGia();
+        }
+
+        return $result;
+    }
+
+    public static function layPhongTroTheoQuan($idQuan,$arrange)
+    {
+        $result = self::where([
+            ["loaiPhong", 0],
+            ["hoatDong", 1],
+            ['idQuan', $idQuan]
+        ])->orderBy('gia', $arrange)->get();
+
+        
+        foreach ($result as $item) {
+            $item->thongTinChuTro();
+            $item->danhSachTienIch();
+            $item->danhSachHinhAnh();
+            $item->demSoLuongBinhLuan();
+            $item->trungBinhDanhGia();
+        }
+
+        return $result;
+    }
+    public static function randomPhong()
+    {
+        $result = self::where([
+            ["loaiPhong", 0],
+            ["hoatDong", 1],
+        ])->inRandomOrder()->get();
+
+        
+        foreach ($result as $item) {
+            $item->thongTinChuTro();
+            $item->danhSachTienIch();
+            $item->danhSachHinhAnh();
+            $item->demSoLuongBinhLuan();
+            $item->trungBinhDanhGia();
+        }
+
+        return $result;
+    }
     public function thongTinChuTro2()
     {
         $this->setAttribute("chuTro", $this->belongsToMany(ChuTro::class, PhongTroChuTro::class, "idPhongTro",  "idChuTro")->first());
     }
+
+
+
+
+
+
+
     public static function danhSachPhongGoiY($idTaiKhoan) {
         $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan',$idTaiKhoan)->get();
         if($phongTroGoiY==null){
@@ -81,7 +149,17 @@ class PhongTro extends Model
             $idQuan = $phong->idQuan;
             $tienCoc = $phong->tienCoc;
             $gioiTinh = $phong->gioiTinh;
-            $danhSachPhong = self::where("idQuan",$idQuan)->orWhere('tienCoc','<',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
+          
+            $danhSachBanDau = self::where(
+                "idQuan",$idQuan,
+                )->orWhere('tienCoc','<',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
+                $danhSachPhong= [];
+                foreach ($danhSachBanDau as $item) {
+                    
+                    if($item->hoatDong!=1){
+                        $danhSachPhong[]= $item;
+                    }
+                }
             if($danhSachPhong!=null){
                 for($i =0; $i<count($danhSachPhong);$i++){
                     $danhSachPhong[$i]->quan();
@@ -94,5 +172,4 @@ class PhongTro extends Model
             }
         }
     }
-    
 }
