@@ -218,6 +218,7 @@ Route::get('/phuong/all/hoatdong', [PhuongController::class, "layTatCaPhuongHoat
 Route::get('/tienich/all/hoatdong', [TienIchController::class, "layTatCaTienIchHoatDongAPI"]);
 Route::post('/phongtro/web/themphong', [PhongTroController::class, "themPhongWebAPI"]);
 Route::get('/yeucaudatphong/all', [YeuCauDatPhongController::class, "layTatCaYeuCauDangKyPhongAPI"]);
+Route::get('/yeucaudatphong/chitiet', [YeuCauDatPhongController::class, "layThongTinChiTietCuaThongBao"]);
 Route::post('/yeucaudatphong/them', [YeuCauDatPhongController::class, "themYeuCauDangKyPhong"]);
 
 
