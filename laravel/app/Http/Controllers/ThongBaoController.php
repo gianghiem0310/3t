@@ -61,6 +61,10 @@ class ThongBaoController extends Controller
     {
         return ThongBao::layTatCaThongBaoTheoIDNguoiNhan($request->idTaiKhoanNhan);
     }
+    public function layTatCaThongBaoChuNhanTheoIDNguoiNhanAPI(Request $request)
+    {
+        return ThongBao::layTatCaThongBaoChuNhanIDNguoiNhan($request->idTaiKhoanNhan);
+    }
     public function laySoLuongThongBaoCuaTaiKhoanAPI(Request $request)
     {
         return ThongBao::where([

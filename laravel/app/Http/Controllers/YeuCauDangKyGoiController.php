@@ -43,7 +43,8 @@ class YeuCauDangKyGoiController extends Controller
             'idChuTro' => $request->idChuTro,
             'idGoi' => $request->idGoi,
             'trangThaiXacThuc' => 0,
-            'hinhAnhChuyenKhoan' => $hinhAnhChuyenKhoan_name
+            'hinhAnhChuyenKhoan' => $hinhAnhChuyenKhoan_name,
+            'trangThaiNhan' => 0
         ]);
     }
 
