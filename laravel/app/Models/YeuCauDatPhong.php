@@ -18,11 +18,11 @@ class YeuCauDatPhong extends Model
     ];
     public function joinPhong()
     {
-        $this->setAttribute("phong", $this->hasOne(PhongTro::class, 'id', 'idPhong'));
+        $this->setAttribute("phong", $this->hasOne(PhongTro::class, 'id', 'idPhong')->first());
     }
     public function joinNguoiThue()
     {
-        $this->setAttribute("nguoiThue", $this->hasOne(NguoiThue::class, 'idTaiKhoan', 'idTaiKhoanGui'));
+        $this->setAttribute("nguoiThue", $this->hasOne(NguoiThue::class, 'idTaiKhoan', 'idTaiKhoanGui')->first());
     }
 
     public static function layTatCaYeuCauDangKyPhong($idTaiKhoan)
