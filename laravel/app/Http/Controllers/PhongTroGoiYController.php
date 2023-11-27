@@ -46,4 +46,14 @@ class PhongTroGoiYController extends Controller
     {
         //
     }
+    function capNhatPhongGoiY(Request $request) {
+        $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
+        if(isset($phongTroGoiY)){
+            $idQuan = $request->idQuan;
+            $tienCoc = $request->tienCoc;
+            $gioiTinh = $request->gioiTinh;
+            return $phongTroGoiY->update(['idQuan'=>$idQuan,'tienCoc'=>$tienCoc,'gioiTinh'=>$gioiTinh]);
+        }
+        return false;
+    }
 }

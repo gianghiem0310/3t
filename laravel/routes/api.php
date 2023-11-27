@@ -17,6 +17,7 @@ use App\Http\Controllers\PhongDanhGiaController;
 use App\Http\Controllers\PhongNguoiThueController;
 use App\Http\Controllers\PhongTinNhanController;
 use App\Http\Controllers\PhongTroChuTroController;
+use App\Http\Controllers\PhongTroGoiYController;
 use App\Http\Controllers\PhuongController;
 use App\Http\Controllers\QuanController;
 use App\Http\Controllers\ThongBaoController;
@@ -29,6 +30,7 @@ use App\Models\PhongDanhGia;
 use App\Models\PhongNguoiThue;
 use App\Models\PhongTro;
 use App\Models\PhongTroChuTro;
+use App\Models\PhongTroGoiY;
 use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -223,5 +225,6 @@ Route::get('nguoithue/danhsachphonggoiy',[PhongTroController::class,'layDanhSach
 Route::get('/taikhoan/dangnhapfb', [TaiKhoanController::class, 'kiemTraDangNhapFB']);
 Route::post('capnhatthongtinnguoithuecohinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueCoHinh']);
 Route::post('capnhatthongtinnguoithuekhonghinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueKhongHinh']);
+Route::post('nguoithue/capnhatphonggoiy',[PhongTroGoiYController::class,'capNhatPhongGoiY']);
 // End Nghiem Api
 
