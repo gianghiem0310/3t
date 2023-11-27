@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('cccdMatTruoc');
             $table->string('cccdMatSau');
             $table->integer('trangThaiXacThuc');
+            $table->integer('trangthaiNhan');
             $table->timestamps();
         });
     }

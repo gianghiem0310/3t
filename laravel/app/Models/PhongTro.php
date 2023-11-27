@@ -156,7 +156,7 @@ class PhongTro extends Model
                 $danhSachPhong= [];
                 foreach ($danhSachBanDau as $item) {
                     
-                    if($item->hoatDong!=1){
+                    if($item->hoatDong!=0){
                         $danhSachPhong[]= $item;
                     }
                 }

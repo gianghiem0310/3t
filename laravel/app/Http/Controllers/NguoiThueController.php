@@ -52,4 +52,28 @@ class NguoiThueController extends Controller
     public function layThongTinNguoiThueTheoId(Request $request)  {
         return NguoiThue::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
     }
+
+    public function capNhatThongTinNguoiThueCoHinh(Request $request)
+    {
+        $nguoiThue = NguoiThue::where('idTaiKhoan', '=', $request->idTaiKhoan)->first();
+        if (isset($nguoiThue)) {
+            $image = $request->hinh;
+            $image_name = 'images/' . time() . '-' . 'nguoithue' . '.' . $image->extension();
+            $image->move(public_path('images'), $image_name);
+            $tenNguoiThue = $request->ten;
+            $soDienThoai = $request->soDienThoai;
+            return $nguoiThue->update(['ten' => $tenNguoiThue, 'hinh' => $image_name, 'soDienThoai' => $soDienThoai]);
+        }
+        return false;
+    }
+    public function capNhatThongTinNguoiThueKhongHinh(Request $request)
+    {
+        $nguoiThue = NguoiThue::where('idTaiKhoan', '=', $request->idTaiKhoan)->first();
+        if (isset($nguoiThue)) {
+            $tenNguoiThue = $request->ten;
+            $soDienThoai = $request->soDienThoai;
+            return $nguoiThue->update(['ten' => $tenNguoiThue, 'soDienThoai' => $soDienThoai]);
+        }
+        return false;
+    }
 }
