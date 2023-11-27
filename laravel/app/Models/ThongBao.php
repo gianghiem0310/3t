@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ThongBao extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'idTaiKhoanGui',
+        'idTaiKhoanNhan',
+        'noiDung',
+        'trangThai',
+        'trangThaiNhan'
+    ];
 
     public function taiKhoan()
     {
@@ -34,6 +41,19 @@ class ThongBao extends Model
             $item->taiKhoan();
             
             $item->joinTheoLoaiTaiKhoan($item->taiKhoanNhan->loaiTaiKhoan);
+        }
+        
+        return $result;
+    }
+    //
+    public static function layTatCaThongBaoChuNhanIDNguoiNhan($idTaiKhoanNhan)
+    {
+        $result = self::where([['idTaiKhoanNhan', "=", $idTaiKhoanNhan], ['trangThaiNhan', "=", 0]])->get();
+
+        foreach ($result as $item) {
+            $item->taiKhoan();
+            $item->joinTheoLoaiTaiKhoan($item->taiKhoanNhan->loaiTaiKhoan);
+            $item->where([['idTaiKhoanNhan', "=", $idTaiKhoanNhan]])->update(["trangThaiNhan"=>1]);
         }
         
         return $result;

@@ -13,7 +13,8 @@ class XacThucChuTro extends Model
         "idChuTro",
         "cccdMatTruoc",
         "cccdMatSau",
-        "trangThaiXacThuc"
+        "trangThaiXacThuc",
+        'trangThaiNhan'
     ];
 
     public function layThongTinChuTro(){
@@ -33,6 +34,13 @@ class XacThucChuTro extends Model
     public static function layThongTinYeuCauXacThuc($idChuTro){
         $result = self::where("idChuTro", $idChuTro)->first();
             $result->layThongTinChuTro();
+        return $result;
+    }
+    //
+    public static function layThongTinYeuCauXacThucChuNhan($idChuTro){
+        $result = self::where([["idChuTro", $idChuTro], ["trangThaiNhan",0]])->first();
+            $result->layThongTinChuTro();
+            $result->where([['idChuTro', "=", $idChuTro]])->update(["trangThaiNhan"=>1]);
         return $result;
     }
 

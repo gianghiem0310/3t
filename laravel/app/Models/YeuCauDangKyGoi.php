@@ -13,7 +13,8 @@ class YeuCauDangKyGoi extends Model
         'idChuTro',
         'idGoi',
         'trangThaiXacThuc',
-        'hinhAnhChuyenKhoan'
+        'hinhAnhChuyenKhoan',
+        'trangThaiNhan'
     ];
 
     public function cuaChuTro()
@@ -53,6 +54,18 @@ class YeuCauDangKyGoi extends Model
             foreach ($result as $item) {
                 $item->cuaChuTro();
                 $item->goiDangKy();
+            }
+        }
+        return $result;
+    }
+    public static function danhSachYeuCauDangKyDaXacThucChuaNhan()
+    {
+        $result = self::where([['trangThaiXacThuc', 1],["trangThaiNhan",0]])->get();
+        if ($result) {
+            foreach ($result as $item) {
+                $item->cuaChuTro();
+                $item->goiDangKy();
+                $item->where('trangThaiXacThuc', "=", 1)->update(["trangThaiNhan"=>1]);
             }
         }
         return $result;
