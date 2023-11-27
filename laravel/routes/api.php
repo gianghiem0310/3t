@@ -98,8 +98,8 @@ Route::post('guitinnhan', [TinNhanController::class, 'guiTinNhan']);
 Route::get('danhsachtinnhantheoidtaikhoan', [PhongTinNhanController::class, 'layDanhSachTinNhanTheoIdTaiKhoan']);
 Route::post('capnhattinnhanmoinhat', [PhongTinNhanController::class, 'capNhatTinNhanMoiNhat']);
 Route::post('capnhattrangthaidaxem', [PhongTinNhanController::class, 'capNhatTrangThaiDaXem']);
-Route::post('capnhatthongtinchutro', [ChuTroController::class, 'capNhatThongTinChuTro']);
-Route::post('capnhatthongtinchutro2', [ChuTroController::class, 'capNhatThongTinChuTro2']);
+Route::post('capnhatthongtinchutrocohinh', [ChuTroController::class, 'capNhatThongTinChuTroCoHinh']);
+Route::post('capnhatthongtinchutrokhonghinh', [ChuTroController::class, 'capNhatThongTinChuTroKhongHinh']);
 Route::post('taotaikhoannguoithue', [TaiKhoanController::class, 'taoTaiKhoanNguoiThue']);
 Route::post('taotaikhoanchutro', [TaiKhoanController::class, 'taoTaiKhoanChuTro']);
 Route::post('taophongtinnhan', [PhongTinNhanController::class, 'taoPhongTinNhan']);
@@ -221,5 +221,7 @@ Route::post('/phongtro/web/themphong', [PhongTroController::class, "themPhongWeb
 // Start Nghiem Api
 Route::get('nguoithue/danhsachphonggoiy',[PhongTroController::class,'layDanhSachPhongGoiY']);
 Route::get('/taikhoan/dangnhapfb', [TaiKhoanController::class, 'kiemTraDangNhapFB']);
+Route::post('capnhatthongtinnguoithuecohinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueCoHinh']);
+Route::post('capnhatthongtinnguoithuekhonghinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueKhongHinh']);
 // End Nghiem Api
 
