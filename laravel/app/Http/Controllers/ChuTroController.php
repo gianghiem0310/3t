@@ -104,4 +104,7 @@ class ChuTroController extends Controller
     {
         return ChuTro::where('idTaiKhoan', '=', $request->idTaiKhoan)->first();
     }
+
+
+    
 }
