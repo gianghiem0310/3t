@@ -19,8 +19,8 @@ class YeuCauDatPhongController extends Controller
             'idTaiKhoanGui'=>$request->idTaiKhoanGui,
             'idTaiKhoanNhan'=>$request->idTaiKhoanNhan,
             'idPhong' => $request->idPhong,
-            'trangThaiXacThuc' => $request->trangThaiXacThuc,
-            'trangThaiThongBao' => $request->trangThaiThongBao,
+            'trangThaiXacThuc' => 0,
+            'trangThaiThongBao' => 0,
             'trangThaiNhan' => 0
         ]);
     }
