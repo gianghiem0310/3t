@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer("idPhong");
             $table->integer("trangThaiXacThuc");
             $table->integer("trangThaiThongBao");
+            $table->integer("trangthaiNhan");
             $table->timestamps();
         });
     }

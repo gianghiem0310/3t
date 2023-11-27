@@ -47,26 +47,38 @@ class ThongBaoController extends Controller
     {
         //
     }
+    public function themThongBao(Request $request)
+    {
+        return ThongBao::create([
+            'idTaiKhoanGui' => $request->idTaiKhoanGui,
+            'idTaiKhoanNhan' => $request->idTaiKhoanNhan,
+            'noiDung' => $request->noiDung,
+            'trangThai' => $request->trangThai,
+            'trangThaiNhan' => $request->trangThaiNhan,
+        ]);
+    }
     public function layTatCaThongBaoTheoIDNguoiNhanAPI(Request $request)
     {
         return ThongBao::layTatCaThongBaoTheoIDNguoiNhan($request->idTaiKhoanNhan);
     }
-    public function laySoLuongThongBaoCuaTaiKhoanAPI(Request $request){
+    public function laySoLuongThongBaoCuaTaiKhoanAPI(Request $request)
+    {
         return ThongBao::where([
             ['idTaiKhoanNhan', $request->idTaiKhoan],
             ['trangThai', 0]
-            ])->count();
+        ])->count();
     }
-    public function demTongSoThongBaoAPI(Request $request){
+    public function demTongSoThongBaoAPI(Request $request)
+    {
         return ThongBao::where([
             ['idTaiKhoanNhan', $request->idTaiKhoan],
             ['trangThai', 0]
-            ])->count() + YeuCauDatPhong::where([
-                ["idTaiKhoanNhan", $request->idTaiKhoan],
-                ["trangThaiThongBao", 0]
-            ])->count();;
+        ])->count() + YeuCauDatPhong::where([
+            ["idTaiKhoanNhan", $request->idTaiKhoan],
+            ["trangThaiThongBao", 0]
+        ])->count();;
     }
-   
+
     //Start Kiet
     public function chitietThongBao(Request $request)
     {
