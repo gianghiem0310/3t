@@ -225,9 +225,10 @@ Route::post('/yeucaudatphong/them', [YeuCauDatPhongController::class, "themYeuCa
 
 
 // Start Nghiem Api
-Route::get('nguoithue/danhsachphonggoiy', [PhongTroController::class, 'layDanhSachPhongGoiY']);
+Route::get('nguoithue/danhsachphonggoiy',[PhongTroController::class,'layDanhSachPhongGoiY']);
 Route::get('/taikhoan/dangnhapfb', [TaiKhoanController::class, 'kiemTraDangNhapFB']);
 Route::post('capnhatthongtinnguoithuecohinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueCoHinh']);
 Route::post('capnhatthongtinnguoithuekhonghinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueKhongHinh']);
-Route::post('nguoithue/capnhatphonggoiy', [PhongTroGoiYController::class, 'capNhatPhongGoiY']);
+Route::post('nguoithue/capnhatphonggoiy',[PhongTroGoiYController::class,'capNhatPhongGoiY']);
+Route::get('profilereceiver',[TaiKhoanController::class,'getProfileReceiver']);
 // End Nghiem Api
