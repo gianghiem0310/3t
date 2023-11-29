@@ -226,5 +226,6 @@ Route::get('/taikhoan/dangnhapfb', [TaiKhoanController::class, 'kiemTraDangNhapF
 Route::post('capnhatthongtinnguoithuecohinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueCoHinh']);
 Route::post('capnhatthongtinnguoithuekhonghinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueKhongHinh']);
 Route::post('nguoithue/capnhatphonggoiy',[PhongTroGoiYController::class,'capNhatPhongGoiY']);
+Route::get('profilereceiver',[TaiKhoanController::class,'getProfileReceiver']);
 // End Nghiem Api
 
