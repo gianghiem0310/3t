@@ -142,24 +142,22 @@ class PhongTro extends Model
 
     public static function danhSachPhongGoiY($idTaiKhoan) {
         $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan',$idTaiKhoan)->get();
-        if($phongTroGoiY==null){
+        if(count($phongTroGoiY)==0){
             return null;
         }else{
             $phong = $phongTroGoiY->first();
             $idQuan = $phong->idQuan;
             $tienCoc = $phong->tienCoc;
             $gioiTinh = $phong->gioiTinh;
-          
             $danhSachBanDau = self::where(
                 "idQuan",$idQuan,
-                )->orWhere('tienCoc','<',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
-                $danhSachPhong= [];
-                foreach ($danhSachBanDau as $item) {
-                    
-                    if($item->hoatDong!=0){
-                        $danhSachPhong[]= $item;
-                    }
+                )->orWhere('tienCoc','<',$tienCoc)->orWhere('tienCoc','=',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
+            $danhSachPhong= [];
+            foreach ($danhSachBanDau as $item) {
+                if($item->hoatDong==1){
+                        $danhSachPhong[] = $item;
                 }
+            }
             if($danhSachPhong!=null){
                 for($i =0; $i<count($danhSachPhong);$i++){
                     $danhSachPhong[$i]->quan();
