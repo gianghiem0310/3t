@@ -11,6 +11,7 @@ class ThongBao extends Model
     protected $fillable = [
         'idTaiKhoanGui',
         'idTaiKhoanNhan',
+        'tieuDe',
         'noiDung',
         'trangThai',
         'trangThaiNhan'

@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class PhongNguoiThue extends Model
 {
+    protected $fillable = [
+        'idNguoiThue',
+        'idPhong'
+    ];
     use HasFactory;
     public function nguoiThue(){
         $this->setAttribute("nguoiThue", $this->hasOne(NguoiThue::class, "id",  "idNguoiThue")->first());

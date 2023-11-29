@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChuTro;
 use App\Models\PhongNguoiThue;
 use App\Models\ThongBao;
 use App\Models\YeuCauDatPhong;
@@ -23,8 +24,8 @@ class YeuCauDatPhongController extends Controller
             'idTaiKhoanGui' => $request->idTaiKhoanGui,
             'idTaiKhoanNhan' => $request->idTaiKhoanNhan,
             'idPhong' => $request->idPhong,
-            'trangThaiXacThuc' => $request->trangThaiXacThuc,
-            'trangThaiThongBao' => $request->trangThaiThongBao,
+            'trangThaiXacThuc' => 0,
+            'trangThaiThongBao' => 0,
             'trangThaiNhan' => 0
         ]);
     }
@@ -44,8 +45,7 @@ class YeuCauDatPhongController extends Controller
     {
         $result = 0;
         $kq = 0;
-        $update = YeuCauDatPhong::updated([
-            "idTaiKhoanGui" => $request->idTaiKhoanGui,
+        $update = YeuCauDatPhong::where("id", $request->id)->update([
             'trangThaiXacThuc' => 1
         ]);
         if ($update == 1) {
@@ -78,12 +78,12 @@ class YeuCauDatPhongController extends Controller
                     'trangThai' => 0,
                     'trangThaiNhan' => 0,
                 ]);
-                $resDL = YeuCauDatPhong::where("idTaiKhoanGui", "<>", $item->idTaiKhoanGui)->delete();
-                if ($resDL == 0) {
-                    return 100; // delete thất bại code 100
-                } else {
-                    $result = 1;
-                }
+            }
+            $resDL = YeuCauDatPhong::where([["id", "<>", $request->id], ["idPhong", $request->idPhong]])->delete();
+            if ($resDL == 0) {
+                return 100; // delete thất bại code 100
+            } else {
+                $result = 1;
             }
         } else {
             return 101; // thêm người thuê vào phòng  thất bại
