@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FirebaseCloudMessaging;
 use App\Models\ThongBao;
 use App\Models\YeuCauDatPhong;
 use Illuminate\Http\Request;
@@ -82,6 +83,10 @@ class ThongBaoController extends Controller
             ["trangThaiThongBao", 0]
         ])->count();;
     }
+    public function getAllTokenDiviceOfAccountAPI(Request $request){
+        return FirebaseCloudMessaging::where("idTaiKhoan", $request->idTaiKhoanNhan)->get();
+    }
+    
 
     //Start Kiet
     public function chitietThongBao(Request $request)

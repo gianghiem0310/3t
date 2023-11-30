@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TaiKhoan;
 use App\Models\YeuCauDangKyGoi;
 use Illuminate\Http\Request;
 
 class YeuCauDangKyGoiController extends Controller
 {
     public function test(){
-        $res = YeuCauDangKyGoi::danhSachYeuCauDangKyDaXacThuc()[0];
-        return $res;
+        // $res = YeuCauDangKyGoi::danhSachYeuCauDangKyDaXacThuc()[0];
+        $taiKhoan = TaiKhoan::all();
+        return json_encode(["result" => 1, "thongBaoThanhCong"=>$taiKhoan, "teiKhoan"=>$taiKhoan[0]]);
         
     }
     public static function danhSachYeuCauDangKyGoiAPI(Request $request)
