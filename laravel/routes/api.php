@@ -93,7 +93,7 @@ Route::get('nguoithue/thongtinchitiet', [NguoiThueController::class, 'layThongTi
 Route::get('phongtinnhan', [PhongTinNhanController::class, 'layIdPhongTinNhan']);
 Route::get('danhsachtinnhan', [TinNhanController::class, 'layDanhSachTinNhan']);
 Route::get('laytaikhoandoiphuong', [TaiKhoanController::class, 'layTaiKhoanDoiPhuong']);
-Route::get('layanhvatendoiphuong',[TinNhanController::class,'layAnhVaTenDoiPhuong']);
+Route::get('layanhvatendoiphuong', [TinNhanController::class, 'layAnhVaTenDoiPhuong']);
 
 
 Route::post('guitinnhan', [TinNhanController::class, 'guiTinNhan']);
@@ -217,7 +217,9 @@ Route::get('/quan/all/hoatdong', [QuanController::class, "layTatCaQuanHoatDongAP
 Route::get('/phuong/all/hoatdong', [PhuongController::class, "layTatCaPhuongHoatDongAPI"]);
 Route::get('/tienich/all/hoatdong', [TienIchController::class, "layTatCaTienIchHoatDongAPI"]);
 Route::post('/phongtro/web/themphong', [PhongTroController::class, "themPhongWebAPI"]);
-Route::post('/yeucaudatphong/all', [YeuCauDatPhongController::class, "layTatCaYeuCauDangKyPhongAPI"]);
+Route::get('/yeucaudatphong/all', [YeuCauDatPhongController::class, "layTatCaYeuCauDangKyPhongAPI"]);
+Route::get('/yeucaudatphong/chitiet', [YeuCauDatPhongController::class, "layThongTinChiTietCuaThongBao"]);
+Route::put('/yeucaudatphong/xacnhandatphong', [YeuCauDatPhongController::class, "xacThucNhanPhongAPI"]);
 Route::post('/yeucaudatphong/them', [YeuCauDatPhongController::class, "themYeuCauDangKyPhong"]);
 
 
@@ -228,5 +230,5 @@ Route::get('/taikhoan/dangnhapfb', [TaiKhoanController::class, 'kiemTraDangNhapF
 Route::post('capnhatthongtinnguoithuecohinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueCoHinh']);
 Route::post('capnhatthongtinnguoithuekhonghinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueKhongHinh']);
 Route::post('nguoithue/capnhatphonggoiy',[PhongTroGoiYController::class,'capNhatPhongGoiY']);
+Route::get('profilereceiver',[TaiKhoanController::class,'getProfileReceiver']);
 // End Nghiem Api
-

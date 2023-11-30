@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('idTaiKhoanGui');
             $table->integer('idTaiKhoanNhan');
+            $table->string('tieuDe');
             $table->string('noiDung');
             $table->integer('trangThai');
             $table->integer('trangthaiNhan');

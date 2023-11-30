@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChuTro;
 use App\Models\PhongNguoiThue;
 use App\Models\ThongBao;
 use App\Models\YeuCauDatPhong;
@@ -23,8 +24,8 @@ class YeuCauDatPhongController extends Controller
             'idTaiKhoanGui' => $request->idTaiKhoanGui,
             'idTaiKhoanNhan' => $request->idTaiKhoanNhan,
             'idPhong' => $request->idPhong,
-            'trangThaiXacThuc' => $request->trangThaiXacThuc,
-            'trangThaiThongBao' => $request->trangThaiThongBao,
+            'trangThaiXacThuc' => 0,
+            'trangThaiThongBao' => 0,
             'trangThaiNhan' => 0
         ]);
     }
@@ -38,6 +39,7 @@ class YeuCauDatPhongController extends Controller
     {
         return YeuCauDatPhong::layChiTietYeuCauDangKyPhong($request->id);
     }
+
     // Xác thực (idTaiKhoanGui,idNguoiThue,idPhong, myIdTaiKhoan)
     public function xacThucNhanPhongAPI(Request $request)
     {
@@ -45,8 +47,7 @@ class YeuCauDatPhongController extends Controller
         $thongBaoThatBai = [];
         $result = 0;
         $kq = 0;
-        $update = YeuCauDatPhong::updated([
-            "idTaiKhoanGui" => $request->idTaiKhoanGui,
+        $update = YeuCauDatPhong::where("id", $request->id)->update([
             'trangThaiXacThuc' => 1
         ]);
         if ($update == 1) {
@@ -58,40 +59,37 @@ class YeuCauDatPhongController extends Controller
             $thongBaoThanhCong = ThongBao::create([
                 'idTaiKhoanGui' => $request->myIdTaiKhoan,
                 'idTaiKhoanNhan' => $request->idTaiKhoanGui,
-                'tieuDe'=>"Đặt phòng thành công",
+                'tieuDe' => "Đặt phòng thành công",
                 'noiDung' => "Đặt phòng thành công hãy đến xem phòng trong 3 ngày tới",
                 'trangThai' => 0,
                 'trangThaiNhan' => 0,
             ]);
-            if ($phong!=null) {
+            if ($phong != null) {
                 $kq = 1;
-            }
-            else {
+            } else {
                 $kq = 0;
             }
         }
         if ($kq == 1) {
             $resYC = YeuCauDatPhong::where("idPhong", $request->idPhong)->get();
-            foreach($resYC as $item){
+            foreach ($resYC as $item) {
                 $itemThongBaoThatBai = ThongBao::create([
                     'idTaiKhoanGui' => $request->myIdTaiKhoan,
                     'idTaiKhoanNhan' => $item->idTaiKhoanGui,
-                    'tieuDe'=>"Đặt phòng thất bại",
+                    'tieuDe' => "Đặt phòng thất bại",
                     'noiDung' => "Đã có người đặt phòng trước",
                     'trangThai' => 0,
                     'trangThaiNhan' => 0,
                 ]);
                 array_push($thongBaoThatBai, $itemThongBaoThatBai);
-                $resDL = YeuCauDatPhong::where("idTaiKhoanGui", "<>", $item->idTaiKhoanGui)->delete();
-                if ($resDL == 0) {
-                    return json_encode(["result"=> 100, "string"=>"Xóa những yêu cầu khác thất bại"]); // delete thất bại code 100
-                }
-                else {
-                    $result = 1;
-                }
             }
-        }
-        else{
+            $resDL = YeuCauDatPhong::where([["id", "<>", $request->id], ["idPhong", $request->idPhong]])->delete();
+            if ($resDL == 0) {
+                return json_encode(["result"=> 100, "string"=>"Xóa những yêu cầu khác thất bại"]); // delete thất bại code 100
+            } else {
+                $result = 1;
+            }
+        } else {
             return json_encode(["result"=> 101, "string"=>"Thêm người thuê vào phòng thất bại"]); // thêm người thuê vào phòng  thất bại
         }
         return json_encode(["result"=> $result, "thongBaoThanhCong"=> $thongBaoThanhCong, "thongBaoThatBai"=>$thongBaoThatBai, "string"=> "Xác nhận thành công"]);

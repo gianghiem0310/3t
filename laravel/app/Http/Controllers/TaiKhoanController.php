@@ -152,4 +152,14 @@ class TaiKhoanController extends Controller
         $tenTaiKhoan = $request->email;
         return TaiKhoan::kiemTraDangNhapFB($tenTaiKhoan);
     }
+
+
+    public function getProfileReceiver(Request $request)  {
+        $taiKhoan = TaiKhoan::find($request->idTaiKhoan);
+        if($taiKhoan->loaiTaiKhoan==1){
+            return ChuTro::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
+        }else{
+            return NguoiThue::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
+        }
+    }
 }
