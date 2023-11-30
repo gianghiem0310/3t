@@ -9,6 +9,7 @@ use App\Http\Controllers\YeuCauDangKyGoiController;
 use App\Http\Controllers\YeuCauXoaPhongController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChinhSachController;
+use App\Http\Controllers\FirebaseCloudMessagingController;
 use App\Http\Controllers\HinhAnhController;
 use App\Http\Controllers\NguoiThueController;
 use App\Http\Controllers\NotificationController;
@@ -221,7 +222,10 @@ Route::get('/yeucaudatphong/all', [YeuCauDatPhongController::class, "layTatCaYeu
 Route::get('/yeucaudatphong/chitiet', [YeuCauDatPhongController::class, "layThongTinChiTietCuaThongBao"]);
 Route::put('/yeucaudatphong/xacnhandatphong', [YeuCauDatPhongController::class, "xacThucNhanPhongAPI"]);
 Route::post('/yeucaudatphong/them', [YeuCauDatPhongController::class, "themYeuCauDangKyPhong"]);
-
+Route::post('/fcm/savetoken', [FirebaseCloudMessagingController::class, "saveTokenDeviceAPI"]);
+Route::delete('/fcm/delete', [FirebaseCloudMessagingController::class, "deleteTokenDeviceOfAccountWhenLogOutAPI"]);
+Route::delete('/fcm/gettoken', [FirebaseCloudMessagingController::class, "getAllTokenDeviceOfAccountAPI"]);
+Route::get('/taikhoan/all/type', [TaiKhoanController::class, "getAllAccountByTypeAPI"]);
 
 
 // Start Nghiem Api

@@ -162,4 +162,8 @@ class TaiKhoanController extends Controller
             return NguoiThue::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
         }
     }
+    public function getAllAccountByTypeAPI(Request $request)  {
+        $result = TaiKhoan::where("loaiTaiKhoan", $request->loaiTaiKhoan)->get();
+        return $result;
+    }
 }
