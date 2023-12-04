@@ -85,13 +85,13 @@ class YeuCauDatPhongController extends Controller
             }
             $resDL = YeuCauDatPhong::where([["id", "<>", $request->id], ["idPhong", $request->idPhong]])->delete();
             if ($resDL == 0) {
-                return json_encode(["result"=> 100, "string"=>"Xóa những yêu cầu khác thất bại"]); // delete thất bại code 100
+                return json_encode(["result" => 1, "thongBaoThanhCong" => $thongBaoThanhCong, "loai"=>1,  "string" => "Xác nhận thành công"]); // delete thất bại code 100
             } else {
                 $result = 1;
             }
         } else {
-            return json_encode(["result"=> 101, "string"=>"Thêm người thuê vào phòng thất bại"]); // thêm người thuê vào phòng  thất bại
+            return json_encode(["result" => 101, "string" => "Thêm người thuê vào phòng thất bại"]); // thêm người thuê vào phòng  thất bại
         }
-        return json_encode(["result"=> $result, "thongBaoThanhCong"=> $thongBaoThanhCong, "thongBaoThatBai"=>$thongBaoThatBai, "string"=> "Xác nhận thành công"]);
+        return json_encode(["result" => $result, "loai"=>2, "thongBaoThanhCong" => $thongBaoThanhCong, "thongBaoThatBai" => $thongBaoThatBai, "string" => "Xác nhận thành công"]);
     }
 }
