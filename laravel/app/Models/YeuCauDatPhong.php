@@ -14,7 +14,7 @@ class YeuCauDatPhong extends Model
         'idPhong',
         'trangThaiXacThuc',
         'trangThaiThongBao',
-        'trangthaiNhan'
+        'trangThaiNhan'
     ];
     public function joinPhong()
     {

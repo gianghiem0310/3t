@@ -80,11 +80,7 @@ class XacThucChuTroController extends Controller
             "trangThaiXacThuc" => 0,
             'trangThaiNhan' => 0
         ]);
-        if($result == null){
-            return false;
-        } else{
-            return true;
-        }
+        return $result;
     }
 
     public function myRandom()
