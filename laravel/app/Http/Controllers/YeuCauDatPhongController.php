@@ -43,6 +43,8 @@ class YeuCauDatPhongController extends Controller
     // Xác thực (idTaiKhoanGui,idNguoiThue,idPhong, myIdTaiKhoan)
     public function xacThucNhanPhongAPI(Request $request)
     {
+        $thongBaoThanhCong = null;
+        $thongBaoThatBai = [];
         $result = 0;
         $kq = 0;
         $update = YeuCauDatPhong::where("id", $request->id)->update([
@@ -53,7 +55,8 @@ class YeuCauDatPhongController extends Controller
                 "idNguoiThue" => $request->idNguoiThue,
                 "idPhong" => $request->idPhong
             ]);
-            ThongBao::create([
+            // Tạo thông bao thành công gửi lại cho người dùng
+            $thongBaoThanhCong = ThongBao::create([
                 'idTaiKhoanGui' => $request->myIdTaiKhoan,
                 'idTaiKhoanNhan' => $request->idTaiKhoanGui,
                 'tieuDe' => "Đặt phòng thành công",
@@ -70,7 +73,7 @@ class YeuCauDatPhongController extends Controller
         if ($kq == 1) {
             $resYC = YeuCauDatPhong::where("idPhong", $request->idPhong)->get();
             foreach ($resYC as $item) {
-                ThongBao::create([
+                $itemThongBaoThatBai = ThongBao::create([
                     'idTaiKhoanGui' => $request->myIdTaiKhoan,
                     'idTaiKhoanNhan' => $item->idTaiKhoanGui,
                     'tieuDe' => "Đặt phòng thất bại",
@@ -78,16 +81,17 @@ class YeuCauDatPhongController extends Controller
                     'trangThai' => 0,
                     'trangThaiNhan' => 0,
                 ]);
+                array_push($thongBaoThatBai, $itemThongBaoThatBai);
             }
             $resDL = YeuCauDatPhong::where([["id", "<>", $request->id], ["idPhong", $request->idPhong]])->delete();
             if ($resDL == 0) {
-                return 100; // delete thất bại code 100
+                return json_encode(["result"=> 100, "string"=>"Xóa những yêu cầu khác thất bại"]); // delete thất bại code 100
             } else {
                 $result = 1;
             }
         } else {
-            return 101; // thêm người thuê vào phòng  thất bại
+            return json_encode(["result"=> 101, "string"=>"Thêm người thuê vào phòng thất bại"]); // thêm người thuê vào phòng  thất bại
         }
-        return $result;
+        return json_encode(["result"=> $result, "thongBaoThanhCong"=> $thongBaoThanhCong, "thongBaoThatBai"=>$thongBaoThatBai, "string"=> "Xác nhận thành công"]);
     }
 }
