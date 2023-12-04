@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChuTro;
 use App\Models\TaiKhoan;
 use App\Models\YeuCauDangKyGoi;
 use Illuminate\Http\Request;
@@ -26,9 +27,17 @@ class YeuCauDangKyGoiController extends Controller
 
     public static function xacThucYeuCauDangKyGoiAPI(Request $request)
     {
-        return YeuCauDangKyGoi::where('id', '=', $request->id)->update([
+        $idTaiKhoan = 0;
+        $res = YeuCauDangKyGoi::where('id', '=', $request->id)->update([
             'trangThaiXacThuc' => 1
         ]);
+        if ($res > 0) {
+            $yeucau = YeuCauDangKyGoi::where('id', '=', $request->id)->first();
+            $idChuTro = $yeucau->idChuTro;
+            $chutro = ChuTro::where("id", $idChuTro)->first();
+            $idTaiKhoan = $chutro->idTaiKhoan;
+        }
+        return $idTaiKhoan;
     }
 
     public static function huyYeuCauDangKyGoiAPI(Request $request)

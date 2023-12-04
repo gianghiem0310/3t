@@ -10,6 +10,7 @@ class FirebaseCloudMessagingController extends Controller
     public function getAllTokenDeviceOfAccountAPI(Request $request){
         return FirebaseCloudMessaging::where("idTaiKhoan", $request->idTaiKhoan)->get();
     }
+
     public function saveTokenDeviceAPI(Request $request)
     {
         $result = null;

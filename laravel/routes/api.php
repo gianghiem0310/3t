@@ -224,8 +224,9 @@ Route::put('/yeucaudatphong/xacnhandatphong', [YeuCauDatPhongController::class, 
 Route::post('/yeucaudatphong/them', [YeuCauDatPhongController::class, "themYeuCauDangKyPhong"]);
 Route::post('/fcm/savetoken', [FirebaseCloudMessagingController::class, "saveTokenDeviceAPI"]);
 Route::delete('/fcm/delete', [FirebaseCloudMessagingController::class, "deleteTokenDeviceOfAccountWhenLogOutAPI"]);
-Route::delete('/fcm/gettoken', [FirebaseCloudMessagingController::class, "getAllTokenDeviceOfAccountAPI"]);
+Route::get('/fcm/gettoken', [FirebaseCloudMessagingController::class, "getAllTokenDeviceOfAccountAPI"]);
 Route::get('/taikhoan/all/type', [TaiKhoanController::class, "getAllAccountByTypeAPI"]);
+Route::post('/notification/create', [ThongBaoController::class, "themThongBao"]);
 
 
 // Start Nghiem Api
