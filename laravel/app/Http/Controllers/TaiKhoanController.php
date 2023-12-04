@@ -123,7 +123,7 @@ class TaiKhoanController extends Controller
         TaiKhoan::create(['tenTaiKhoan'=>$tenTaiKhoan,'matKhau'=>$matKhau,'email'=>$email,'trangThai'=>0,'loaiTaiKhoan'=>0]);
         $taiKhoan = TaiKhoan::where('tenTaiKhoan','=',$tenTaiKhoan)->where('matKhau','=',$matKhau)->first();
         if(isset($taiKhoan)){
-            return NguoiThue::create(['idTaiKhoan'=>$taiKhoan->id,'ten'=>$tenNguoiDung,'gioiTinh'=>$gioiTinh]);
+            return NguoiThue::create(['idTaiKhoan'=>$taiKhoan->id,'ten'=>$tenNguoiDung,'hinh'=>"images/avt_macdinh.jpg",'gioiTinh'=>$gioiTinh]);
         }
         return null;
    }
@@ -136,7 +136,7 @@ class TaiKhoanController extends Controller
     $taiKhoan = TaiKhoan::where('tenTaiKhoan','=',$tenTaiKhoan)->where('matKhau','=',$matKhau)->where('loaiTaiKhoan','=',1)->first();
     if(isset($taiKhoan)){
         $id = $taiKhoan->id;
-        return ChuTro::create(['idTaiKhoan'=>$id,'ten'=>$tenNguoiDung,'xacThuc'=>0]);
+        return ChuTro::create(['idTaiKhoan'=>$id,'ten'=>$tenNguoiDung,'hinh'=>"images/avt_macdinh.jpg",'xacThuc'=>0]);
     }
     return null;
 	}
