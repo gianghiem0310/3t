@@ -237,4 +237,5 @@ Route::post('capnhatthongtinnguoithuecohinh', [NguoiThueController::class, 'capN
 Route::post('capnhatthongtinnguoithuekhonghinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueKhongHinh']);
 Route::post('nguoithue/capnhatphonggoiy',[PhongTroGoiYController::class,'capNhatPhongGoiY']);
 Route::get('profilereceiver',[TaiKhoanController::class,'getProfileReceiver']);
+Route::get('profilesender',[TaiKhoanController::class,'getNameSender']);
 // End Nghiem Api
