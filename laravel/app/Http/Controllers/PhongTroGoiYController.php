@@ -54,6 +54,13 @@ class PhongTroGoiYController extends Controller
             $gioiTinh = $request->gioiTinh;
             return $phongTroGoiY->update(['idQuan'=>$idQuan,'tienCoc'=>$tienCoc,'gioiTinh'=>$gioiTinh]);
         }
-        return false;
+        else{
+            $idTaiKhoan = $request->idTaiKhoan;
+            $idQuan = $request->idQuan;
+            $tienCoc = $request->tienCoc;
+            $gioiTinh = $request->gioiTinh;
+            PhongTroGoiY::create(['idTaiKhoan'=>$idTaiKhoan,'idQuan'=>$idQuan,'tienCoc'=>$tienCoc,'gioiTinh'=>$gioiTinh]);
+            return true;
+        }
     }
 }

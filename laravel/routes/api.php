@@ -231,9 +231,11 @@ Route::post('/notification/create', [ThongBaoController::class, "themThongBao"])
 
 // Start Nghiem Api
 Route::get('nguoithue/danhsachphonggoiy',[PhongTroController::class,'layDanhSachPhongGoiY']);
+Route::get('nguoithue/danhsachphonggoiytheoquan',[PhongTroController::class,'layDanhSachPhongGoiYTheoQuan']);
 Route::get('/taikhoan/dangnhapfb', [TaiKhoanController::class, 'kiemTraDangNhapFB']);
 Route::post('capnhatthongtinnguoithuecohinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueCoHinh']);
 Route::post('capnhatthongtinnguoithuekhonghinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueKhongHinh']);
 Route::post('nguoithue/capnhatphonggoiy',[PhongTroGoiYController::class,'capNhatPhongGoiY']);
 Route::get('profilereceiver',[TaiKhoanController::class,'getProfileReceiver']);
+Route::get('profilesender',[TaiKhoanController::class,'getNameSender']);
 // End Nghiem Api
