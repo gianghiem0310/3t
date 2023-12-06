@@ -37,9 +37,23 @@ class YeuCauDatPhongController extends Controller
     // lấy chi tiet thông báo của tài khoản theo idTaiKhoan
     public function layThongTinChiTietCuaThongBao(Request $request)
     {
+        YeuCauDatPhong::where('id', $request->id)->update(['trangThaiThongBao' => 1]);
         return YeuCauDatPhong::layChiTietYeuCauDangKyPhong($request->id);
     }
 
+    //Từ chối yêu cầu
+    public function tuChoiNhanPhongAPI(Request $request)
+    {
+        YeuCauDatPhong::where("id", $request->id)->delete();
+        return ThongBao::create([
+            'idTaiKhoanGui' => $request->myIdTaiKhoan,
+            'idTaiKhoanNhan' => $request->idTaiKhoanGui,
+            'tieuDe' => "Chủ trọ từ chối yêu cầu",
+            'noiDung' => "Chủ trọ đã từ chối yêu cầu đặt phòng của bạn",
+            'trangThai' => 0,
+            'trangThaiNhan' => 0,
+        ]);
+    }
     // Xác thực (idTaiKhoanGui,idNguoiThue,idPhong, myIdTaiKhoan)
     public function xacThucNhanPhongAPI(Request $request)
     {
@@ -85,13 +99,13 @@ class YeuCauDatPhongController extends Controller
             }
             $resDL = YeuCauDatPhong::where([["id", "<>", $request->id], ["idPhong", $request->idPhong]])->delete();
             if ($resDL == 0) {
-                return json_encode(["result" => 1, "thongBaoThanhCong" => $thongBaoThanhCong, "loai"=>1,  "string" => "Xác nhận thành công"]); // delete thất bại code 100
+                return json_encode(["result" => 1, "thongBaoThanhCong" => $thongBaoThanhCong, "loai" => 1,  "string" => "Xác nhận thành công"]); // delete thất bại code 100
             } else {
                 $result = 1;
             }
         } else {
             return json_encode(["result" => 101, "string" => "Thêm người thuê vào phòng thất bại"]); // thêm người thuê vào phòng  thất bại
         }
-        return json_encode(["result" => $result, "loai"=>2, "thongBaoThanhCong" => $thongBaoThanhCong, "thongBaoThatBai" => $thongBaoThatBai, "string" => "Xác nhận thành công"]);
+        return json_encode(["result" => $result, "loai" => 2, "thongBaoThanhCong" => $thongBaoThanhCong, "thongBaoThatBai" => $thongBaoThatBai, "string" => "Xác nhận thành công"]);
     }
 }
