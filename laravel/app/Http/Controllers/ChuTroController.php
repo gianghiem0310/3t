@@ -60,7 +60,13 @@ class ChuTroController extends Controller
     }
     public function xacNhanThongTinChuTroTheoIDTaiKhoanAPI(Request $request)
     {
-        return ChuTro::where('id', $request->id)->update(['xacThuc' => 1]);
+        $idTaiKhoan = 0;
+        $res = ChuTro::where('id', $request->id)->update(['xacThuc' => 1]);
+        if ($res > 0) {
+            $chutro = ChuTro::where('id', $request->id)->first();
+            $idTaiKhoan = $chutro->idTaiKhoan;
+        }
+        return $idTaiKhoan;
     }
 
     //Start Kiet

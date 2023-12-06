@@ -162,4 +162,18 @@ class TaiKhoanController extends Controller
             return NguoiThue::where('idTaiKhoan','=',$request->idTaiKhoan)->first();
         }
     }
+    public function getNameSender(Request $request)  {
+        $taiKhoan = TaiKhoan::find($request->idTaiKhoan);
+        if($taiKhoan->loaiTaiKhoan==1){
+            $ten = ChuTro::where('idTaiKhoan','=',$request->idTaiKhoan)->get()->first();
+            return $ten ;
+        }else{
+            $ten = NguoiThue::where('idTaiKhoan','=',$request->idTaiKhoan)->get()->first();
+            return $ten ;
+        }
+    }
+    public function getAllAccountByTypeAPI(Request $request)  {
+        $result = TaiKhoan::where("loaiTaiKhoan", $request->loaiTaiKhoan)->get();
+        return $result;
+    }
 }
