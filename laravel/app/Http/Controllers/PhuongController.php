@@ -66,6 +66,17 @@ class PhuongController extends Controller
         }
         return null;
     }
+    public function capNhatTrangThaiPhuong(Request $request) {
+        $phuong = Phuong::find($request->id);
+        if(isset($phuong)){
+            if($phuong->trangThai==0){
+                return $phuong->update(['trangThai'=>1]);
+            }else{
+                return $phuong->update(['trangThai'=>0]);
+            }
+            // return $phuong;
+        }
+    }
     public function layTatCaPhuong()
     {
         return Phuong::all();
