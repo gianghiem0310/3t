@@ -222,6 +222,7 @@ Route::post('/phongtro/web/themphong', [PhongTroController::class, "themPhongWeb
 Route::get('/yeucaudatphong/all', [YeuCauDatPhongController::class, "layTatCaYeuCauDangKyPhongAPI"]);
 Route::get('/yeucaudatphong/chitiet', [YeuCauDatPhongController::class, "layThongTinChiTietCuaThongBao"]);
 Route::put('/yeucaudatphong/xacnhandatphong', [YeuCauDatPhongController::class, "xacThucNhanPhongAPI"]);
+Route::put('/yeucaudatphong/tuchoi', [YeuCauDatPhongController::class, "tuChoiNhanPhongAPI"]);
 Route::post('/yeucaudatphong/them', [YeuCauDatPhongController::class, "themYeuCauDangKyPhong"]);
 Route::post('/fcm/savetoken', [FirebaseCloudMessagingController::class, "saveTokenDeviceAPI"]);
 Route::delete('/fcm/delete', [FirebaseCloudMessagingController::class, "deleteTokenDeviceOfAccountWhenLogOutAPI"]);
