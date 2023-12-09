@@ -40,6 +40,11 @@ class Kernel extends ConsoleKernel
         }
     }
 
+    public function xoaNguoiDungKhoiPhong()
+    {
+       
+    }
+
     /**
      * Register the commands for the application.
      */
