@@ -24,6 +24,7 @@ use App\Http\Controllers\QuanController;
 use App\Http\Controllers\ThongBaoController;
 use App\Http\Controllers\TienIchController;
 use App\Http\Controllers\TinNhanController;
+use App\Http\Controllers\VideoReviewController;
 use App\Http\Controllers\XacThucChuTroController;
 use App\Http\Controllers\YeuCauDatPhongController;
 use App\Models\HinhAnh;
@@ -238,4 +239,8 @@ Route::post('capnhatthongtinnguoithuekhonghinh', [NguoiThueController::class, 'c
 Route::post('nguoithue/capnhatphonggoiy',[PhongTroGoiYController::class,'capNhatPhongGoiY']);
 Route::get('profilereceiver',[TaiKhoanController::class,'getProfileReceiver']);
 Route::get('profilesender',[TaiKhoanController::class,'getNameSender']);
+Route::post('uploadvideoreview',[VideoReviewController::class,"uploadVideo"]);
+Route::post('uploadvideoreviewyoutube',[VideoReviewController::class,"uploadVideoYoutube"]);
+Route::get('getvideoreview',[VideoReviewController::class,'getVideoReview']);
+Route::post('deletevideoreview',[VideoReviewController::class,'deleteVideoReview']);
 // End Nghiem Api
