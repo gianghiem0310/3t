@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhongTro;
 use App\Models\PhongTroYeuThich;
 use Illuminate\Http\Request;
 
@@ -59,7 +60,20 @@ class PhongTroYeuThichController extends Controller
         }
     }
     public function layDanhSachPhongTroYeuThich(Request $request){
-        return PhongTroYeuThich::where('idTaiKhoan','=',$request->idTaiKhoan)->get();
+        $danhSachPhong = [];
+        $danhsachId = PhongTroYeuThich::where('idTaiKhoan','=',$request->idTaiKhoan)->get();
+        if(count($danhsachId)!=0){
+            foreach ($danhsachId as $value) {
+                $phong = PhongTro::find($value->idPhong);
+                if($phong->hoatDong==1){
+                    $danhSachPhong[]= $phong;
+                }
+            }
+            return $danhSachPhong;
+            
+        }else{
+            return $danhSachPhong;
+        }
     }
     public function layTongSoLuotYeuThichCuaPhongTro(Request $request)  {
         return count(PhongTroYeuThich::where('idPhong','=',$request->idPhong)->get());
