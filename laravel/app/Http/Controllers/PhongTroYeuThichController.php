@@ -53,10 +53,18 @@ class PhongTroYeuThichController extends Controller
             if(PhongTroYeuThich::create(['idTaiKhoan'=>$request->idTaiKhoan,'idPhong'=>$request->idPhong])){
                 return true;
             }else{
-                return false;
+                return 0;
             }
         }else{
             return $phongYeuThich->first()->delete();
+        }
+    }
+    public function xemDaYeuThichHayChua(Request $request) {
+        $phongYeuThich = PhongTroYeuThich::where('idPhong','=',$request->idPhong)->where('idTaiKhoan','=',$request->idTaiKhoan)->get();
+        if(count($phongYeuThich)==0){
+            return 0;
+        }else{
+            return true;
         }
     }
     public function layDanhSachPhongTroYeuThich(Request $request){

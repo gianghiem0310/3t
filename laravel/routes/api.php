@@ -250,4 +250,5 @@ Route::post('deletevideoreview',[VideoReviewController::class,'deleteVideoReview
 Route::post('capnhatyeuthichphongtro',[PhongTroYeuThichController::class,'capNhatYeuThichPhongTro']);
 Route::get('laydanhsachphongtroyeuthich',[PhongTroYeuThichController::class,'layDanhSachPhongTroYeuThich']);
 Route::get('laytongsoluotyeuthich',[PhongTroYeuThichController::class,'layTongSoLuotYeuThichCuaPhongTro']);
+Route::get('kiemtrayeuthich',[PhongTroYeuThichController::class,'xemDaYeuThichHayChua']);
 // End Nghiem Api
