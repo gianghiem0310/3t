@@ -236,6 +236,7 @@ Route::post('/notification/create', [ThongBaoController::class, "themThongBao"])
 
 // Start Nghiem Api
 Route::get('nguoithue/danhsachphonggoiy',[PhongTroController::class,'layDanhSachPhongGoiY']);
+Route::get('nguoithue/danhsachphonggoiy2',[PhongTroController::class,'layDanhSachPhongGoiY2']);
 Route::get('nguoithue/danhsachphonggoiytheoquan',[PhongTroController::class,'layDanhSachPhongGoiYTheoQuan']);
 Route::get('/taikhoan/dangnhapfb', [TaiKhoanController::class, 'kiemTraDangNhapFB']);
 Route::post('capnhatthongtinnguoithuecohinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueCoHinh']);
