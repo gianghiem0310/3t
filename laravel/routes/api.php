@@ -9,7 +9,9 @@ use App\Http\Controllers\YeuCauDangKyGoiController;
 use App\Http\Controllers\YeuCauXoaPhongController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChinhSachController;
+use App\Http\Controllers\EmailSendController;
 use App\Http\Controllers\FirebaseCloudMessagingController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HinhAnhController;
 use App\Http\Controllers\NguoiThueController;
 use App\Http\Controllers\NotificationController;
@@ -37,6 +39,7 @@ use App\Models\PhongTroGoiY;
 use App\Models\PhongTroYeuThich;
 use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -232,6 +235,14 @@ Route::delete('/fcm/delete', [FirebaseCloudMessagingController::class, "deleteTo
 Route::get('/fcm/gettoken', [FirebaseCloudMessagingController::class, "getAllTokenDeviceOfAccountAPI"]);
 Route::get('/taikhoan/all/type', [TaiKhoanController::class, "getAllAccountByTypeAPI"]);
 Route::post('/notification/create', [ThongBaoController::class, "themThongBao"]);
+Route::get('/checkuser', [ForgotPasswordController::class, "getAccountByUsernameAPI"]);
+Route::post('/checkcode', [ForgotPasswordController::class, "checkCodeAPI"]);
+Route::get('/timkiemtheonhucau', [PhongTroController::class, "layTatCaPhongTheoNhuCauAPI"]);
+
+
+
+Route::post('/send-email', [EmailSendController::class, "sendAPI"]);
+Route::post('/forgotpassword', [ForgotPasswordController::class, "createCodeForgotPasswordAPI"]);
 
 
 // Start Nghiem Api

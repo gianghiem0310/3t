@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChuTro;
+use App\Models\ForgotPassword;
 use App\Models\TaiKhoan;
 use App\Models\YeuCauDangKyGoi;
 use Illuminate\Http\Request;
@@ -10,9 +11,10 @@ use Illuminate\Http\Request;
 class YeuCauDangKyGoiController extends Controller
 {
     public function test(){
+        $item = ForgotPassword::find(1);
         // $res = YeuCauDangKyGoi::danhSachYeuCauDangKyDaXacThuc()[0];
-        $taiKhoan = TaiKhoan::all();
-        return json_encode(["result" => 1, "thongBaoThanhCong"=>$taiKhoan, "teiKhoan"=>$taiKhoan[0]]);
+        // $taiKhoan = TaiKhoan::all();
+        return $item->created_at->addMinutes(5) . "  <  " . now();
         
     }
     public static function danhSachYeuCauDangKyGoiAPI(Request $request)

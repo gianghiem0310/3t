@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('firebase_cloud_messagings', function (Blueprint $table) {
+        Schema::create('forgot_passwords', function (Blueprint $table) {
             $table->id();
-            // 1  tài khoản có nhiều token divice
-            $table->string("token");// token divice
-            $table->integer("idTaiKhoan"); // id của tài khoản
+            $table->integer("idTaiKhoan");
+            $table->integer("code");
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('firebase_cloud_messagings');
+        Schema::dropIfExists('forgot_passwords');
     }
 };

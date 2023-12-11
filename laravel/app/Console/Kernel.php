@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\ForgotPassword;
 use App\Models\PhongTro;
 use App\Models\PhongTroChuTro;
 use App\Models\YeuCauDangKyGoi;
@@ -18,14 +19,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->call($this->xoaGoi())->everySecond();
+        $schedule->call([$this->xoaGoi(), $this->xoaCodeForgotPassword()])->everySecond();
     }
     public function xoaGoi()
     {
         $yeuCauDangKyGoi = YeuCauDangKyGoi::danhSachYeuCauDangKyDaXacThuc();
         foreach($yeuCauDangKyGoi as $item){
             // if(date('Y-m-d', strtotime("2023-11-21") > date('Y-m-d', strtotime("2023-11-22")))){
-            if($item->updated_at->addDays($item->goi->thoiHan) > now()){
+            if($item->updated_at->addDays($item->goi->thoiHan) < now()){
                 
                 $item->chuTro->update(
                     ["idGoi"=>-1]
@@ -35,6 +36,16 @@ class Kernel extends ConsoleKernel
                 foreach($ds as $phong){
                     PhongTro::where("id", $phong->idPhongTro)->update(["hoatDong"=> 0]);
                 }
+                $item->delete();
+            }
+        }
+    }
+    public function xoaCodeForgotPassword()
+    {
+        $list = ForgotPassword::all();
+        foreach($list as $item){
+            // if(date('Y-m-d', strtotime("2023-11-21") > date('Y-m-d', strtotime("2023-11-22")))){
+            if($item->created_at->addMinutes(1) < now()){
                 $item->delete();
             }
         }

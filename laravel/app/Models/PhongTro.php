@@ -28,6 +28,10 @@ class PhongTro extends Model
     {
         $this->setAttribute("tienIch", $this->belongsToMany(TienIch::class, PhongTroTienIch::class, 'idPhong', "idTienIch")->get());
     }
+    public function tienIchWhereListTienIch()
+    {
+        $this->setAttribute("tienIch", $this->belongsToMany(TienIch::class, PhongTroTienIch::class, 'idPhong', "idTienIch")->get());
+    }
     public function quan()
     {
         $this->setAttribute("quan", $this->hasOne(Quan::class, 'id', "idQuan")->first());
@@ -240,4 +244,28 @@ class PhongTro extends Model
             }
         }
     }
+    public static function layTatCaPhongTheoNhuCau($request)
+    {
+        // $arr_tienIch = $request->listTienIch;
+        $result = self::where([
+            ["idQuan", $request->quan],
+            ["gia", ">=", $request->giaBatDau],
+            ["gia", "<=", $request->giaKetThuc],
+            ["loaiPhong", $request->loaiPhong],
+            ["gioiTinh", $request->gioiTinh]
+        ])->orderBy('gia', "DESC")->get();
+
+
+        foreach ($result as $item) {
+            $item->tienIchWhereListTienIch();
+            $item->danhSachHinhAnh();
+            $item->demSoLuongBinhLuan();
+            $item->trungBinhDanhGia();
+        }
+        
+
+
+        return $result;
+    }
+    
 }
