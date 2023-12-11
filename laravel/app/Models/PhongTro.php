@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\PhongTroChuTro;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class PhongTro extends Model
 {
@@ -25,6 +26,10 @@ class PhongTro extends Model
         'hoatDong',
     ];
     public function tienIch()
+    {
+        $this->setAttribute("tienIch", $this->belongsToMany(TienIch::class, PhongTroTienIch::class, 'idPhong', "idTienIch")->get());
+    }
+    public function tienIchWhereListTienIch()
     {
         $this->setAttribute("tienIch", $this->belongsToMany(TienIch::class, PhongTroTienIch::class, 'idPhong', "idTienIch")->get());
     }
@@ -80,7 +85,7 @@ class PhongTro extends Model
             ["hoatDong", 1]
         ])->orderBy('gia', $sapXep)->get();
 
-        
+
         foreach ($result as $item) {
             $item->thongTinChuTro();
             $item->danhSachTienIch();
@@ -92,7 +97,7 @@ class PhongTro extends Model
         return $result;
     }
 
-    public static function layPhongTroTheoQuan($idQuan,$arrange)
+    public static function layPhongTroTheoQuan($idQuan, $arrange)
     {
         $result = self::where([
             ["loaiPhong", 0],
@@ -100,7 +105,7 @@ class PhongTro extends Model
             ['idQuan', $idQuan]
         ])->orderBy('gia', $arrange)->get();
 
-        
+
         foreach ($result as $item) {
             $item->thongTinChuTro();
             $item->danhSachTienIch();
@@ -118,7 +123,7 @@ class PhongTro extends Model
             ["hoatDong", 1],
         ])->inRandomOrder()->get();
 
-        
+
         foreach ($result as $item) {
             $item->thongTinChuTro();
             $item->danhSachTienIch();
@@ -140,34 +145,60 @@ class PhongTro extends Model
 
 
 
-    public static function danhSachPhongGoiY($idTaiKhoan) {
-        $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan',$idTaiKhoan)->get();
-        if(count($phongTroGoiY)==0){
+    public static function danhSachPhongGoiY($idTaiKhoan)
+    {
+        $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan', $idTaiKhoan)->get();
+        if (count($phongTroGoiY) == 0) {
             return null;
-        }else{
+        } else {
             $phong = $phongTroGoiY->first();
             $idQuan = $phong->idQuan;
             $tienCoc = $phong->tienCoc;
             $gioiTinh = $phong->gioiTinh;
             $danhSachBanDau = self::where(
-                "idQuan",$idQuan,
-                )->orWhere('tienCoc','<',$tienCoc)->orWhere('tienCoc','=',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
-            $danhSachPhong= [];
+                "idQuan",
+                $idQuan,
+            )->orWhere('tienCoc', '<', $tienCoc)->orWhere('tienCoc', '=', $tienCoc)->orWhere('gioiTinh', $gioiTinh)->get();
+            $danhSachPhong = [];
             foreach ($danhSachBanDau as $item) {
-                if($item->hoatDong==1){
-                        $danhSachPhong[] = $item;
+                if ($item->hoatDong == 1) {
+                    $danhSachPhong[] = $item;
                 }
             }
-            if($danhSachPhong!=null){
-                for($i =0; $i<count($danhSachPhong);$i++){
+            if ($danhSachPhong != null) {
+                for ($i = 0; $i < count($danhSachPhong); $i++) {
                     $danhSachPhong[$i]->quan();
                     $danhSachPhong[$i]->thongTinChuTro2();
                     $danhSachPhong[$i]->danhSachHinhAnh();
                 }
                 return $danhSachPhong;
-            }else{
+            } else {
                 return null;
             }
         }
     }
+    public static function layTatCaPhongTheoNhuCau($request)
+    {
+        // $arr_tienIch = $request->listTienIch;
+        $result = self::where([
+            ["idQuan", $request->quan],
+            ["gia", ">=", $request->giaBatDau],
+            ["gia", "<=", $request->giaKetThuc],
+            ["loaiPhong", $request->loaiPhong],
+            ["gioiTinh", $request->gioiTinh]
+        ])->orderBy('gia', "DESC")->get();
+
+
+        foreach ($result as $item) {
+            $item->tienIchWhereListTienIch();
+            $item->danhSachHinhAnh();
+            $item->demSoLuongBinhLuan();
+            $item->trungBinhDanhGia();
+        }
+        
+
+
+        return $result;
+    }
+    
 }

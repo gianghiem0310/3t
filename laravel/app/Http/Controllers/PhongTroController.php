@@ -243,4 +243,9 @@ class PhongTroController extends Controller
     {
         return PhongTro::danhSachPhongGoiY($request->idTaiKhoan);
     }
+    public function layTatCaPhongTheoNhuCauAPI(Request $request)
+    {
+        $result = PhongTro::layTatCaPhongTheoNhuCau($request);
+        return $result;
+    }
 }
