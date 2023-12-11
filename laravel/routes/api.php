@@ -19,11 +19,13 @@ use App\Http\Controllers\PhongNguoiThueController;
 use App\Http\Controllers\PhongTinNhanController;
 use App\Http\Controllers\PhongTroChuTroController;
 use App\Http\Controllers\PhongTroGoiYController;
+use App\Http\Controllers\PhongTroYeuThichController;
 use App\Http\Controllers\PhuongController;
 use App\Http\Controllers\QuanController;
 use App\Http\Controllers\ThongBaoController;
 use App\Http\Controllers\TienIchController;
 use App\Http\Controllers\TinNhanController;
+use App\Http\Controllers\VideoReviewController;
 use App\Http\Controllers\XacThucChuTroController;
 use App\Http\Controllers\YeuCauDatPhongController;
 use App\Models\HinhAnh;
@@ -32,6 +34,7 @@ use App\Models\PhongNguoiThue;
 use App\Models\PhongTro;
 use App\Models\PhongTroChuTro;
 use App\Models\PhongTroGoiY;
+use App\Models\PhongTroYeuThich;
 use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -81,6 +84,7 @@ Route::patch('/capnhattrangthaiquan', [QuanController::class, 'capNhatTrangThaiQ
 Route::get('/laytatcaphuong', [TienIchController::class, 'layTatCaPhuong']);
 Route::post('/themphuong', [PhuongController::class, 'themPhuong']);
 Route::post('/capnhatphuong', [PhuongController::class, 'capNhatPhuong']);
+Route::patch('/capnhattrangthaiphuong', [PhuongController::class, 'capNhatTrangThaiPhuong']);
 //UpAnh
 Route::post('/uploadimage', [AdminController::class, 'uploadImage']);
 Route::post('/capnhatthongtinchutrocohinh', [ChuTroController::class, 'capNhatThongTinChuTroCoHinh']);
@@ -221,6 +225,7 @@ Route::post('/phongtro/web/themphong', [PhongTroController::class, "themPhongWeb
 Route::get('/yeucaudatphong/all', [YeuCauDatPhongController::class, "layTatCaYeuCauDangKyPhongAPI"]);
 Route::get('/yeucaudatphong/chitiet', [YeuCauDatPhongController::class, "layThongTinChiTietCuaThongBao"]);
 Route::put('/yeucaudatphong/xacnhandatphong', [YeuCauDatPhongController::class, "xacThucNhanPhongAPI"]);
+Route::put('/yeucaudatphong/tuchoi', [YeuCauDatPhongController::class, "tuChoiNhanPhongAPI"]);
 Route::post('/yeucaudatphong/them', [YeuCauDatPhongController::class, "themYeuCauDangKyPhong"]);
 Route::post('/fcm/savetoken', [FirebaseCloudMessagingController::class, "saveTokenDeviceAPI"]);
 Route::delete('/fcm/delete', [FirebaseCloudMessagingController::class, "deleteTokenDeviceOfAccountWhenLogOutAPI"]);
@@ -231,9 +236,20 @@ Route::post('/notification/create', [ThongBaoController::class, "themThongBao"])
 
 // Start Nghiem Api
 Route::get('nguoithue/danhsachphonggoiy',[PhongTroController::class,'layDanhSachPhongGoiY']);
+Route::get('nguoithue/danhsachphonggoiy2',[PhongTroController::class,'layDanhSachPhongGoiY2']);
+Route::get('nguoithue/danhsachphonggoiytheoquan',[PhongTroController::class,'layDanhSachPhongGoiYTheoQuan']);
 Route::get('/taikhoan/dangnhapfb', [TaiKhoanController::class, 'kiemTraDangNhapFB']);
 Route::post('capnhatthongtinnguoithuecohinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueCoHinh']);
 Route::post('capnhatthongtinnguoithuekhonghinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueKhongHinh']);
 Route::post('nguoithue/capnhatphonggoiy',[PhongTroGoiYController::class,'capNhatPhongGoiY']);
 Route::get('profilereceiver',[TaiKhoanController::class,'getProfileReceiver']);
+Route::get('profilesender',[TaiKhoanController::class,'getNameSender']);
+Route::post('uploadvideoreview',[VideoReviewController::class,"uploadVideo"]);
+Route::post('uploadvideoreviewyoutube',[VideoReviewController::class,"uploadVideoYoutube"]);
+Route::get('getvideoreview',[VideoReviewController::class,'getVideoReview']);
+Route::post('deletevideoreview',[VideoReviewController::class,'deleteVideoReview']);
+Route::post('capnhatyeuthichphongtro',[PhongTroYeuThichController::class,'capNhatYeuThichPhongTro']);
+Route::get('laydanhsachphongtroyeuthich',[PhongTroYeuThichController::class,'layDanhSachPhongTroYeuThich']);
+Route::get('laytongsoluotyeuthich',[PhongTroYeuThichController::class,'layTongSoLuotYeuThichCuaPhongTro']);
+Route::get('kiemtrayeuthich',[PhongTroYeuThichController::class,'xemDaYeuThichHayChua']);
 // End Nghiem Api

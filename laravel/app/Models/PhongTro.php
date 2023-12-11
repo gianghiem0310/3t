@@ -111,6 +111,7 @@ class PhongTro extends Model
 
         return $result;
     }
+    
     public static function randomPhong()
     {
         $result = self::where([
@@ -138,9 +139,78 @@ class PhongTro extends Model
 
 
 
-
+    public static function danhSachPhongGoiY2($idTaiKhoan,$pageNumber,$numberObjectInPage) {
+        $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan',$idTaiKhoan)->get();
+        $listRong = [];
+        if(count($phongTroGoiY)==0){
+            return $listRong;
+        }else{
+            $phong = $phongTroGoiY->first();
+            $idQuan = $phong->idQuan;
+            $tienCoc = $phong->tienCoc;
+            $gioiTinh = $phong->gioiTinh;
+            $danhSachBanDau = self::where(
+                "idQuan",$idQuan,
+                )->orWhere('tienCoc','<',$tienCoc)->orWhere('tienCoc','=',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
+            $danhSachPhong= [];
+            foreach ($danhSachBanDau as $item) {
+                if($item->hoatDong==1&&$item->loaiPhong==0){
+                        $danhSachPhong[] = $item;
+                }
+            }
+            if($danhSachPhong!=null){
+                for($i =0; $i<count($danhSachPhong);$i++){
+                    $danhSachPhong[$i]->quan();
+                    $danhSachPhong[$i]->thongTinChuTro2();
+                    $danhSachPhong[$i]->danhSachHinhAnh();
+                }
+                $offset = ($pageNumber-1)*$numberObjectInPage;
+                $danhSachPhongGoiY2 = [];
+                for ($i=0; $i < $numberObjectInPage; $i++) { 
+                    if(isset($danhSachPhong[$offset])){
+                        $danhSachPhongGoiY2[]=$danhSachPhong[$offset];
+                        $offset++;
+                    }
+                }
+                return $danhSachPhongGoiY2;
+            }else{
+                return $listRong;
+            }
+        }
+    }
 
     public static function danhSachPhongGoiY($idTaiKhoan) {
+        $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan',$idTaiKhoan)->get();
+        $listRong = [];
+        if(count($phongTroGoiY)==0){
+            return $listRong;
+        }else{
+            $phong = $phongTroGoiY->first();
+            $idQuan = $phong->idQuan;
+            $tienCoc = $phong->tienCoc;
+            $gioiTinh = $phong->gioiTinh;
+            $danhSachBanDau = self::where(
+                "idQuan",$idQuan,
+                )->orWhere('tienCoc','<',$tienCoc)->orWhere('tienCoc','=',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
+            $danhSachPhong= [];
+            foreach ($danhSachBanDau as $item) {
+                if($item->hoatDong==1&&$item->loaiPhong==0){
+                        $danhSachPhong[] = $item;
+                }
+            }
+            if($danhSachPhong!=null){
+                for($i =0; $i<count($danhSachPhong);$i++){
+                    $danhSachPhong[$i]->quan();
+                    $danhSachPhong[$i]->thongTinChuTro2();
+                    $danhSachPhong[$i]->danhSachHinhAnh();
+                }
+                return $danhSachPhong;
+            }else{
+                return $listRong;
+            }
+        }
+    }
+    public static function danhSachPhongGoiYTheoQuan($idTaiKhoan) {
         $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan',$idTaiKhoan)->get();
         if(count($phongTroGoiY)==0){
             return null;
@@ -151,7 +221,7 @@ class PhongTro extends Model
             $gioiTinh = $phong->gioiTinh;
             $danhSachBanDau = self::where(
                 "idQuan",$idQuan,
-                )->orWhere('tienCoc','<',$tienCoc)->orWhere('tienCoc','=',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
+                )->get();
             $danhSachPhong= [];
             foreach ($danhSachBanDau as $item) {
                 if($item->hoatDong==1){
