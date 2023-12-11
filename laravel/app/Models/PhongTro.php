@@ -143,8 +143,9 @@ class PhongTro extends Model
 
     public static function danhSachPhongGoiY($idTaiKhoan) {
         $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan',$idTaiKhoan)->get();
+        $listRong = [];
         if(count($phongTroGoiY)==0){
-            return null;
+            return $listRong;
         }else{
             $phong = $phongTroGoiY->first();
             $idQuan = $phong->idQuan;
@@ -167,7 +168,7 @@ class PhongTro extends Model
                 }
                 return $danhSachPhong;
             }else{
-                return null;
+                return $listRong;
             }
         }
     }
