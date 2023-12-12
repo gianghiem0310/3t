@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HinhAnh;
 use App\Models\PhongTro;
 use App\Models\PhongTroYeuThich;
 use Illuminate\Http\Request;
@@ -67,6 +68,10 @@ class PhongTroYeuThichController extends Controller
             return true;
         }
     }
+    public function danhSachHinhAnh()
+    {
+        $this->setAttribute("hinhAnhPhongTro", $this->hasMany(HinhAnh::class, "idPhong",  "idPhong")->get());
+    }
     public function layDanhSachPhongTroYeuThich(Request $request){
         $danhSachPhong = [];
         $danhsachId = PhongTroYeuThich::where('idTaiKhoan','=',$request->idTaiKhoan)->get();
@@ -74,7 +79,9 @@ class PhongTroYeuThichController extends Controller
             foreach ($danhsachId as $value) {
                 $phong = PhongTro::find($value->idPhong);
                 if($phong->hoatDong==1){
+                    $phong->danhSachHinhAnh();
                     $danhSachPhong[]= $phong;
+
                 }
             }
             return $danhSachPhong;
