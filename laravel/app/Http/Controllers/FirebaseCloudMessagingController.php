@@ -31,8 +31,7 @@ class FirebaseCloudMessagingController extends Controller
     public function deleteTokenDeviceOfAccountWhenLogOutAPI(Request $request)
     {
         $result = FirebaseCloudMessaging::where([
-            ["token", $request->token],
-            ["idTaiKhoan", $request->idTaiKhoan],
+            ["token", $request->token]
         ])->delete();
         return $result;
     }
