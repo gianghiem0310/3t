@@ -179,7 +179,12 @@ class PhongTro extends Model
     }
     public static function layTatCaPhongTheoNhuCau($request)
     {
-        // $arr_tienIch = $request->listTienIch;
+        $arr_tienIch = [];
+        foreach (json_decode($request->listTienIch, true) as $item) {
+            array_push($arr_tienIch, $item["id"]);
+        }
+
+        $nhuCau = [];
         $result = self::where([
             ["idQuan", $request->quan],
             ["gia", ">=", $request->giaBatDau],
@@ -188,17 +193,43 @@ class PhongTro extends Model
             ["gioiTinh", $request->gioiTinh]
         ])->orderBy('gia', "DESC")->get();
 
+        if (!$arr_tienIch == []) {
+            foreach ($result as $item) {
+                $item->tienIchWhereListTienIch();
+                $item->danhSachHinhAnh();
+                $item->demSoLuongBinhLuan();
+                $item->trungBinhDanhGia();
 
-        foreach ($result as $item) {
-            $item->tienIchWhereListTienIch();
-            $item->danhSachHinhAnh();
-            $item->demSoLuongBinhLuan();
-            $item->trungBinhDanhGia();
+                // Những nhu item list sau không có
+                $listTienIch = [];
+                foreach ($item->tienIch as $itemTI) {
+                    array_push($listTienIch, $itemTI->id);
+                }
+                if (!is_array($listTienIch)) {
+                    return "listTienIch không phải mảng";
+                    // var_dump($arr_tienIch);
+                    // return;
+                }
+                if (!is_array($arr_tienIch)) {
+                    return "arr_tienIch không phải mảng";
+                }
+                if (!empty($arr_tienIch) && !empty($listTienIch)) {
+                    $mangKhacNhauKhongCo = array_diff($arr_tienIch, $listTienIch);
+                    if (empty($mangKhacNhauKhongCo)) {
+                        // mảng sau giống mảng trước.
+                        array_push($nhuCau, $item);
+                    }
+                }
+            }
+        }else{
+            foreach ($result as $item) {
+                $item->tienIchWhereListTienIch();
+                $item->danhSachHinhAnh();
+                $item->demSoLuongBinhLuan();
+                $item->trungBinhDanhGia();
+            }
+            return $result;
         }
-        
-
-
-        return $result;
+        return $nhuCau;
     }
-    
 }
