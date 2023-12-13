@@ -20,14 +20,22 @@ class YeuCauDatPhongController extends Controller
     // gửi yêu cầu đăng ký gói
     public function themYeuCauDangKyPhong(Request $request)
     {
-        return YeuCauDatPhong::create([
+        $nguoiThue = NguoiThue::where("idTaiKhoan", $request->idTaiKhoanGui)->first();
+        // Lấy phòng của người thuê
+        $phongNguoiThue = PhongNguoiThue::where("idNguoiThue", $nguoiThue->id)->first();
+        if ($phongNguoiThue) {
+            // Đã có phòng
+            response()->json(["message" => "Gửi yêu cầu đăng ký thất bại vì bạn đã có phòng trọ"]);
+        }
+        // Chưa có phòng đăng ký thành công
+        return response()->json(["message" => "Gửi yêu cầu đăng ký thành công", "object" => YeuCauDatPhong::create([
             'idTaiKhoanGui' => $request->idTaiKhoanGui,
             'idTaiKhoanNhan' => $request->idTaiKhoanNhan,
             'idPhong' => $request->idPhong,
             'trangThaiXacThuc' => 0,
             'trangThaiThongBao' => 0,
             'trangThaiNhan' => 0
-        ]);
+        ])]);
     }
     // lấy tất cả thông báo của tài khoản theo idTaiKhoan
     public function layTatCaYeuCauDangKyPhongAPI(Request $request)
@@ -69,6 +77,8 @@ class YeuCauDatPhongController extends Controller
                 "idNguoiThue" => $request->idNguoiThue,
                 "idPhong" => $request->idPhong
             ]);
+            // Tìm tới phòng có id phòng đã thêm vào danh sách phòng trọ của người thuê và update hoạt động thành 0 để phòng ẩn phía người dùng
+            PhongTro::where("id", $phong->idPhong)->update(["hoatDong"=>1]);
             // Tạo thông bao thành công gửi lại cho người dùng
             $thongBaoThanhCong = ThongBao::create([
                 'idTaiKhoanGui' => $request->myIdTaiKhoan,

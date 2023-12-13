@@ -243,9 +243,18 @@ class PhongTroController extends Controller
     {
         return PhongTro::danhSachPhongGoiY($request->idTaiKhoan);
     }
+    public function layDanhSachPhongGoiY2(Request $request)
+    {
+        return PhongTro::danhSachPhongGoiY2($request->idTaiKhoan,$request->pageNumber,$request->numberObjectinPage);
+    }
     
     public function layDanhSachPhongGoiYTheoQuan(Request $request)
     {
         return PhongTro::danhSachPhongGoiYTheoQuan($request->idTaiKhoan);
+    }
+    public function layTatCaPhongTheoNhuCauAPI(Request $request)
+    {
+        $result = PhongTro::layTatCaPhongTheoNhuCau($request);
+        return $result;
     }
 }

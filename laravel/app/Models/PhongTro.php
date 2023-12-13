@@ -28,6 +28,10 @@ class PhongTro extends Model
     {
         $this->setAttribute("tienIch", $this->belongsToMany(TienIch::class, PhongTroTienIch::class, 'idPhong', "idTienIch")->get());
     }
+    public function tienIchWhereListTienIch()
+    {
+        $this->setAttribute("tienIch", $this->belongsToMany(TienIch::class, PhongTroTienIch::class, 'idPhong', "idTienIch")->get());
+    }
     public function quan()
     {
         $this->setAttribute("quan", $this->hasOne(Quan::class, 'id', "idQuan")->first());
@@ -139,7 +143,45 @@ class PhongTro extends Model
 
 
 
-
+    public static function danhSachPhongGoiY2($idTaiKhoan,$pageNumber,$numberObjectInPage) {
+        $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan',$idTaiKhoan)->get();
+        $listRong = [];
+        if(count($phongTroGoiY)==0){
+            return $listRong;
+        }else{
+            $phong = $phongTroGoiY->first();
+            $idQuan = $phong->idQuan;
+            $tienCoc = $phong->tienCoc;
+            $gioiTinh = $phong->gioiTinh;
+            $danhSachBanDau = self::where(
+                "idQuan",$idQuan,
+                )->orWhere('tienCoc','<',$tienCoc)->orWhere('tienCoc','=',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
+            $danhSachPhong= [];
+            foreach ($danhSachBanDau as $item) {
+                if($item->hoatDong==1&&$item->loaiPhong==0){
+                        $danhSachPhong[] = $item;
+                }
+            }
+            if($danhSachPhong!=null){
+                for($i =0; $i<count($danhSachPhong);$i++){
+                    $danhSachPhong[$i]->quan();
+                    $danhSachPhong[$i]->thongTinChuTro2();
+                    $danhSachPhong[$i]->danhSachHinhAnh();
+                }
+                $offset = ($pageNumber-1)*$numberObjectInPage;
+                $danhSachPhongGoiY2 = [];
+                for ($i=0; $i < $numberObjectInPage; $i++) { 
+                    if(isset($danhSachPhong[$offset])){
+                        $danhSachPhongGoiY2[]=$danhSachPhong[$offset];
+                        $offset++;
+                    }
+                }
+                return $danhSachPhongGoiY2;
+            }else{
+                return $listRong;
+            }
+        }
+    }
 
     public static function danhSachPhongGoiY($idTaiKhoan) {
         $phongTroGoiY = PhongTroGoiY::where('idTaiKhoan',$idTaiKhoan)->get();
@@ -156,7 +198,7 @@ class PhongTro extends Model
                 )->orWhere('tienCoc','<',$tienCoc)->orWhere('tienCoc','=',$tienCoc)->orWhere('gioiTinh',$gioiTinh)->get();
             $danhSachPhong= [];
             foreach ($danhSachBanDau as $item) {
-                if($item->hoatDong==1){
+                if($item->hoatDong==1&&$item->loaiPhong==0){
                         $danhSachPhong[] = $item;
                 }
             }
@@ -201,5 +243,60 @@ class PhongTro extends Model
                 return null;
             }
         }
+    }
+    public static function layTatCaPhongTheoNhuCau($request)
+    {
+        $arr_tienIch = [];
+        foreach (json_decode($request->listTienIch, true) as $item) {
+            array_push($arr_tienIch, $item["id"]);
+        }
+
+        $nhuCau = [];
+        $result = self::where([
+            ["idQuan", $request->quan],
+            ["gia", ">=", $request->giaBatDau],
+            ["gia", "<=", $request->giaKetThuc],
+            ["loaiPhong", $request->loaiPhong],
+            ["gioiTinh", $request->gioiTinh]
+        ])->orderBy('gia', "DESC")->get();
+
+        if (!$arr_tienIch == []) {
+            foreach ($result as $item) {
+                $item->tienIchWhereListTienIch();
+                $item->danhSachHinhAnh();
+                $item->demSoLuongBinhLuan();
+                $item->trungBinhDanhGia();
+
+                // Những nhu item list sau không có
+                $listTienIch = [];
+                foreach ($item->tienIch as $itemTI) {
+                    array_push($listTienIch, $itemTI->id);
+                }
+                if (!is_array($listTienIch)) {
+                    return "listTienIch không phải mảng";
+                    // var_dump($arr_tienIch);
+                    // return;
+                }
+                if (!is_array($arr_tienIch)) {
+                    return "arr_tienIch không phải mảng";
+                }
+                if (!empty($arr_tienIch) && !empty($listTienIch)) {
+                    $mangKhacNhauKhongCo = array_diff($arr_tienIch, $listTienIch);
+                    if (empty($mangKhacNhauKhongCo)) {
+                        // mảng sau giống mảng trước.
+                        array_push($nhuCau, $item);
+                    }
+                }
+            }
+        }else{
+            foreach ($result as $item) {
+                $item->tienIchWhereListTienIch();
+                $item->danhSachHinhAnh();
+                $item->demSoLuongBinhLuan();
+                $item->trungBinhDanhGia();
+            }
+            return $result;
+        }
+        return $nhuCau;
     }
 }

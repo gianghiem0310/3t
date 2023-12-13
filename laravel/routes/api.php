@@ -9,7 +9,9 @@ use App\Http\Controllers\YeuCauDangKyGoiController;
 use App\Http\Controllers\YeuCauXoaPhongController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChinhSachController;
+use App\Http\Controllers\EmailSendController;
 use App\Http\Controllers\FirebaseCloudMessagingController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\HinhAnhController;
 use App\Http\Controllers\NguoiThueController;
 use App\Http\Controllers\NotificationController;
@@ -19,6 +21,7 @@ use App\Http\Controllers\PhongNguoiThueController;
 use App\Http\Controllers\PhongTinNhanController;
 use App\Http\Controllers\PhongTroChuTroController;
 use App\Http\Controllers\PhongTroGoiYController;
+use App\Http\Controllers\PhongTroYeuThichController;
 use App\Http\Controllers\PhuongController;
 use App\Http\Controllers\QuanController;
 use App\Http\Controllers\ThongBaoController;
@@ -33,8 +36,10 @@ use App\Models\PhongNguoiThue;
 use App\Models\PhongTro;
 use App\Models\PhongTroChuTro;
 use App\Models\PhongTroGoiY;
+use App\Models\PhongTroYeuThich;
 use App\Models\XacThucChuTro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -230,10 +235,19 @@ Route::delete('/fcm/delete', [FirebaseCloudMessagingController::class, "deleteTo
 Route::get('/fcm/gettoken', [FirebaseCloudMessagingController::class, "getAllTokenDeviceOfAccountAPI"]);
 Route::get('/taikhoan/all/type', [TaiKhoanController::class, "getAllAccountByTypeAPI"]);
 Route::post('/notification/create', [ThongBaoController::class, "themThongBao"]);
+Route::get('/checkuser', [ForgotPasswordController::class, "getAccountByUsernameAPI"]);
+Route::post('/checkcode', [ForgotPasswordController::class, "checkCodeAPI"]);
+Route::get('/timkiemtheonhucau', [PhongTroController::class, "layTatCaPhongTheoNhuCauAPI"]);
+
+
+
+Route::post('/send-email', [EmailSendController::class, "sendAPI"]);
+Route::post('/forgotpassword', [ForgotPasswordController::class, "createCodeForgotPasswordAPI"]);
 
 
 // Start Nghiem Api
 Route::get('nguoithue/danhsachphonggoiy',[PhongTroController::class,'layDanhSachPhongGoiY']);
+Route::get('nguoithue/danhsachphonggoiy2',[PhongTroController::class,'layDanhSachPhongGoiY2']);
 Route::get('nguoithue/danhsachphonggoiytheoquan',[PhongTroController::class,'layDanhSachPhongGoiYTheoQuan']);
 Route::get('/taikhoan/dangnhapfb', [TaiKhoanController::class, 'kiemTraDangNhapFB']);
 Route::post('capnhatthongtinnguoithuecohinh', [NguoiThueController::class, 'capNhatThongTinNguoiThueCoHinh']);
@@ -245,4 +259,8 @@ Route::post('uploadvideoreview',[VideoReviewController::class,"uploadVideo"]);
 Route::post('uploadvideoreviewyoutube',[VideoReviewController::class,"uploadVideoYoutube"]);
 Route::get('getvideoreview',[VideoReviewController::class,'getVideoReview']);
 Route::post('deletevideoreview',[VideoReviewController::class,'deleteVideoReview']);
+Route::post('capnhatyeuthichphongtro',[PhongTroYeuThichController::class,'capNhatYeuThichPhongTro']);
+Route::get('laydanhsachphongtroyeuthich',[PhongTroYeuThichController::class,'layDanhSachPhongTroYeuThich']);
+Route::get('laytongsoluotyeuthich',[PhongTroYeuThichController::class,'layTongSoLuotYeuThichCuaPhongTro']);
+Route::get('kiemtrayeuthich',[PhongTroYeuThichController::class,'xemDaYeuThichHayChua']);
 // End Nghiem Api
