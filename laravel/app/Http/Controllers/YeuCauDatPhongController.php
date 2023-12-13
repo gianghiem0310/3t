@@ -23,11 +23,16 @@ class YeuCauDatPhongController extends Controller
     public function themYeuCauDangKyPhong(Request $request)
     {
         $nguoiThue = NguoiThue::where("idTaiKhoan", $request->idTaiKhoanGui)->first();
+        $yeuCauDatPhong = YeuCauDatPhong::where("idTaiKhoanGui", $request->idTaiKhoanGui)->first();
+        //Kiểm tra trong data có yêu cầu này chưa
+        if ($yeuCauDatPhong){
+            return response()->json(["message" => "Gửi yêu cầu đăng ký thất bại vì bạn đã gửi 1 yêu cầu trước đó"]);
+        }
         // Lấy phòng của người thuê
         $phongNguoiThue = PhongNguoiThue::where("idNguoiThue", $nguoiThue->id)->first();
         if ($phongNguoiThue) {
             // Đã có phòng
-            response()->json(["message" => "Gửi yêu cầu đăng ký thất bại vì bạn đã có phòng trọ"]);
+            return response()->json(["message" => "Gửi yêu cầu đăng ký thất bại vì bạn đã có phòng trọ"]);
         }
         // Chưa có phòng đăng ký thành công
         return response()->json(["message" => "Gửi yêu cầu đăng ký thành công", "object" => YeuCauDatPhong::create([
