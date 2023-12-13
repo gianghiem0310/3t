@@ -240,6 +240,8 @@ Route::post('/checkcode', [ForgotPasswordController::class, "checkCodeAPI"]);
 Route::get('/timkiemtheonhucau', [PhongTroController::class, "layTatCaPhongTheoNhuCauAPI"]);
 Route::get('/layphongnguoithue', [PhongNguoiThueController::class, "layPhongCuaNguoiThueAPI"]);
 Route::get('/layyeucaudatphong', [YeuCauDatPhongController::class, "layDuLieuDatPhongAPI"]);
+Route::delete('/xoayeucaudatphong', [YeuCauDatPhongController::class, "xoaYeuCauXacThucAPI"]);
+Route::delete('/xoaphongcuanguoithue', [PhongNguoiThueController::class, "xoaPhongCuaNguoiThueAPI"]);
 
 
 

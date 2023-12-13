@@ -41,22 +41,22 @@ class ForgotPasswordController extends Controller
             "code" => $code
         ]);
         if (!$forgot) {
-            return response()->json(['message' => "Tạo mã thất bại", 400]);
+            return response()->json(['message' => "Tạo mã thất bại", "status"=>0]);
         }
         $to = $request->email;
         $subject = "Mã đặt lại mật khẩu";
         $content = "Xin chào bạn.\nĐây là email lấy mã đặt lại mật khẩu, nếu bạn không phải nhấn quên mật khẩu thì không cần quan tâm đến email này\nMã của bạn là: ";
         $content .= $forgot->code;
         if (!$to) {
-            return response()->json(['message' => 'Email trống'], 400);
+            return response()->json(['message' => 'Email trống',"status"=>0]);
         }
 
         if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
-            return response()->json(['message' => 'Email sai định dạng không thể gửi'], 400);
+            return response()->json(['message' => 'Email sai định dạng không thể gửi',"status"=>0]);
         }
         $res = Mail::html($content, function ($mail) use ($to, $subject) {
             $mail->to($to)->subject($subject);
         });
-        return response()->json(['message' => $res]);
+        return response()->json(['message' => "Đã gửi mã lấy lại mật khẩu vào email hãy kiểm tra email nếu không thấy vui lòng vào phần thư rác trong email để kiểm tra", "status"=>1]);
     }
 }

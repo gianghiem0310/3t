@@ -254,10 +254,10 @@ class PhongTro extends Model
         $nhuCau = [];
         $result = self::where([
             ["idQuan", $request->quan],
-            ["gia", ">=", $request->giaBatDau],
-            ["gia", "<=", $request->giaKetThuc],
-            ["loaiPhong", $request->loaiPhong],
-            ["gioiTinh", $request->gioiTinh]
+            ["gia", ">=", $request->giaBatDau ? $request->giaBatDau: 0],
+            ["gia", "<=", $request->giaKetThuc? $request->giaKetThuc:5000000],
+            ["loaiPhong", $request->loaiPhong?$request->loaiPhong:0],
+            ["gioiTinh", $request->gioiTinh?$request->gioiTinh:0]
         ])->orderBy('gia', "DESC")->get();
 
         if (!$arr_tienIch == []) {
