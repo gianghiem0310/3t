@@ -247,9 +247,12 @@ class PhongTro extends Model
     public static function layTatCaPhongTheoNhuCau($request)
     {
         $arr_tienIch = [];
-        foreach (json_decode($request->listTienIch, true) as $item) {
-            array_push($arr_tienIch, $item["id"]);
+        if ($request->listTienIch) {
+            foreach (json_decode($request->listTienIch, true) as $item) {
+                array_push($arr_tienIch, $item["id"]);
+            }
         }
+        
 
         $nhuCau = [];
         $result = self::where([
