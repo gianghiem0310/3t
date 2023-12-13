@@ -233,6 +233,7 @@ Route::post('/notification/create', [ThongBaoController::class, "themThongBao"])
 Route::get('/checkuser', [ForgotPasswordController::class, "getAccountByUsernameAPI"]);
 Route::post('/checkcode', [ForgotPasswordController::class, "checkCodeAPI"]);
 Route::get('/timkiemtheonhucau', [PhongTroController::class, "layTatCaPhongTheoNhuCauAPI"]);
+Route::get('/layphongnguoithue', [PhongNguoiThueController::class, "layPhongCuaNguoiThueAPI"]);
 
 
 

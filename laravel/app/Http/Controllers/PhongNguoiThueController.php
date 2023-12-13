@@ -51,4 +51,7 @@ class PhongNguoiThueController extends Controller
     public function latTatCaNguoiThueTheoIDPhongAPI(Request $request){
         return PhongNguoiThue::layNguoiThueTheoIDPhong($request->idPhong);
     }
+    public function layPhongCuaNguoiThueAPI(Request $request){
+        return PhongNguoiThue::where("idNguoiThue", $request->idNguoiThue)->first();
+    }
 }
