@@ -239,6 +239,7 @@ Route::get('/checkuser', [ForgotPasswordController::class, "getAccountByUsername
 Route::post('/checkcode', [ForgotPasswordController::class, "checkCodeAPI"]);
 Route::get('/timkiemtheonhucau', [PhongTroController::class, "layTatCaPhongTheoNhuCauAPI"]);
 Route::get('/layphongnguoithue', [PhongNguoiThueController::class, "layPhongCuaNguoiThueAPI"]);
+Route::get('/layyeucaudatphong', [YeuCauDatPhongController::class, "layDuLieuDatPhongAPI"]);
 
 
 
