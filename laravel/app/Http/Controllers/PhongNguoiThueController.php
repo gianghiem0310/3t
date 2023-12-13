@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NguoiThue;
 use App\Models\PhongNguoiThue;
+use App\Models\YeuCauDatPhong;
 use Illuminate\Http\Request;
 
 class PhongNguoiThueController extends Controller
@@ -53,5 +54,9 @@ class PhongNguoiThueController extends Controller
     }
     public function layPhongCuaNguoiThueAPI(Request $request){
         return PhongNguoiThue::where("idNguoiThue", $request->idNguoiThue)->first();
+    }
+    public function xoaPhongCuaNguoiThueAPI(Request $request){
+        YeuCauDatPhong::where("idTaiKhoanGui", $request->idTaiKhoan)->delete();
+        return PhongNguoiThue::where("idNguoiThue", $request->idNguoiThue)->delete();
     }
 }

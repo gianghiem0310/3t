@@ -114,4 +114,7 @@ class YeuCauDatPhongController extends Controller
     public function layDuLieuDatPhongAPI(Request $request){
         return YeuCauDatPhong::where("idTaiKhoanGui", $request->idTaiKhoanGui)->first();
     }
+    public function xoaYeuCauXacThucAPI(Request $request){
+        return YeuCauDatPhong::where("idTaiKhoanGui", $request->idTaiKhoanGui)->delete();
+    }
 }
