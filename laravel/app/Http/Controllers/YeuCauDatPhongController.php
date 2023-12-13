@@ -111,4 +111,7 @@ class YeuCauDatPhongController extends Controller
         }
         return json_encode(["result" => $result, "thongBaoThanhCong" => $thongBaoThanhCong, "thongBaoThatBai" => $thongBaoThatBai, "string" => "Xác nhận thành công"]);
     }
+    public function layDuLieuDatPhongAPI(Request $request){
+        return YeuCauDatPhong::where("idTaiKhoanGui", $request->idTaiKhoanGui)->first();
+    }
 }
