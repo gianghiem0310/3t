@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChuTro;
+use App\Models\NguoiThue;
 use App\Models\PhongNguoiThue;
+use App\Models\PhongTro;
 use App\Models\ThongBao;
 use App\Models\YeuCauDatPhong;
 use Illuminate\Http\Request;
