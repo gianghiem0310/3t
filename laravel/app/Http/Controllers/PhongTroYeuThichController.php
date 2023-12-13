@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HinhAnh;
 use App\Models\PhongTro;
 use App\Models\PhongTroYeuThich;
+use App\Models\Quan;
 use Illuminate\Http\Request;
 
 class PhongTroYeuThichController extends Controller
@@ -68,6 +69,10 @@ class PhongTroYeuThichController extends Controller
             return true;
         }
     }
+    public function quan()
+    {
+        $this->setAttribute("quan", $this->hasOne(Quan::class, 'id', "idQuan")->first());
+    }
     public function danhSachHinhAnh()
     {
         $this->setAttribute("hinhAnhPhongTro", $this->hasMany(HinhAnh::class, "idPhong",  "idPhong")->get());
@@ -80,12 +85,12 @@ class PhongTroYeuThichController extends Controller
                 $phong = PhongTro::find($value->idPhong);
                 if($phong->hoatDong==1){
                     $phong->danhSachHinhAnh();
+                    $phong->quan();
                     $danhSachPhong[]= $phong;
 
                 }
             }
             return $danhSachPhong;
-            
         }else{
             return $danhSachPhong;
         }
