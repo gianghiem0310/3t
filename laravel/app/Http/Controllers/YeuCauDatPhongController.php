@@ -126,7 +126,21 @@ class YeuCauDatPhongController extends Controller
         return json_encode(["result" => $result, "loai" => 2, "thongBaoThanhCong" => $thongBaoThanhCong, "thongBaoThatBai" => $thongBaoThatBai, "string" => "Xác nhận thành công"]);
     }
     public function layDuLieuDatPhongAPI(Request $request){
-        return YeuCauDatPhong::where("idTaiKhoanGui", $request->idTaiKhoanGui)->first();
+        $yeuCau =  YeuCauDatPhong::where("idTaiKhoanGui", $request->idTaiKhoanGui)->get();
+        if(count($yeuCau)!=0){
+            return $yeuCau->first();
+        }else{
+            $chuaCoYeuCau = new YeuCauDatPhong;
+            $chuaCoYeuCau->idTaiKhoanGui = -1;
+            $chuaCoYeuCau->idTaiKhoanNhan= -1;
+            $chuaCoYeuCau->idPhong = -1;
+            $chuaCoYeuCau->trangThaiXacThuc= -1;
+            $chuaCoYeuCau->trangThaiThongBao = -1;
+            $chuaCoYeuCau->trangThaiNhan = -1;
+            return $chuaCoYeuCau;
+        }
+        
+        
     }
     public function xoaYeuCauXacThucAPI(Request $request){
         return YeuCauDatPhong::where("idTaiKhoanGui", $request->idTaiKhoanGui)->delete();
