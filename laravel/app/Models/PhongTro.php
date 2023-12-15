@@ -269,6 +269,7 @@ class PhongTro extends Model
                 $item->danhSachHinhAnh();
                 $item->demSoLuongBinhLuan();
                 $item->trungBinhDanhGia();
+                $item->quan();
 
                 // Những nhu item list sau không có
                 $listTienIch = [];
