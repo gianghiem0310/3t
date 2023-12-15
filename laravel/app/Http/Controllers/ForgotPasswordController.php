@@ -27,9 +27,8 @@ class ForgotPasswordController extends Controller
             }
         }
         else{
-            return response()->json(["message"=>"mã quá hạn", "status"=>0]);
+            return response()->json(["message"=>"Mã quá hạn hoặc không còn tồn tại", "status"=>0]);
         }
-        return $res;
     }
 
     public function createCodeForgotPasswordAPI(Request $request)

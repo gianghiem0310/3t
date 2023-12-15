@@ -52,7 +52,7 @@ class TaiKhoan extends Model
   }
   public static function kiemTraDangNhapFB($tenTaiKhoan)
   {
-    $result = self::where('email', '=', $tenTaiKhoan)->first();
+    $result = self::where('tenTaiKhoan', '=', $tenTaiKhoan)->first();
     if ($result) {
       $result->joinTheoLoaiTaiKhoan($result["loaiTaiKhoan"]);
     }

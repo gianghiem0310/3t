@@ -33,10 +33,12 @@ class YeuCauDangKyGoiController extends Controller
         $res = YeuCauDangKyGoi::where('id', '=', $request->id)->update([
             'trangThaiXacThuc' => 1
         ]);
+        
         if ($res > 0) {
             $yeucau = YeuCauDangKyGoi::where('id', '=', $request->id)->first();
             $idChuTro = $yeucau->idChuTro;
             $chutro = ChuTro::where("id", $idChuTro)->first();
+            ChuTro::where("id", $idChuTro)->update(["idGoi"=>$yeucau->idGoi]);
             $idTaiKhoan = $chutro->idTaiKhoan;
         }
         return $idTaiKhoan;
