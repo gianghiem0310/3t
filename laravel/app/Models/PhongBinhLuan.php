@@ -13,33 +13,38 @@ class PhongBinhLuan extends Model
         "idTaiKhoan",
         "noiDungBinhLuan",
     ];
-    public function joinTheoLoaiTaiKhoan($loaiTaiKhoan){
-        if($loaiTaiKhoan == 0){
+    public function joinTheoLoaiTaiKhoan($loaiTaiKhoan)
+    {
+        if ($loaiTaiKhoan == 0) {
             $this->setAttribute("nguoiGui", $this->hasOne(NguoiThue::class, 'idTaiKhoan', 'idTaiKhoan')->first(["hinh",  "ten"]));
             $this->setAttribute("loaiTaiKhoan", "Người thuê");
         }
-        if($loaiTaiKhoan == 1){
+        if ($loaiTaiKhoan == 1) {
             $this->setAttribute("nguoiGui", $this->hasOne(ChuTro::class, 'idTaiKhoan', 'idTaiKhoan')->first(["hinh",  "ten"]));
             $this->setAttribute("loaiTaiKhoan", "Chủ trọ");
         }
-        if($loaiTaiKhoan == 2){
+        if ($loaiTaiKhoan == 2) {
             $this->setAttribute("nguoiGui", $this->hasOne(Admin::class, 'idTaiKhoan', 'idTaiKhoan')->first(["hinh",  "ten"]));
             $this->setAttribute("loaiTaiKhoan", "Admin");
         }
-        
     }
 
-    public static function layBinhLuanCuaPhongTheoIDPhong($idPhong){
+    public static function layBinhLuanCuaPhongTheoIDPhong($idPhong)
+    {
         $result = self::where("idPhong", $idPhong)->orderBy('updated_at', 'DESC')->get();
 
-        foreach ($result as $item){
-            $loaiTaiKhoan = TaiKhoan::where("id", $item['idTaiKhoan'])->first()->loaiTaiKhoan;
-            $item->joinTheoLoaiTaiKhoan($loaiTaiKhoan);
+        foreach ($result as $item) {
+
+            if (TaiKhoan::where("id", $item['idTaiKhoan'])->first()) {
+                $loaiTaiKhoan = TaiKhoan::where("id", $item['idTaiKhoan'])->first()->loaiTaiKhoan;
+                $item->joinTheoLoaiTaiKhoan($loaiTaiKhoan);
+            }
         }
 
         return $result;
     }
-    public static function vietComment($idPhong, $idTaiKhoan, $noiDungBinhLuan){
+    public static function vietComment($idPhong, $idTaiKhoan, $noiDungBinhLuan)
+    {
         $result =  self::create([
             "idPhong" => $idPhong,
             "idTaiKhoan" => $idTaiKhoan,
