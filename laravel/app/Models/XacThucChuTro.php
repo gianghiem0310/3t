@@ -17,32 +17,36 @@ class XacThucChuTro extends Model
         'trangThaiNhan'
     ];
 
-    public function layThongTinChuTro(){
+    public function layThongTinChuTro()
+    {
         $this->setAttribute("chuTro", $this->hasOne(ChuTro::class, 'id', 'idChuTro')->first());
     }
 
-    public static function layTatCaYeuCauXacThucChuTro(){
+    public static function layTatCaYeuCauXacThucChuTro()
+    {
         $result = self::where("trangThaiXacThuc", 0)->get();
 
-        foreach ($result as $item){
+        foreach ($result as $item) {
             $item->layThongTinChuTro();
         }
 
         return $result;
     }
 
-    public static function layThongTinYeuCauXacThuc($idChuTro){
+    public static function layThongTinYeuCauXacThuc($idChuTro)
+    {
         $result = self::where("idChuTro", $idChuTro)->first();
+        if ($result) {
             $result->layThongTinChuTro();
+        }
         return $result;
     }
     //
-    public static function layThongTinYeuCauXacThucChuNhan($idChuTro){
-        $result = self::where([["idChuTro", $idChuTro], ["trangThaiNhan",0]])->first();
-            $result->layThongTinChuTro();
-            $result->where([['idChuTro', "=", $idChuTro]])->update(["trangThaiNhan"=>1]);
+    public static function layThongTinYeuCauXacThucChuNhan($idChuTro)
+    {
+        $result = self::where([["idChuTro", $idChuTro], ["trangThaiNhan", 0]])->first();
+        $result->layThongTinChuTro();
+        $result->where([['idChuTro', "=", $idChuTro]])->update(["trangThaiNhan" => 1]);
         return $result;
     }
-
-    
 }
