@@ -104,15 +104,17 @@ class YeuCauDatPhongController extends Controller
         if ($kq == 1) {
             $resYC = YeuCauDatPhong::where("idPhong", $request->idPhong)->get();
             foreach ($resYC as $item) {
-                $itemThongBaoThatBai = ThongBao::create([
-                    'idTaiKhoanGui' => $request->myIdTaiKhoan,
-                    'idTaiKhoanNhan' => $item->idTaiKhoanGui,
-                    'tieuDe' => "Đặt phòng thất bại",
-                    'noiDung' => "Đã có người đặt phòng trước",
-                    'trangThai' => 0,
-                    'trangThaiNhan' => 0,
-                ]);
-                array_push($thongBaoThatBai, $itemThongBaoThatBai);
+                if ($item->idTaiKhoanGui != $request->idTaiKhoanGui) {
+                    $itemThongBaoThatBai = ThongBao::create([
+                        'idTaiKhoanGui' => $request->myIdTaiKhoan,
+                        'idTaiKhoanNhan' => $item->idTaiKhoanGui,
+                        'tieuDe' => "Đặt phòng thất bại",
+                        'noiDung' => "Đã có người đặt phòng trước",
+                        'trangThai' => 0,
+                        'trangThaiNhan' => 0,
+                    ]);
+                    array_push($thongBaoThatBai, $itemThongBaoThatBai);
+                }
             }
             $resDL = YeuCauDatPhong::where([["id", "<>", $request->id], ["idPhong", $request->idPhong]])->delete();
             if ($resDL == 0) {

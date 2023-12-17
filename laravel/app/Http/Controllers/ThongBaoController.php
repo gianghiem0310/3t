@@ -53,7 +53,7 @@ class ThongBaoController extends Controller
         return ThongBao::create([
             'idTaiKhoanGui' => $request->idTaiKhoanGui,
             'idTaiKhoanNhan' => $request->idTaiKhoanNhan,
-            'title' => $request->title,
+            'tieuDe' => $request->title,
             'noiDung' => $request->noiDung,
             'trangThai' => $request->trangThai,
             'trangThaiNhan' => $request->trangThaiNhan,
