@@ -10,12 +10,12 @@ use Illuminate\Http\Request;
 
 class YeuCauDangKyGoiController extends Controller
 {
-    public function test(){
+    public function test()
+    {
         $item = ForgotPassword::find(1);
         // $res = YeuCauDangKyGoi::danhSachYeuCauDangKyDaXacThuc()[0];
         // $taiKhoan = TaiKhoan::all();
         return $item->created_at->addMinutes(5) . "  <  " . now();
-        
     }
     public static function danhSachYeuCauDangKyGoiAPI(Request $request)
     {
@@ -33,12 +33,12 @@ class YeuCauDangKyGoiController extends Controller
         $res = YeuCauDangKyGoi::where('id', '=', $request->id)->update([
             'trangThaiXacThuc' => 1
         ]);
-        
+
         if ($res > 0) {
             $yeucau = YeuCauDangKyGoi::where('id', '=', $request->id)->first();
             $idChuTro = $yeucau->idChuTro;
             $chutro = ChuTro::where("id", $idChuTro)->first();
-            ChuTro::where("id", $idChuTro)->update(["idGoi"=>$yeucau->idGoi]);
+            ChuTro::where("id", $idChuTro)->update(["idGoi" => $yeucau->idGoi]);
             $idTaiKhoan = $chutro->idTaiKhoan;
         }
         return $idTaiKhoan;
@@ -51,16 +51,21 @@ class YeuCauDangKyGoiController extends Controller
 
     public static function guiYeuCauDangKyGoiAPI(Request $request)
     {
-        $hinhAnhChuyenKhoan = $request->hinhAnhChuyenKhoan;
-        $hinhAnhChuyenKhoan_name = 'images/'.self::myRandom()."-" . now()->getTimestampMs() . '-' . 'banner' . '.'. $hinhAnhChuyenKhoan->extension();
-        $hinhAnhChuyenKhoan->move(public_path('images'), $hinhAnhChuyenKhoan_name);
-        return YeuCauDangKyGoi::create([
-            'idChuTro' => $request->idChuTro,
-            'idGoi' => $request->idGoi,
-            'trangThaiXacThuc' => 0,
-            'hinhAnhChuyenKhoan' => $hinhAnhChuyenKhoan_name,
-            'trangThaiNhan' => 0
-        ]);
+        $yc = YeuCauDangKyGoi::where("idChuTro", $request->idChuTro)->first();
+        if (!$yc) {
+            $hinhAnhChuyenKhoan = $request->hinhAnhChuyenKhoan;
+            $hinhAnhChuyenKhoan_name = 'images/' . self::myRandom() . "-" . now()->getTimestampMs() . '-' . 'banner' . '.' . $hinhAnhChuyenKhoan->extension();
+            $hinhAnhChuyenKhoan->move(public_path('images'), $hinhAnhChuyenKhoan_name);
+            return YeuCauDangKyGoi::create([
+                'idChuTro' => $request->idChuTro,
+                'idGoi' => $request->idGoi,
+                'trangThaiXacThuc' => 0,
+                'hinhAnhChuyenKhoan' => $hinhAnhChuyenKhoan_name,
+                'trangThaiNhan' => 0
+            ]);
+        } else{
+            return null;
+        }
     }
 
     public static function myRandom()
@@ -77,5 +82,4 @@ class YeuCauDangKyGoiController extends Controller
         $string = str_shuffle($pin);
         return $string;
     }
-    
 }
