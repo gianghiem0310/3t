@@ -25,7 +25,7 @@ class YeuCauDatPhongController extends Controller
         $nguoiThue = NguoiThue::where("idTaiKhoan", $request->idTaiKhoanGui)->first();
         $yeuCauDatPhong = YeuCauDatPhong::where("idTaiKhoanGui", $request->idTaiKhoanGui)->first();
         //Kiểm tra trong data có yêu cầu này chưa
-        if ($yeuCauDatPhong){
+        if ($yeuCauDatPhong) {
             return response()->json(["message" => "Gửi yêu cầu đăng ký thất bại, đang chờ chủ trọ xác thực"]);
         }
         // Lấy phòng của người thuê
@@ -85,7 +85,7 @@ class YeuCauDatPhongController extends Controller
                 "idPhong" => $request->idPhong
             ]);
             // Tìm tới phòng có id phòng đã thêm vào danh sách phòng trọ của người thuê và update hoạt động thành 0 để phòng ẩn phía người dùng
-            PhongTro::where("id", $phong->idPhong)->update(["hoatDong"=>1]);
+            PhongTro::where("id", $phong->idPhong)->update(["hoatDong" => 1]);
             // Tạo thông bao thành công gửi lại cho người dùng
             $thongBaoThanhCong = ThongBao::create([
                 'idTaiKhoanGui' => $request->myIdTaiKhoan,
@@ -125,24 +125,24 @@ class YeuCauDatPhongController extends Controller
         }
         return json_encode(["result" => $result, "loai" => 2, "thongBaoThanhCong" => $thongBaoThanhCong, "thongBaoThatBai" => $thongBaoThatBai, "string" => "Xác nhận thành công"]);
     }
-    public function layDuLieuDatPhongAPI(Request $request){
+    public function layDuLieuDatPhongAPI(Request $request)
+    {
         $yeuCau =  YeuCauDatPhong::where("idTaiKhoanGui", $request->idTaiKhoanGui)->get();
-        if(count($yeuCau)!=0){
+        if (count($yeuCau) != 0) {
             return $yeuCau->first();
-        }else{
+        } else {
             $chuaCoYeuCau = new YeuCauDatPhong;
             $chuaCoYeuCau->idTaiKhoanGui = -1;
-            $chuaCoYeuCau->idTaiKhoanNhan= -1;
+            $chuaCoYeuCau->idTaiKhoanNhan = -1;
             $chuaCoYeuCau->idPhong = -1;
-            $chuaCoYeuCau->trangThaiXacThuc= -1;
+            $chuaCoYeuCau->trangThaiXacThuc = -1;
             $chuaCoYeuCau->trangThaiThongBao = -1;
             $chuaCoYeuCau->trangThaiNhan = -1;
             return $chuaCoYeuCau;
         }
-        
-        
     }
-    public function xoaYeuCauXacThucAPI(Request $request){
+    public function xoaYeuCauXacThucAPI(Request $request)
+    {
         return YeuCauDatPhong::where("idTaiKhoanGui", $request->idTaiKhoanGui)->delete();
     }
 }
