@@ -21,10 +21,10 @@ class TaiKhoan extends Model
   public function joinTheoLoaiTaiKhoan($loaiTaiKhoan)
   {
     if ($loaiTaiKhoan == 0) {
-      $this->setAttribute("nguoiDangNhap", $this->hasOne(NguoiThue::class, 'idTaiKhoan', 'id')->first(["id"]));
+      $this->setAttribute("nguoiDangNhap", $this->hasOne(NguoiThue::class, 'idTaiKhoan', 'id')->first(["id","ten"]));
     }
     if ($loaiTaiKhoan == 1) {
-      $this->setAttribute("nguoiDangNhap", $this->hasOne(ChuTro::class, 'idTaiKhoan', 'id')->first(["id",  "xacThuc"]));
+      $this->setAttribute("nguoiDangNhap", $this->hasOne(ChuTro::class, 'idTaiKhoan', 'id')->first(["id",  "xacThuc","ten"]));
     }
     if ($loaiTaiKhoan == 2) {
       $this->setAttribute("nguoiDangNhap", $this->hasOne(Admin::class, 'idTaiKhoan', 'id')->first(["id"]));
