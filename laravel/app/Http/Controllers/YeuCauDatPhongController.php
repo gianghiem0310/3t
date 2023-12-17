@@ -84,8 +84,9 @@ class YeuCauDatPhongController extends Controller
                 "idNguoiThue" => $request->idNguoiThue,
                 "idPhong" => $request->idPhong
             ]);
+
             // Tìm tới phòng có id phòng đã thêm vào danh sách phòng trọ của người thuê và update hoạt động thành 0 để phòng ẩn phía người dùng
-            PhongTro::where("id", $phong->idPhong)->update(["hoatDong" => 1]);
+            PhongTro::where("id", $phong->idPhong)->update(["hoatDong" => 0]);
             // Tạo thông bao thành công gửi lại cho người dùng
             $thongBaoThanhCong = ThongBao::create([
                 'idTaiKhoanGui' => $request->myIdTaiKhoan,
