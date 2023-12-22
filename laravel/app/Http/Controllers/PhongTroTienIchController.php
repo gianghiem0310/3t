@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PhongTroTienIch;
+use App\Models\TienIch;
 use Illuminate\Http\Request;
 
 class PhongTroTienIchController extends Controller
@@ -45,5 +46,14 @@ class PhongTroTienIchController extends Controller
     public function destroy(PhongTroTienIch $phongTroTienIch)
     {
         //
+    }
+    public function deleteTienIchOfRoomAPI(Request $request){
+        return PhongTroTienIch::where([
+            ["idPhong", $request->idPhong],
+            ["idTienIch", $request->idTienIch]
+        ])->delete();
+    }
+    public function getTienIchSeletedOfRoomAPI(Request $request){
+        return PhongTroTienIch::layTatCaTienIchDaChon($request->idPhong);
     }
 }

@@ -85,4 +85,7 @@ class HinhAnhController extends Controller
     public function deleteHinhAnhAPI(Request $request){
         return HinhAnh::where("id", $request->idHinh)->delete();
     }
+    public function layTatCaHinhAnhDaChonCuaPhongAPI(Request $request){
+        return HinhAnh::where("idPhong", $request->idPhong)->get();
+    }
 }

@@ -166,6 +166,54 @@ class PhongTroController extends Controller
         }
         return 1;
     }
+    public function suaPhongWebAPI(Request $request)
+    {
+        PhongTro::where('id', $request->idPhong)->update([
+            'soPhong' => $request->soPhong != null ? $request->soPhong : -1,
+            'gia' => $request->gia != null ? $request->gia : -1,
+            'dienTich' => $request->dienTich != null ? $request->dienTich : -1,
+            'moTa' => $request->moTa != null ? $request->moTa : -1,
+            'idQuan' => $request->idQuan != null ? $request->idQuan : -1,
+            'idPhuong' => $request->idPhuong != null ? $request->idPhuong : -1,
+            'diaChiChiTiet' => $request->diaChiChiTiet != null ? $request->diaChiChiTiet : -1,
+            'loaiPhong' => $request->loaiPhong != null ? $request->loaiPhong : 0,
+            'soLuongToiDa' => $request->soLuongToiDa != null ? $request->soLuongToiDa : -1,
+            'tienCoc' => $request->tienCoc != null ? $request->tienCoc : 0,
+            'gioiTinh' => $request->gioiTinh != null ? $request->gioiTinh : -1,
+            'tienDien' => $request->tienDien != null ? $request->tienDien : -1,
+            'tienNuoc' => $request->tienNuoc != null ? $request->tienNuoc : -1,
+            'hoatDong' => 0,
+        ]);
+        // Thêm mới hình
+        if ($request->hinh) {
+            $files[] = $request->hinh;
+            $images = $files[0];
+
+            foreach ($images as $key => $value) {
+                $image_name = 'images/' . self::myRandom() . now()->getTimestampMs() . '-' . 'hinhphong' . '.' . $value->extension();
+                $value->move(public_path('images'), $image_name);
+                HinhAnh::create(['idPhong' => $request->idPhong, 'hinh' => $image_name]);
+            }
+        }
+        if ($request->tienIch) {
+            // $jsonList = $request->tienIch;
+            // $list = json_decode($jsonList, true);
+            $list = $request->tienIch;
+            foreach ($list as $key => $value) {
+                $getTienIch = PhongTroTienIch::where([
+                    ["idPhong", $request->idPhong],
+                    ["idTienIch", $value]
+                ])->first();
+                if (!$getTienIch) {
+                    PhongTroTienIch::create([
+                        'idPhong'  => $request->idPhong,
+                        'idTienIch' => $value
+                    ]);
+                }
+            }
+        }
+        return 1;
+    }
 
 
     public function layThongTinPhongTheoIDAPI(Request $request)
@@ -213,22 +261,22 @@ class PhongTroController extends Controller
             // TH1 phòng trống
             if (PhongNguoiThue::where('idPhong', $request->idPhong)->count() == 0) {
                 return PhongTro::where('id', $request->idPhong)->update(['hoatDong' => $request->hoatDong]);
-            } 
+            }
             // TH2 Phòng có người thuê
             else {
-                return 100;//Đã có ít nhất 1 người thuê
+                return 100; //Đã có ít nhất 1 người thuê
             }
         }
         // Nếu hoạt động gửi lên là 1: hoạt động
         else {
             // TH1: Đã đăng ký gói
-            if (ChuTro::layThongTinGoi($request->idChuTro)->goi != null){
+            if (ChuTro::layThongTinGoi($request->idChuTro)->goi != null) {
                 // Số lượng phòng hiện hoạt động nhỏ hơn số lượng phòng tối đa của gói
-                if (ChuTro::layThongTinGoi($request->idChuTro)->goi->soLuongPhongToiDa > PhongTroChuTro::demPhongHoatDongCuaChuTro($request->idChuTro)){
+                if (ChuTro::layThongTinGoi($request->idChuTro)->goi->soLuongPhongToiDa > PhongTroChuTro::demPhongHoatDongCuaChuTro($request->idChuTro)) {
                     return PhongTro::where('id', $request->idPhong)->update(['hoatDong' => $request->hoatDong]);
                 }
                 // Số lượng phòng hoạt động bằng số lượng phòng tối đa có thể đăng
-                else{
+                else {
                     return 101;
                 }
             }
@@ -245,9 +293,9 @@ class PhongTroController extends Controller
     }
     public function layDanhSachPhongGoiY2(Request $request)
     {
-        return PhongTro::danhSachPhongGoiY2($request->idTaiKhoan,$request->pageNumber,$request->numberObjectinPage);
+        return PhongTro::danhSachPhongGoiY2($request->idTaiKhoan, $request->pageNumber, $request->numberObjectinPage);
     }
-    
+
     public function layDanhSachPhongGoiYTheoQuan(Request $request)
     {
         return PhongTro::danhSachPhongGoiYTheoQuan($request->idTaiKhoan);
@@ -255,6 +303,11 @@ class PhongTroController extends Controller
     public function layTatCaPhongTheoNhuCauAPI(Request $request)
     {
         $result = PhongTro::layTatCaPhongTheoNhuCau($request);
+        return $result;
+    }
+    public function layTatCaPhongTheoNhuCauWebAPI(Request $request)
+    {
+        $result = PhongTro::layTatCaPhongTheoNhuCauWeb($request);
         return $result;
     }
 }

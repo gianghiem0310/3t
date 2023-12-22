@@ -12,4 +12,16 @@ class PhongTroTienIch extends Model
         'idPhong',
         'idTienIch'
     ];
+
+    public function joinTienIch(){
+        $this->setAttribute("tienIchSeleted", $this->hasOne(TienIch::class, "id", "idTienIch")->first());
+    }
+
+    public static function layTatCaTienIchDaChon($idPhong){
+        $res = self::where("idPhong", $idPhong)->get();
+        foreach ($res as $item) {
+            $item->joinTienIch();
+        }
+        return $res;
+    }
 }

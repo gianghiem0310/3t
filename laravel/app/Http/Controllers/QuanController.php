@@ -85,6 +85,9 @@ class QuanController extends Controller
     public function layTatCaQuan()  {
         return Quan::all();
     }
+    public function layQuanDauTienTrongDanhSachAPI()  {
+        return Quan::where("trangThai", 0)->first();
+    }
     public function layTatCaQuanAPI()  {
         return Quan::all();
     }

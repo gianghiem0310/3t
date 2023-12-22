@@ -21,6 +21,7 @@ use App\Http\Controllers\PhongNguoiThueController;
 use App\Http\Controllers\PhongTinNhanController;
 use App\Http\Controllers\PhongTroChuTroController;
 use App\Http\Controllers\PhongTroGoiYController;
+use App\Http\Controllers\PhongTroTienIchController;
 use App\Http\Controllers\PhongTroYeuThichController;
 use App\Http\Controllers\PhuongController;
 use App\Http\Controllers\QuanController;
@@ -190,6 +191,7 @@ Route::post('/phonghinhanh/create', [HinhAnhController::class, "uploadmultiple"]
 
 Route::post('/phongtro/create', [PhongTroController::class, "themPhongAPI"]);
 Route::post('/phongtro/update', [PhongTroController::class, "suaPhongAPI"]);
+Route::post('/phongtro/updateweb', [PhongTroController::class, "suaPhongWebAPI"]);
 Route::get('/quan/all', [QuanController::class, "layTatCaQuanAPI"]);
 
 Route::post('/xacthucchutro/create', [XacThucChuTroController::class, "guiYeuCauXacThucAPI"]);
@@ -238,10 +240,16 @@ Route::post('/notification/create', [ThongBaoController::class, "themThongBao"])
 Route::get('/checkuser', [ForgotPasswordController::class, "getAccountByUsernameAPI"]);
 Route::post('/checkcode', [ForgotPasswordController::class, "checkCodeAPI"]);
 Route::get('/timkiemtheonhucau', [PhongTroController::class, "layTatCaPhongTheoNhuCauAPI"]);
+Route::get('/timkiemtheonhucauweb', [PhongTroController::class, "layTatCaPhongTheoNhuCauWebAPI"]);
 Route::get('/layphongnguoithue', [PhongNguoiThueController::class, "layPhongCuaNguoiThueAPI"]);
 Route::get('/layyeucaudatphong', [YeuCauDatPhongController::class, "layDuLieuDatPhongAPI"]);
 Route::delete('/xoayeucaudatphong', [YeuCauDatPhongController::class, "xoaYeuCauXacThucAPI"]);
 Route::delete('/xoaphongcuanguoithue', [PhongNguoiThueController::class, "xoaPhongCuaNguoiThueAPI"]);
+Route::delete('/phongtrotienich/delete', [PhongTroTienIchController::class, "deleteTienIchOfRoomAPI"]);
+Route::delete('/phongtrotienich/delete', [PhongTroTienIchController::class, "deleteTienIchOfRoomAPI"]);
+Route::get('/phongtrotienich/getseleted', [PhongTroTienIchController::class, "getTienIchSeletedOfRoomAPI"]);
+Route::get('/hinhanh/getseleted', [HinhAnhController::class, "layTatCaHinhAnhDaChonCuaPhongAPI"]);
+Route::get('/quan/first', [QuanController::class, "layQuanDauTienTrongDanhSachAPI"]);
 
 
 
