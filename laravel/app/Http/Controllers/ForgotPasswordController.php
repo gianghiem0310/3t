@@ -11,7 +11,11 @@ class ForgotPasswordController extends Controller
 {
     public function getAccountByUsernameAPI(Request $request)
     {
-        return TaiKhoan::where("tenTaiKhoan", $request->tenTaiKhoan)->first(["id", "tenTaiKhoan", "email"]);
+        $taiKhoan = TaiKhoan::where("tenTaiKhoan", $request->tenTaiKhoan)->first(["id", "tenTaiKhoan", "email"]);
+        if ($taiKhoan) {
+            return $taiKhoan;
+        }
+        return -1;
     }
     public function checkCodeAPI(Request $request)
     {
