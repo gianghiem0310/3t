@@ -250,7 +250,7 @@ Route::delete('/phongtrotienich/delete', [PhongTroTienIchController::class, "del
 Route::get('/phongtrotienich/getseleted', [PhongTroTienIchController::class, "getTienIchSeletedOfRoomAPI"]);
 Route::get('/hinhanh/getseleted', [HinhAnhController::class, "layTatCaHinhAnhDaChonCuaPhongAPI"]);
 Route::get('/quan/first', [QuanController::class, "layQuanDauTienTrongDanhSachAPI"]);
-
+Route::get('layphuongtheoid', [PhuongController::class, "layPhuongTheoID"]);
 
 
 Route::post('/send-email', [EmailSendController::class, "sendAPI"]);

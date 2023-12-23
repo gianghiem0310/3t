@@ -90,4 +90,7 @@ class PhuongController extends Controller
     public function layPhuongTheoIDQuanAPI(Request $request){
         return Phuong::where("idQuan", $request->idQuan)->get();
     }
+    public function layPhuongTheoID(Request $request)  {
+        return Phuong::find($request->id);
+    }
 }
